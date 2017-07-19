@@ -6,17 +6,50 @@ const CardModel  = require('../models/cardModel');
 // const EventModel = require('../models/eventModel');
 //change card visibility
 
+//show contacts
+router.get('/contacts', (req, res, next) => {
+  const userId = req.params._id;
+  UserModel.findById(userId, (err, theUser) => {
+    if (err) {
+      res.json(err);
+      return;
+    }
+    res.json({userInfo: theUser, contacts: theUser.contacts});
+  });
+});
+
 //edit card info
-router.put('/profile/edit-card/:id', (req, res, next) => {
+router.put('/profile/my-cards/edit/:id', (req, res, next) => {
    const cardToEditId = req.params.id;
    const userId       = req.user._id;
-   CardModel.findById(cardToEditId, (err, theCard) => {
-     
+   if (!mongoose.Types.ObjectId.isValid(cardToEdit)) {
+     res.status(400).json({
+       message: 'Specified id is not valid'
+     });
+     return;
+   }
+   CardModel.findByIdAndUpdate(
+     cardToEditId,
+   {
+     fullName:       req.body.fullName,
+     companyName:    req.body.companyNamename,
+     position:       req.body.position,
+     phoneNum:       req.body.image,
+     email:          req.body.email,
+     description:    req.body.description,
+     profilePic:     req.body.profilePic,
+   },
+     (err, theCard) => {
+       if(err) {
+         res.json(err);
+         return;
+       }
+       res.json({  message: 'Changes Saved', editedCard: theCard });
    });
 });
 
 //add(save) other user's card
-router.post('/profile/save-card/:id', (req, res, next) => {
+router.post('/contacts/add/:id', (req, res, next) => {
     const cardToSaveId = req.params.id;
     const userId       = req.user._id;
     if (!mongoose.Types.ObjectId.isValid(cardToSaveId)) {
@@ -37,25 +70,25 @@ router.post('/profile/save-card/:id', (req, res, next) => {
           res.json(err);
           return;
         }
-        res.json({  message: 'Contact Added' });
+        res.json({  message: 'Contact Added', contacts: theUser.contacts });
       });
     });
 });
 
 //add new user's card
-router.post('/profile/add-card', (req, res, next) => {
+router.post('/profile/my-cards/add', (req, res, next) => {
   const userId  = req.user._id;
   // console.log("POST TRIGGERED");
   const theCard = new CardModel ({
     fullName:       req.body.fullName,
-    companyName:    req.body.companyNamename,
+    companyName:    req.body.companyName,
     position:       req.body.position,
     phoneNum:       req.body.image,
     email:          req.body.email,
     description:    req.body.description,
     profilePic:     req.body.profilePic,
-    visibility:     req.body.visibility
-    // QRcode:         ???
+    visibility:     req.body.visibility,
+    QRcode:         req.body.qrcode
   });
   theCard.save(err => {
     if (err) {
@@ -83,8 +116,8 @@ router.post('/profile/add-card', (req, res, next) => {
   );
 });
 
-//delete user owned card
-router.remove('/profile/my-cards/delete/:id', (req, res, next) => {
+//delete user's own card
+router.delete('/profile/my-cards/delete/:id', (req, res, next) => {
   const cardToRemoveId = req.params.id;
   const userId = req.params._id;
   if (!mongoose.Types.ObjectId.isValid(cardToRemoveId)) {
@@ -117,18 +150,16 @@ router.remove('/profile/my-cards/delete/:id', (req, res, next) => {
             res.json(err);
             return;
           }
-            });
+        });
       }
     );
     //card succesfully removed from the DB
-    return res.json({
-      message: 'Card succesfully removed!'
-    });
+    return res.json({ message: 'Card succesfully removed!' });
   });
 });
 
-//delete one of user's saved cards
-router.remove('/profile/saved-cards/delete/:id', (req, res, next) => {
+//delete one of user's contacts
+router.put('/contacts/delete/:id', (req, res, next) => {
   const cardToRemoveId = req.params.id;
   const userId = req.params._id;
   if (!mongoose.Types.ObjectId.isValid(cardToRemoveId)) {
@@ -163,3 +194,5 @@ router.remove('/profile/saved-cards/delete/:id', (req, res, next) => {
       }
     );
 });
+
+module.exports = router;

@@ -6,9 +6,13 @@ const cookieParser = require('cookie-parser');
 const bodyParser   = require('body-parser');
 const layouts      = require('express-ejs-layouts');
 const mongoose     = require('mongoose');
-var cors           = require('cors');
-
-mongoose.connect('mongodb://localhost/cardxchange');
+const cors         = require('cors');
+const index        = require('./routes/index');
+const userRoutes   = require('./routes/users-api.js');
+const cardRoutes   = require('./routes/cards-api');
+// const eventRoutes  = require('./routes/events-api');
+// const qrGenerator  = require('qrcode');
+require('./configs/database');
 
 const app = express();
 app.use(cors());
@@ -29,11 +33,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(layouts);
 
-const index = require('./routes/index');
 app.use('/', index);
 app.use('/api', userRoutes);
 app.use('/api', cardRoutes);
-app.use('/api', eventRoutes);
+// app.use('/api', eventRoutes);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

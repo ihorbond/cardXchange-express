@@ -7,10 +7,10 @@ const cardSchema = new mongoose.Schema({
   phoneNum:          {type: String},
   email:             {type: String},
   description:       {type: String},
-  profilePic:        {type: String, default: ""},
+  profilePic:        {type: String, default: "../public/images/new-user.png"},
   visibility:        {type: Boolean, default: true},
   //unique qr code for each card for scanning
-  QRcode:            {type: String, required: true}
+  QRcode:            {type: String}
 });
 
 const CardModel = mongoose.model('Card', cardSchema);

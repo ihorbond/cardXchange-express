@@ -3,6 +3,24 @@ const router    = express.Router();
 const mongoose  = require('mongoose');
 const UserModel = require('../models/userModel');
 const CardModel = require('../models/cardModel');
+//login
+
+//signup
+router.post('/signup', (req, res, next) => {
+  const theUser = new UserModel ({
+    fullName:          req.body.fullName,
+    email:             req.body.email,
+    encryptedPassword: req.body.password
+  });
+  theUser.save(err => {
+    if (err) {
+      next(err);
+      return;
+    }
+  });
+  res.json(theUser);
+  // res.redirect('/login');
+});
 
 //show user's profile
 router.get('/profile', (req, res, next) => {
@@ -14,11 +32,13 @@ router.get('/profile', (req, res, next) => {
     return;
   }
 
-  UserModel.findById(id, (err, theUser) => {
+  UserModel.findById(userId, (err, theUser) => {
     if (err) {
       res.json(err);
       return;
     }
-    res.json(theUser);
+    res.json({userInfo: theUser, cards: theUser.cards});
   });
 });
+
+module.exports = router;
