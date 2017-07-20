@@ -6,18 +6,37 @@ import { AppComponent } from './app.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { CardService } from './card.service';
+import { AddCardComponent } from './add-card/add-card.component';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+//qr code generator
+import { QRCodeModule } from 'angular2-qrcode'
+//qr code scanner
+import { QrScannerModule } from 'angular2-qrscanner';
+import { AboutComponent } from './about/about.component'
+import { AuthorizationService } from './authorization.service';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserProfileComponent,
-    ContactsComponent
+    ContactsComponent,
+    AddCardComponent,
+    AboutComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
+    QrScannerModule,
+    QRCodeModule,
+    HttpModule,
+    FormsModule,
     BrowserModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [CardService],
+  providers: [CardService, AuthorizationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,16 @@
+
+<form #signupInfo="ngForm" id="signupForm" (ngSubmit)="signup(signupInfo)">
+<h2> Signup </h2>
+<label for id="signup-fullName"> Full Name </label>
+<input id="signup-fullName" type="string" name="fullName" ngModel>
+<br>
+<label for id="signup-email"> Email </label>
+<input id="login-email" type="email" name="email" ngModel>
+<br>
+<label for id="login-password"> Password </label>
+<input id="login-password" type="password" name="password" ngModel>
+<br>
+<button> Login </button>
+</form>
+
+<p class="error"> {{ error }} </p>

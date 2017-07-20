@@ -24,6 +24,7 @@ router.post('/signup', (req, res, next) => {
 
 //show user's profile
 router.get('/profile', (req, res, next) => {
+  let cardsArray = [];
   const userId = req.params._id;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     res.status(400).json({
@@ -37,7 +38,13 @@ router.get('/profile', (req, res, next) => {
       res.json(err);
       return;
     }
-    res.json({userInfo: theUser, cards: theUser.cards});
+    theUser.cards.forEach(oneCard => {
+      CardModel.findById(oneCard._id, (err, theCard) => {
+        //do i need to check for error??
+      cardsArray.push(theCard);
+      });
+    });
+    res.json({userInfo: theUser, cards: cardsArray});
   });
 });
 

@@ -1,3 +1,13 @@
-<p>
-  contacts works!
-</p>
+<h1> Cards list </h1>
+    <div>
+      <div *ngFor="let oneContact of contacts">
+        <img [src]="oneContact.profilePic">
+        <p> {{ oneContact.fullName }} </p>
+        <p> {{ oneContact.companyName }} </p>
+        <p> {{ oneContact.position }} </p>
+        <p> {{ oneContact.phoneNum }} </p>
+        <p> {{ oneContact.email }} </p>
+          <p> {{ oneContact.description }} </p>
+            <p> {{ oneContact.QRcode }} </p>
+      </div>
+    </div>

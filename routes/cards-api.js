@@ -8,13 +8,22 @@ const CardModel  = require('../models/cardModel');
 
 //show contacts
 router.get('/contacts', (req, res, next) => {
+  let contactsArray = [];
   const userId = req.params._id;
   UserModel.findById(userId, (err, theUser) => {
     if (err) {
       res.json(err);
       return;
     }
-    res.json({userInfo: theUser, contacts: theUser.contacts});
+    //if id saved in contacts matches id
+    //in cards collection push that card into array
+    theUser.contacts.forEach(oneContact => {
+      CardModel.findById(oneContact._id, (err, theCard) => {
+        //do i need to account an error??
+        contactsArray.push(theCard);
+      });
+    });
+    res.json({status: "OK", userInfo: contactsArray});
   });
 });
 
@@ -44,7 +53,7 @@ router.put('/profile/my-cards/edit/:id', (req, res, next) => {
          res.json(err);
          return;
        }
-       res.json({  message: 'Changes Saved', editedCard: theCard });
+       res.json({ message: 'Changes Saved', status: "OK", editedCard: theCard });
    });
 });
 
@@ -70,15 +79,14 @@ router.post('/contacts/add/:id', (req, res, next) => {
           res.json(err);
           return;
         }
-        res.json({  message: 'Contact Added', contacts: theUser.contacts });
+        res.json({  message: 'Contact Added', status: "OK", contacts: theUser.contacts });
       });
     });
 });
 
-//add new user's card
+//add own card
 router.post('/profile/my-cards/add', (req, res, next) => {
   const userId  = req.user._id;
-  // console.log("POST TRIGGERED");
   const theCard = new CardModel ({
     fullName:       req.body.fullName,
     companyName:    req.body.companyName,
@@ -88,7 +96,7 @@ router.post('/profile/my-cards/add', (req, res, next) => {
     description:    req.body.description,
     profilePic:     req.body.profilePic,
     visibility:     req.body.visibility,
-    QRcode:         req.body.qrcode
+    QRcode:         req.body.qrcode//???
   });
   theCard.save(err => {
     if (err) {
@@ -110,7 +118,7 @@ router.post('/profile/my-cards/add', (req, res, next) => {
           res.json(err);
           return;
         }
-        res.json({  message: 'Card Added' });
+        res.json({  message: 'Card Added', status: "OK", userInfo: theUser });
       });
     }
   );
@@ -154,7 +162,7 @@ router.delete('/profile/my-cards/delete/:id', (req, res, next) => {
       }
     );
     //card succesfully removed from the DB
-    return res.json({ message: 'Card succesfully removed!' });
+    return res.json({ message: 'Card succesfully removed!', status: 'OK' });
   });
 });
 
@@ -189,7 +197,7 @@ router.put('/contacts/delete/:id', (req, res, next) => {
             res.json(err);
             return;
           }
-          res.json({  message: 'Card Removed' });
+          res.json({  message: 'Card succesfully removed!', status: "OK" });
             });
       }
     );

@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+// import { HttpModule } from "@angular/http";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class CardService {
@@ -11,18 +13,24 @@ BASE_URL: string = 'http://localhost:3000';
 //get all saved contacts
   getContacts() {
      return this.http.get(`${this.BASE_URL}/api/contacts`)
-       .map((res) => res.json());
+       .map(res => res.json());
+   }
+
+  //get user profile and cards
+   getCards() {
+     return this.http.get(`${this.BASE_URL}/api/profile`)
+     .map(res => res.json());
    }
 
    //add new own card
-   addCard() {
-     return this.http.delete(`${this.BASE_URL}/api/profile/my-cards/add`)
-       .map((res) => res.json());
+   addCard(newCard) {
+     return this.http.post(`${this.BASE_URL}/api/profile/my-cards/add`, newCard)
+       .map(res => res.json());
    }
 
    //save other user's card
    saveCard(id) {
-     return this.http.delete(`${this.BASE_URL}/api/contacts/add/${id}`)
+     return this.http.post(`${this.BASE_URL}/api/contacts/add/${id}`, {id:id})
        .map((res) => res.json());
    }
 
@@ -41,7 +49,7 @@ BASE_URL: string = 'http://localhost:3000';
 
   //update own card
   //  editCard(id) {
-  //      return this.http.put(`${this.BASE_URL}/api/profile/my-cards/edit/${id}`, updatedCard)
+  //      return this.http.patch(`${this.BASE_URL}/api/profile/my-cards/edit/${id}`, updatedCard)
   //        .map((res) => res.json());
   //    }
 

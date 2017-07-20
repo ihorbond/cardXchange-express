@@ -1,10 +1,16 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<div class="container">
   <h1>
     Welcome to {{title}}!
+    <h2> Main page </h2>
   </h1>
-
+<app-user-profile>Go to Profile </app-user-profile>
   <p> Contacts works! </p>
   <a [routerLink]="['/contacts']">Contacts</a>
   <p> Profile Works! </p>
   <a [routerLink]="['/profile']">Profile</a>
+    <p> About Works! </p>
+  <a [routerLink]="['/about']">About</a>
+  <p> SignUp works! </p>
+<a [routerLink]="['/signup']">SignUp</a>

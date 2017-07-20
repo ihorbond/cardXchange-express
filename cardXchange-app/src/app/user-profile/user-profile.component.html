@@ -1,3 +1,15 @@
-<p>
-  user-profile works!
-</p>
+<h1> User Profile </h1>
+<app-add-card>Add Card</app-add-card>
+    <div>
+      <h1> Cards </h1>
+      <div *ngFor="let oneCard of cards">
+        <img [src]="oneCard.profilePic">
+        <p> {{ oneCard.fullName }} </p>
+        <p> {{ oneCard.companyName }} </p>
+        <p> {{ oneCard.position }} </p>
+        <p> {{ oneCard.phoneNum }} </p>
+        <p> {{ oneCard.email }} </p>
+          <p> {{ oneCard.description }} </p>
+            <p> {{ oneCard.QRcode }} </p>
+      </div>
+    </div>
