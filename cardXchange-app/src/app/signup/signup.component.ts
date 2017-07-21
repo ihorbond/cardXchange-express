@@ -30,9 +30,10 @@ export class SignupComponent implements OnInit {
 
   signup(form: NgForm) {
     this.signupInfo.fullName = form.value.fullName;
-    this.signupInfo.email    = form.value.email;
+    this.signupInfo.email    = form.value.email.toLowerCase();
     this.signupInfo.password = form.value.password;
-    this.auth.login(this.signupInfo)
+    console.log(this.signupInfo);
+    this.auth.signup(this.signupInfo)
     .subscribe((user => { this.user  = user;
                           this.error = null; }),
                (err) =>   this.error = err   );

@@ -13,7 +13,7 @@
 <p class="error"> {{ error }} </p>
 
 <div *ngIf="user">
-  <h2> You are now logged in as {{ user.username }}!! </h2>
+  <h2> You are now logged in as {{ user.fullName }}!! </h2>
   <p> Here's the user object </p>
   <pre> {{ user | json }} </pre>
 

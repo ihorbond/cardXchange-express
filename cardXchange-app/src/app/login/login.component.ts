@@ -16,8 +16,8 @@ export class LoginComponent implements OnInit {
   user: any;
   error: string;
   loginInfo: any = {
-    email: '',
-    password: ''
+    loginEmail: '',
+    loginPassword: ''
   }
   constructor(private auth: AuthorizationService) { }
 
@@ -29,8 +29,9 @@ export class LoginComponent implements OnInit {
   }
 
   login(form: NgForm) {
-    this.loginInfo.email    = form.value.email;
-    this.loginInfo.password = form.value.password;
+    this.loginInfo.loginEmail    = form.value.loginEmail.toLowerCase();
+    this.loginInfo.loginPassword = form.value.loginPassword;
+    console.log(this.loginInfo);
     this.auth.login(this.loginInfo)
     .subscribe((user => { this.user  = user;
                           this.error = null; }),

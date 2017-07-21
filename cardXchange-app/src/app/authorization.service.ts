@@ -34,7 +34,7 @@ BASE_URL: string = 'http://localhost:3000';
  }
 
  logout() {
-    return this.http.get(`${this.BASE_URL}/api/logout`)
+    return this.http.post(`${this.BASE_URL}/api/logout`, {})
     .map(res => res.json())
     .catch(this.handleError)
  }
