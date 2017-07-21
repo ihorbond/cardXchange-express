@@ -7,11 +7,17 @@ const bodyParser   = require('body-parser');
 const layouts      = require('express-ejs-layouts');
 const mongoose     = require('mongoose');
 const cors         = require('cors');
+const session      = require('express-session');
+const passport     = require('passport');
+const passportSetup= require('./configs/passport');
+passportSetup(passport);
 const index        = require('./routes/index');
-const userRoutes   = require('./routes/users-api.js');
+const userRoutes   = require('./routes/users-api');
 const cardRoutes   = require('./routes/cards-api');
+const authRoutes   = require('./routes/auth-api');
+
 // const eventRoutes  = require('./routes/events-api');
-// const qrGenerator  = require('qrcode');
+
 require('./configs/database');
 
 const app = express();
@@ -32,8 +38,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(layouts);
+app.use(session({
+  secret: 'angular auth passport secret shh',
+  resave: true,
+  saveUninitialized: true,
+  cookie : { httpOnly: true, maxAge: 2419200000 }
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.use('/', index);
+app.use('/',    index);
+app.use('/api', authRoutes);
 app.use('/api', userRoutes);
 app.use('/api', cardRoutes);
 // app.use('/api', eventRoutes);
@@ -49,7 +64,7 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.locals.error   = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
   res.status(err.status || 500);
