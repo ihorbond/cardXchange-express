@@ -11,7 +11,6 @@ router.get('/profile', (req, res, next) => {
     return;
   }
   const userId = req.user._id;
-  let cardsArray = [];
   if (!mongoose.Types.ObjectId.isValid(userId)) {
     res.status(400).json({ message: 'Specified id is not valid' });
     return;
@@ -26,13 +25,16 @@ router.get('/profile', (req, res, next) => {
       res.json({message: "No cards to display", userInfo: theUser});
       return;
     }
-    theUser.cards.forEach(oneCard => {
-      CardModel.findById(oneCard._id, (err, theCard) => {
-        //do i need to check for error??
-      cardsArray.push(theCard);
+      //find and return all matching cards from cards collection
+      CardModel.find({ _id:theUser.cards }, (err, cardsArray) => {
+        if (err) {
+          res.json(err);
+          return;
+        }
+          console.log(cardsArray);
+          theUser.cards = cardsArray;
+        res.json({message: "Here is your cards", userInfo: theUser });
       });
-    });
-    res.json(theUser);
   });
 });
 

@@ -21,7 +21,10 @@ const authRoutes   = require('./routes/auth-api');
 require('./configs/database');
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  credentials: true,
+  origin: [ 'http://localhost:4200' ]
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

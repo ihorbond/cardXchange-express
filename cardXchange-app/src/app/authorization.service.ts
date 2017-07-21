@@ -16,25 +16,25 @@ BASE_URL: string = 'http://localhost:3000';
   }
 
   signup(signupInfo) {
-  return this.http.post(`${this.BASE_URL}/api/signup`, signupInfo)
+  return this.http.post(`${this.BASE_URL}/api/signup`, signupInfo, {withCredentials: true})
   .map(res => res.json())
   .catch(this.handleError)
   }
 
  login(loginInfo) {
-  return this.http.post(`${this.BASE_URL}/api/login`, loginInfo)
+  return this.http.post(`${this.BASE_URL}/api/login`, loginInfo, {withCredentials: true})
   .map(res => res.json())
   .catch(this.handleError)
  }
 
  isLoggedIn() {
-   return this.http.get(`${this.BASE_URL}/api/loggedin`)
+   return this.http.get(`${this.BASE_URL}/api/loggedin`, {withCredentials:true})
    .map(res => res.json())
    .catch(this.handleError)
  }
 
  logout() {
-    return this.http.post(`${this.BASE_URL}/api/logout`, {})
+    return this.http.post(`${this.BASE_URL}/api/logout`, {withCredentials: true})
     .map(res => res.json())
     .catch(this.handleError)
  }

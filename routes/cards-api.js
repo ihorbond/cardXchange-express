@@ -8,22 +8,26 @@ const CardModel  = require('../models/cardModel');
 
 //show contacts
 router.get('/contacts', (req, res, next) => {
-  let contactsArray = [];
-  const userId = req.params._id;
+  const userId = req.user._id;
   UserModel.findById(userId, (err, theUser) => {
     if (err) {
       res.json(err);
       return;
     }
-    //if id saved in contacts matches id
-    //in cards collection push that card into array
-    theUser.contacts.forEach(oneContact => {
-      CardModel.findById(oneContact._id, (err, theCard) => {
-        //do i need to account an error??
-        contactsArray.push(theCard);
+    if(!theUser.contacts.length) {
+      res.json({message: "No cards to display", userInfo: theUser });
+      return;
+    }
+       //fetch matching cards from cards collection
+      CardModel.find({ _id:theUser.contacts }, (err, contactsArray) => {
+        if (err) {
+          res.json(err);
+          return;
+        }
+        console.log("CONTACTS: " + contactsArray);
+        theUser.contacts = contactsArray;
+        res.json({message: "Here's your saved cards", userInfo: theUser });
       });
-    });
-    res.json({status: "OK", userInfo: contactsArray});
   });
 });
 
@@ -31,19 +35,17 @@ router.get('/contacts', (req, res, next) => {
 router.put('/profile/my-cards/edit/:id', (req, res, next) => {
    const cardToEditId = req.params.id;
    const userId       = req.user._id;
-   if (!mongoose.Types.ObjectId.isValid(cardToEdit)) {
-     res.status(400).json({
-       message: 'Specified id is not valid'
-     });
+   if (!mongoose.Types.ObjectId.isValid(cardToEditId)) {
+     res.status(400).json({ message: 'Specified id is not valid' });
      return;
    }
    CardModel.findByIdAndUpdate(
      cardToEditId,
    {
      fullName:       req.body.fullName,
-     companyName:    req.body.companyNamename,
+     companyName:    req.body.companyName,
      position:       req.body.position,
-     phoneNum:       req.body.image,
+     phoneNum:       req.body.phoneNum,
      email:          req.body.email,
      description:    req.body.description,
      profilePic:     req.body.profilePic,
@@ -53,11 +55,11 @@ router.put('/profile/my-cards/edit/:id', (req, res, next) => {
          res.json(err);
          return;
        }
-       res.json({ message: 'Changes Saved', status: "OK", editedCard: theCard });
+       res.json({ message: 'Changes Saved', userInfo: theCard });
    });
 });
 
-//add(save) other user's card
+//add(save) other user's card/contact
 router.post('/contacts/add/:id', (req, res, next) => {
     const cardToSaveId = req.params.id;
     const userId       = req.user._id;
@@ -79,7 +81,7 @@ router.post('/contacts/add/:id', (req, res, next) => {
           res.json(err);
           return;
         }
-        res.json({  message: 'Contact Added', status: "OK", contacts: theUser.contacts });
+        res.json({ message: 'Contact Added', userInfo: theUser });
       });
     });
 });
@@ -91,7 +93,7 @@ router.post('/profile/my-cards/add', (req, res, next) => {
     fullName:       req.body.fullName,
     companyName:    req.body.companyName,
     position:       req.body.position,
-    phoneNum:       req.body.image,
+    phoneNum:       req.body.phoneNum,
     email:          req.body.email,
     description:    req.body.description,
     profilePic:     req.body.profilePic,
@@ -118,7 +120,7 @@ router.post('/profile/my-cards/add', (req, res, next) => {
           res.json(err);
           return;
         }
-        res.json({  message: 'Card Added', status: "OK", userInfo: theUser });
+        res.json({  message: 'Card Added', userInfo: theUser });
       });
     }
   );
@@ -127,7 +129,7 @@ router.post('/profile/my-cards/add', (req, res, next) => {
 //delete user's own card
 router.delete('/profile/my-cards/delete/:id', (req, res, next) => {
   const cardToRemoveId = req.params.id;
-  const userId = req.params._id;
+  const userId = req.user._id;
   if (!mongoose.Types.ObjectId.isValid(cardToRemoveId)) {
     res.status(400).json({
       message: 'Specified id is not valid'
@@ -159,17 +161,17 @@ router.delete('/profile/my-cards/delete/:id', (req, res, next) => {
             return;
           }
         });
+        //card succesfully removed from the DB
+        return res.json({ message: 'Card succesfully removed!', userInfo: theUser });
       }
     );
-    //card succesfully removed from the DB
-    return res.json({ message: 'Card succesfully removed!', status: 'OK' });
   });
 });
 
 //delete one of user's contacts
 router.put('/contacts/delete/:id', (req, res, next) => {
   const cardToRemoveId = req.params.id;
-  const userId = req.params._id;
+  const userId = req.user._id;
   if (!mongoose.Types.ObjectId.isValid(cardToRemoveId)) {
     res.status(400).json({
       message: 'Specified id is not valid'
@@ -177,9 +179,7 @@ router.put('/contacts/delete/:id', (req, res, next) => {
     return;
   }
     //update user's contacts Array
-    UserModel.findById(
-      userId,
-      (err, theUser) => {
+    UserModel.findById(userId, (err, theUser) => {
         if(err) {
           res.json(err);
           return;
@@ -197,8 +197,8 @@ router.put('/contacts/delete/:id', (req, res, next) => {
             res.json(err);
             return;
           }
-          res.json({  message: 'Card succesfully removed!', status: "OK" });
-            });
+        });
+        res.json({  message: 'Card succesfully removed!', userInfo: theUser });
       }
     );
 });

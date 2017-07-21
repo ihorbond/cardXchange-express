@@ -9,11 +9,15 @@ import { CardService } from '../card.service';
 })
 export class UserProfileComponent implements OnInit {
 cards;
+message;
   constructor(private card: CardService) { }
 
   ngOnInit() {
-    this.card.getCards().subscribe(
-    result => this.cards = result
+    this.card.getCards().subscribe(result =>
+              { console.log("USER-PROFILE CARDS: " + result);
+                this.message = result.message;
+                this.cards   = result.userInfo.cards;
+              }
     )
   }
 

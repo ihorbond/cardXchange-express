@@ -12,37 +12,37 @@ BASE_URL: string = 'http://localhost:3000';
 
 //get all saved contacts
   getContacts() {
-     return this.http.get(`${this.BASE_URL}/api/contacts`)
+     return this.http.get(`${this.BASE_URL}/api/contacts`, {withCredentials: true})
        .map(res => res.json());
    }
 
   //get user profile and cards
    getCards() {
-     return this.http.get(`${this.BASE_URL}/api/profile`)
+     return this.http.get(`${this.BASE_URL}/api/profile`, {withCredentials: true})
      .map(res => res.json());
    }
 
    //add new own card
    addCard(newCard) {
-     return this.http.post(`${this.BASE_URL}/api/profile/my-cards/add`, newCard)
+     return this.http.post(`${this.BASE_URL}/api/profile/my-cards/add`, newCard, {withCredentials: true})
        .map(res => res.json());
    }
 
    //save other user's card
    saveCard(id) {
-     return this.http.post(`${this.BASE_URL}/api/contacts/add/${id}`, {id:id})
+     return this.http.post(`${this.BASE_URL}/api/contacts/add/${id}`, {id:id}, {withCredentials: true})
        .map((res) => res.json());
    }
 
    //remove card from contacts
       removeContact(id) {
-        return this.http.delete(`${this.BASE_URL}/api/contacts/delete/${id}`)
+        return this.http.delete(`${this.BASE_URL}/api/contacts/delete/${id}`, {withCredentials: true})
           .map((res) => res.json());
       }
 
   //remove  own card
   removeCard(id) {
-    return this.http.delete(`${this.BASE_URL}/api/profile/my-cards/delete/${id}`)
+    return this.http.delete(`${this.BASE_URL}/api/profile/my-cards/delete/${id}`, {withCredentials: true})
       .map((res) => res.json());
   }
 
