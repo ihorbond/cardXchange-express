@@ -7,7 +7,7 @@ import 'rxjs/add/operator/toPromise';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.scss'],
+  styleUrls: ['./signup.component.min.css'],
   providers: [AuthorizationService]
 })
 export class SignupComponent implements OnInit {

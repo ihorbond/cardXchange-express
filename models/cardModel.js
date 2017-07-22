@@ -5,7 +5,7 @@ const cardSchema = new mongoose.Schema({
   companyName:       {type: String},
   position:          {type: String},
   phoneNum:          {type: String},
-  email:             {type: String},
+  email:             {type: String, required: true},
   description:       {type: String},
   profilePic:        {type: String, default: "../public/images/new-user.png"},
   visibility:        {type: Boolean, default: true},

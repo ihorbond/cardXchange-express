@@ -8,7 +8,7 @@ import 'rxjs/add/operator/toPromise';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  styleUrls: ['./login.component.min.css'],
   providers: [AuthorizationService]
 
 })

@@ -15,7 +15,7 @@ router.get('/contacts', (req, res, next) => {
       return;
     }
     if(!theUser.contacts.length) {
-      res.json({message: "No cards to display", userInfo: theUser });
+      res.json({message: "No contacts to display", userInfo: theUser });
       return;
     }
        //fetch matching cards from cards collection
@@ -89,6 +89,7 @@ router.post('/contacts/add/:id', (req, res, next) => {
 //add own card
 router.post('/profile/my-cards/add', (req, res, next) => {
   const userId  = req.user._id;
+
   const theCard = new CardModel ({
     fullName:       req.body.fullName,
     companyName:    req.body.companyName,
@@ -100,6 +101,10 @@ router.post('/profile/my-cards/add', (req, res, next) => {
     visibility:     req.body.visibility,
     QRcode:         req.body.qrcode//???
   });
+  if(!theCard.fullName || !theCard.email) {
+    res.json({message: "Both Name and Email fields must be filled out"});
+    return;
+  }
   theCard.save(err => {
     if (err) {
       res.json(err);

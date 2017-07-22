@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CardService } from '../card.service';
+import { CardService }       from '../card.service';
+
 // import { Http } from '@angular/http';
 @Component({
   selector: 'app-user-profile',
@@ -8,8 +9,9 @@ import { CardService } from '../card.service';
   providers: [CardService]
 })
 export class UserProfileComponent implements OnInit {
-cards;
-message;
+cards: any;
+message: string;
+user: string;
   constructor(private card: CardService) { }
 
   ngOnInit() {
@@ -17,8 +19,10 @@ message;
               { console.log("USER-PROFILE CARDS: " + result);
                 this.message = result.message;
                 this.cards   = result.userInfo.cards;
+                this.user    = result.userInfo.fullName;
               }
     )
   }
+
 
 }

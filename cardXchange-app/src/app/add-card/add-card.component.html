@@ -1,18 +1,22 @@
-<h1> Add New Card </h1>
+
+<button (click)="addNewCard()">Add Card</button>
 <p *ngIf="message"> {{message}} </p>
- <form #newCardInfo="ngForm" id="new-card-info" (ngSubmit)="addCard(newCardInfo)">
+
+<div [ngClass]="{'hidden':isHidden}">
+
+  <form #newCardInfo="ngForm" id="new-card-info" (ngSubmit)="addCard(newCardInfo)">
   Name: <input type="text" name="fullName" ngModel><br>
   Company Name: <input type="text" name="companyName" ngModel><br>
   Position: <input type="text" name="position" ngModel><br>
-      Email: <input type="email" name="email" ngModel><br>
-      Phone#: <input type="text" name="phoneNum" ngModel><br>
-        Desc: <input type="text" name="description" ngModel><br>
-        Photo:<input type="file" accept="image/*" name="picture" ngModel><br>
+  Email: <input type="email" name="email" ngModel><br>
+  Phone#: <input type="text" name="phoneNum" ngModel><br>
+  Desc: <input type="text" name="description" ngModel><br>
+  Photo:<input type="file" accept="image/*" name="picture" ngModel><br>
   <button id="add-card" type="submit"> Save </button>
   </form>
-
   <qr-code id="qr" [value]="'All QR Code data goes here!'" [size]="150"></qr-code>
 
+</div>
   <!-- <qr-scanner
      [debug]="true"
      [canvasWidth]="300"

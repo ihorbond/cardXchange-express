@@ -4,7 +4,7 @@ import { CardService } from '../card.service';
 @Component({
   selector: 'app-contacts',
   templateUrl: './contacts.component.html',
-  styleUrls: ['./contacts.component.scss'],
+  styleUrls: ['./contacts.component.min.css'],
   providers: [CardService]
 })
 export class ContactsComponent implements OnInit {

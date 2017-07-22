@@ -1,48 +1,64 @@
-  <h1>
-    Welcome to {{title}}!
-  </h1>
-  <h2> You are home :) </h2>
-
-<ul>
-  <li>
-  <a [routerLink]="['']">Home</a>
-</li>
-  <li>
-  <a [routerLink]="['contacts']">Contacts</a>
-</li>
-<li>
-  <a [routerLink]="['profile']">Profile</a>
-</li>
-  <li>
-  <a [routerLink]="['about']">About</a>
-</li>
-  <li>
-<a [routerLink]="['signup']">SignUp</a>
-</li>
-<li>
-<a [routerLink]="['login']">Login</a>
-</li>
-</ul>
-
-<router-outlet></router-outlet>
-
-<form #loginInfo="ngForm" id="loginForm" (ngSubmit)="login(loginInfo)">
-<h2> Login </h2>
-<label for id="login-email"> Email </label>
-<input id="login-email" type="email" name="loginEmail" ngModel>
-<br>
-<label for id="login-password"> Password </label>
-<input id="login-password" type="password" name="loginPassword" ngModel>
-<br>
-<button> Login </button>
-</form>
-
-<p class="error"> {{ error }} </p>
-
-<div *ngIf="user">
-  <h2> You are now logged in as {{ user.fullName }}!! </h2>
-  <p> Here's the user object </p>
-  <pre> {{ user | json }} </pre>
-
-  <button (click)="logout()"> logout </button>
+<div id="mySidenav" class="sidenav">
+  <a (click)="showMenu()" class="menu"><span class="glyphicon glyphicon-remove"></span></a>
+  <a href="#">About</a>
+  <a href="#">Help</a>
+  <a (click)="logout()">Logout</a>
 </div>
+
+
+
+  <nav class="header">
+    <div class="container-fluid">
+      <div class="row">
+        <ul>
+          <li class="col-xs-3"><a [routerLink]="['']" class="logo">{{title}}</a></li>
+          <li class="col-xs-6"><a *ngIf="user" [routerLink]="['profile']" class="greeting">Hello, {{user.fullName}}</a></li>
+          <li *ngIf="!user" class="col-xs-3"><a [routerLink]="['signup']" class="menu">Sign Up</a></li>
+          <li *ngIf="user" class="col-xs-3">
+            <a (click)="showMenu()" class="menu"><span class="glyphicon glyphicon-th-list"></span></a>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div id="pageContent">
+
+  <router-outlet></router-outlet>
+
+  <form *ngIf="!user" #loginInfo="ngForm" id="loginForm" (ngSubmit)="login(loginInfo)">
+    <h2> Login </h2>
+    <label for id="loginEmail"> Email </label>
+    <input id="loginEmail" type="email" name="loginEmail" ngModel>
+    <br>
+    <label for id="loginPassword"> Password </label>
+    <input id="loginPassword" type="password" name="loginPassword" ngModel>
+    <br>
+    <button> Login </button>
+  </form>
+
+  <p class="error"> {{ error }} </p>
+
+  <div *ngIf="user">
+    <h2> You are now logged in as {{ user.fullName }}!! </h2>
+  </div>
+
+</div>
+
+  <nav class="footer">
+    <div class="container-fluid">
+      <div class="row">
+        <ul>
+          <li class="col-xs-4">
+            <a id="contacts" [routerLink]="['contacts']">Contacts</a>
+          </li>
+          <li class="col-xs-4">
+            <a id="Profile"[routerLink]="['profile']">Profile</a>
+          </li>
+          <li class="col-xs-4">
+            <a id="events">Events</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>

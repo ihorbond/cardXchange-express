@@ -1,19 +1,38 @@
-<h1> User Profile </h1>
+<h1> Hello, {{user}} </h1>
     <div>
-      <h1> Cards </h1>
+      <h1> Your Cards </h1>
+      <app-add-card>Add Card</app-add-card>
+      <a href="#"> Purchase template </a>
+
       <p *ngIf="message"> {{message}} </p>
-      <p> {{cards | json}} </p>
+      <!-- <p> {{cards | json}} </p> -->
       <div *ngIf="cards">
+
+
       <div *ngFor="let oneCard of cards">
+        <div class="wrapper">
+           <div class="image-wrapper">
+              <img src="//cdn0.iconfinder.com/data/icons/user-pictures/100/male-256.png" alt="{{oneCard.fullName}}" />
+              <h1 class="name">{{oneCard.fullName}}</h1>
+              <p class="description">{{oneCard.position}}</p>
+
+              <ul class="social-media">
+                 <!-- <a href="https://www.instagram.com/simply_aalex"><i class="fa fa-instagram" target="_blank"></i></a>
+                 <a href="https://www.behance.net/alextkachov"><i class="fa fa-behance" target="_blank"></i></a>
+                 <a href="https://codepen.io/alexpopovich" target="_blank"><i class="fa fa-codepen"></i></a> -->
+              </ul>
+              <a href="https://twitter.com/simply_aalex" target="_blank" class="follow"><i class="fa fa-twitter"></i>Follow</a>
+           </div>
+        </div>
         <!-- <img [src]="oneCard.profilePic"> -->
         <p> {{ oneCard.fullName }} </p>
         <p> {{ oneCard.companyName }} </p>
         <p> {{ oneCard.position }} </p>
         <p> {{ oneCard.phoneNum }} </p>
         <p> {{ oneCard.email }} </p>
-          <p> {{ oneCard.description }} </p>
-            <p> {{ oneCard.QRcode }} </p>
+        <p> {{ oneCard.description }} </p>
+        <p> {{ oneCard.QRcode }} </p>
       </div>
+      </div>
+
     </div>
-    </div>
-    <app-add-card>Add Card</app-add-card>
