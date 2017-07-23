@@ -8,23 +8,26 @@ const CardModel  = require('../models/cardModel');
 //change card visibility
 router.put('/profile/my-cards/cv/:id', (req, res, next) => {
    const cardToEditId = req.params.id;
-   const userId       = req.user._id;
    if (!mongoose.Types.ObjectId.isValid(cardToEditId)) {
      res.status(400).json({ message: 'Specified id is not valid' });
      return;
    }
-   CardModel.findByIdAndUpdate(
-     cardToEditId,
-   {
-     visibility: req.body.visibility
-   },
-     (err, theCard) => {
-       if(err) {
-         res.json(err);
-         return;
-       }
-       res.json({ message: 'Changes Saved', userInfo: theCard });
+   //no validation needed that's why findByIdAndUpdate
+   CardModel.findById( cardToEditId, (err, theCard) => {
+     if(err) {
+       res.json(err);
+       return;
+     }
+
+   visibility = req.body.visibility;
+   theCard.save(err => {
+     if(err) {
+       res.json(err);
+       return;
+     }
+  res.json({ message: 'Changes Saved', userInfo: theCard });
    });
+});
 });
 
 //show contacts
@@ -61,6 +64,7 @@ router.put('/profile/my-cards/edit/:id', (req, res, next) => {
    }
    //findById and save is better than findByIdAndUpdate
    //because it will validate the changes
+   //also findByIdAndUpdate returns the old, unchanged document
    CardModel.findById(cardToEditId, (err, theCard) => {
      if(err) {
        res.json(err);
