@@ -12,11 +12,16 @@
   Phone#: <input type="text" name="phoneNum" ngModel><br>
   Desc: <input type="text" name="description" ngModel><br>
   Photo:<input type="file" accept="image/*" name="picture" ngModel><br>
+  LinkedIn uername:<input type="text" name="linkedIn" ngModel><br>
   <button id="add-card" type="submit"> Save </button>
   </form>
   <qr-code id="qr" [value]="'All QR Code data goes here!'" [size]="150"></qr-code>
 
 </div>
+
+<textarea id="note" (blur)="hideNote(oneCard.id)" value="{{oneCard.description}}">Text Area</textarea>
+<a (click)="addNote(oneCard.id)">Add Note</a>
+<br>
   <!-- <qr-scanner
      [debug]="true"
      [canvasWidth]="300"

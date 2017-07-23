@@ -30,28 +30,40 @@ BASE_URL: string = 'http://localhost:3000';
 
    //save other user's card
    saveCard(id) {
-     return this.http.post(`${this.BASE_URL}/api/contacts/add/${id}`, {id:id}, {withCredentials: true})
-       .map((res) => res.json());
+     return this.http.patch(`${this.BASE_URL}/api/contacts/add/${id}`, {id:id}, {withCredentials: true})
+       .map(res => res.json());
    }
 
    //remove card from contacts
       removeContact(id) {
-        return this.http.delete(`${this.BASE_URL}/api/contacts/delete/${id}`, {withCredentials: true})
-          .map((res) => res.json());
+        return this.http.patch(`${this.BASE_URL}/api/contacts/delete/${id}`, {withCredentials: true})
+          .map(res => res.json());
       }
 
-  //remove  own card
-  removeCard(id) {
+  //remove own card
+  removeCardFromCollection(id) {
     return this.http.delete(`${this.BASE_URL}/api/profile/my-cards/delete/${id}`, {withCredentials: true})
-      .map((res) => res.json());
+        .map(res => res.json());
+  }
+
+  //remove  own card
+  removeCardFromArray(id) {
+    return this.http.patch(`${this.BASE_URL}/api/profile/my-cards/update/${id}`, {withCredentials: true})
+        .map(res => res.json());
+  }
+
+  //change card visibility
+  changeVisibility(id) {
+    return this.http.patch(`${this.BASE_URL}/profile/my-cards/cv/${id}`, {withCredentials: true})
+      .map(res => res.json());
   }
 
 
   //update own card
-  //  editCard(id) {
-  //      return this.http.patch(`${this.BASE_URL}/api/profile/my-cards/edit/${id}`, updatedCard)
-  //        .map((res) => res.json());
-  //    }
+   editCard(id, updatedCard) {
+       return this.http.patch(`${this.BASE_URL}/api/profile/my-cards/edit/${id}`, updatedCard, {withCredentials: true})
+         .map(res => res.json());
+     }
 
 
 

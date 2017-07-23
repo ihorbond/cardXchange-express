@@ -37,6 +37,7 @@ numberOfCards: number;
       phoneNum:    form.value.phoneNum,
       email:       form.value.email,
       description: form.value.description,
+      linkedIn:    form.value.linkedIn,
       QRcode:      this.generateQR()
     }
     console.log(newCard);

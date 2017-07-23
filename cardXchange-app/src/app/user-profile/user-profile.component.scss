@@ -1,91 +1,81 @@
-@import url('https://fonts.googleapis.com/css?family=PT+Sans');
-
-// Variables
-$font: 'PT Sans', sans-serif;;
+@import url( 'https://fonts.googleapis.com/css?family=PT+Sans');
+$font: 'PT Sans', sans-serif;
 $bg: linear-gradient(to right, #E75A7C, #141B41);
 $bg_wrapper: linear-gradient(to left, #306BAC, #141B41);
 $white: #fff;
 $black: #212129;
-$grey: #A1A2AD;
 $selection: #272838;
 
 ::selection {
-   background: $selection;
+  background: $selection;
 }
 
 * {
-   margin: 0;
-   padding: 0;
-   font-family: $font;
-   text-align: center;
-   text-decoration: none;
-
-   -webkit-box-sizing: border-box;
-   -moz-box-sizing: border-box;
-   -ms-box-sizing: border-box;
-   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: $font;
+  text-decoration: none;
 }
 
 img {
-   max-width: 100%;
+  max-width: 100%;
 }
 
-html, body {
-   height: 100%;
-}
+.one-card {
+  margin-bottom: 10px;
 
-.wrapper {
-   max-width: 30em;
-   position: relative;
-   background: $bg_wrapper;
-   color: $white;
-   margin: 0 auto;
-   // margin-top: 30px;
-   padding: 30px;
-   border-radius: 20px;
-   box-shadow: 0px 0px 80px 1px $black;
-   .image-wrapper img {
+  .wrapper {
+    width: 100%;
+    background: $bg_wrapper;
+    color: $white;
+    margin-left: 10px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 50px 1px $black;
+
+    .image-wrapper img {
       width: 5em;
       border-radius: 50%;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-   }
-   .name {
-      font-size: 2.2em;
-   }
-   .description {
-      color: $grey;
-      text-transform: uppercase;
-      margin-top: 10px;
-   }
-   .social-media a i {
-      color: $white;
-      font-size: 2em;
-      margin-left: 10px;
-      margin-top: 10px;
-      padding: 15px;
-      transition: 300ms;
+    }
 
-   }
-  //  .follow {
-  //     background: $white;
-  //     color: $black;
-  //     text-transform: uppercase;
-  //     font-size: 1.2em;
-  //     letter-spacing: 0.1em;
-  //     padding: 10px 45px;
-  //     border-radius: 30px;
-  //     transition: 300ms;
-  //     -webkit-user-select: none;
-  //     -moz-user-select: none;
-  //     -ms-user-select: none;
-  //     user-select: none;
-   //
-  //     .fa-twitter {
-  //        margin-right: 5px;
-  //        margin-top: 15px;
-  //     }
-  //  }
+    .information {
+      text-align: left;
+
+      .name {
+        font-size: 1.5em;
+        text-transform: capitalize;
+      }
+
+      .position {
+        font-size: 1em;
+        font-style: italic;
+      }
+    }
+  }
+
+  .on-off {
+    display: inline-block;
+    text-align: center;
+    margin: 20px 0 0 10px;
+  }
+
+  .contact-info {
+    img {
+      margin: 15px 10px 0;
+      width: 2em;
+      height: 2em;
+    }
+  }
+
+  .controls {
+    text-align: center;
+  }
+
+}
+
+#editForm {
+    display: none;
+    border-radius: 5px;
+    height: 100%;
+    width: 0;
 }

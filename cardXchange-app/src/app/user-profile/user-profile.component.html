@@ -1,38 +1,72 @@
-<h1> Hello, {{user}} </h1>
-    <div>
-      <h1> Your Cards </h1>
-      <app-add-card>Add Card</app-add-card>
-      <a href="#"> Purchase template </a>
+<div class="container-fluid">
+  <h1> Your Cards </h1>
+  <a (click)="addCard()">Add Card</a> |
+  <a href="#"> Purchase template </a>
 
-      <p *ngIf="message"> {{message}} </p>
-      <!-- <p> {{cards | json}} </p> -->
-      <div *ngIf="cards">
+  <p *ngIf="message"> {{message}} </p>
 
+ <div *ngIf="cards" class="cards">
+  <div *ngFor="let oneCard of cards" class="row one-card">
+    <div class="col-xs-9" id="oneCard">
+      <div class="container-fluid wrapper">
+        <div class="row">
+          <div class="col-xs-4 image-wrapper">
+            <img src="//cdn0.iconfinder.com/data/icons/user-pictures/100/male-256.png" alt="{{oneCard.fullName}}" />
 
-      <div *ngFor="let oneCard of cards">
-        <div class="wrapper">
-           <div class="image-wrapper">
-              <img src="//cdn0.iconfinder.com/data/icons/user-pictures/100/male-256.png" alt="{{oneCard.fullName}}" />
-              <h1 class="name">{{oneCard.fullName}}</h1>
-              <p class="description">{{oneCard.position}}</p>
+          </div>
+          <div class="col-xs-8 information">
+            <p class="name">{{oneCard.fullName}}</p>
+            <p class="position">{{oneCard.position}} at
+            {{oneCard.companyName}}  </p>
 
-              <ul class="social-media">
-                 <!-- <a href="https://www.instagram.com/simply_aalex"><i class="fa fa-instagram" target="_blank"></i></a>
-                 <a href="https://www.behance.net/alextkachov"><i class="fa fa-behance" target="_blank"></i></a>
-                 <a href="https://codepen.io/alexpopovich" target="_blank"><i class="fa fa-codepen"></i></a> -->
-              </ul>
-              <a href="https://twitter.com/simply_aalex" target="_blank" class="follow"><i class="fa fa-twitter"></i>Follow</a>
-           </div>
+          </div>
+            </div>
+<div class="row">
+<div class="col-xs-4">
+    <a (click)="onOffSwitch(oneCard._id)" class="on-off"> ON/OFF </a>
+ </div>
+<div class="col-xs-8">
+  <p class="contact-info">
+    <a *ngIf="oneCard.email" href="mailto:{{oneCard.email}}"><img src="../../assets/email.png"></a>
+    <a *ngIf="oneCard.phoneNum" href="tel:{{oneCared.phoneNum}}"><img src="../../assets/call.png"></a>
+    <a *ngIf="oneCard.linkedIn" href="{{oneCard.linkedIn}}" target="_blank"><img src="../../assets/linkedin.png"></a>
+    <a (click)="enlargeQr(oneCard._id)"> {{ oneCard.QRcode }} </a>
+  </p>
+</div>
+</div>
+<div id="editForm">
+
+  <form #editInfo="ngForm" id="editInfo" (ngSubmit)="saveChanges(oneCard.id)">
+  <label for id="editedFullName"> Full Name </label>
+  <input id="editedFullName" maxlength="16" type="string" name="fullName" ngModel>
+  <br>
+  <label for id="editedCompanyName"> Company Name </label>
+  <input id="editedCompanyName" type="text" maxlength="12" name="companyName" ngModel>
+  <br>
+  <label for id="editedPosition"> Position </label>
+  <input id="editedPosition" type="text" maxlength="12" name="position" ngModel>
+  <br>
+  <label for id="editedEmail"> Email </label>
+  <input id="editedEmail" type="text" name="email" ngModel>
+  <br>
+  <label for id="editedPhoneNum"> Phone# </label>
+  <input id="editedPhoneNum" type="text" name="phoneNum" ngModel>
+  <br>
+  <label for id="editedlinkedIn"> LinkedIn </label>
+  <input id="editedlLinkedIn" type="text" maxlength="25" name="linkedIn" ngModel>
+  <br>
+  <button> Save </button>
+  </form>
+
+</div>
+  </div>
+  </div>
+        <div class="col-xs-3 controls">
+          <a (click)="editCard()">Edit</a>
+          <br>
+          <a (click)="deleteCard(oneCard._id)">Delete</a>
+          <br>
         </div>
-        <!-- <img [src]="oneCard.profilePic"> -->
-        <p> {{ oneCard.fullName }} </p>
-        <p> {{ oneCard.companyName }} </p>
-        <p> {{ oneCard.position }} </p>
-        <p> {{ oneCard.phoneNum }} </p>
-        <p> {{ oneCard.email }} </p>
-        <p> {{ oneCard.description }} </p>
-        <p> {{ oneCard.QRcode }} </p>
-      </div>
-      </div>
-
-    </div>
+  </div>
+</div>
+</div>

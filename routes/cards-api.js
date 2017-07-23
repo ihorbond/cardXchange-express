@@ -4,7 +4,28 @@ const mongoose   = require('mongoose');
 const UserModel  = require('../models/userModel');
 const CardModel  = require('../models/cardModel');
 // const EventModel = require('../models/eventModel');
+
 //change card visibility
+router.put('/profile/my-cards/cv/:id', (req, res, next) => {
+   const cardToEditId = req.params.id;
+   const userId       = req.user._id;
+   if (!mongoose.Types.ObjectId.isValid(cardToEditId)) {
+     res.status(400).json({ message: 'Specified id is not valid' });
+     return;
+   }
+   CardModel.findByIdAndUpdate(
+     cardToEditId,
+   {
+     visibility: req.body.visibility
+   },
+     (err, theCard) => {
+       if(err) {
+         res.json(err);
+         return;
+       }
+       res.json({ message: 'Changes Saved', userInfo: theCard });
+   });
+});
 
 //show contacts
 router.get('/contacts', (req, res, next) => {
@@ -34,33 +55,36 @@ router.get('/contacts', (req, res, next) => {
 //edit card info
 router.put('/profile/my-cards/edit/:id', (req, res, next) => {
    const cardToEditId = req.params.id;
-   const userId       = req.user._id;
    if (!mongoose.Types.ObjectId.isValid(cardToEditId)) {
      res.status(400).json({ message: 'Specified id is not valid' });
      return;
    }
-   CardModel.findByIdAndUpdate(
-     cardToEditId,
-   {
-     fullName:       req.body.fullName,
-     companyName:    req.body.companyName,
-     position:       req.body.position,
-     phoneNum:       req.body.phoneNum,
-     email:          req.body.email,
-     description:    req.body.description,
-     profilePic:     req.body.profilePic,
-   },
-     (err, theCard) => {
-       if(err) {
-         res.json(err);
-         return;
-       }
-       res.json({ message: 'Changes Saved', userInfo: theCard });
+   //findById and save is better than findByIdAndUpdate
+   //because it will validate the changes
+   CardModel.findById(cardToEditId, (err, theCard) => {
+     if(err) {
+       res.json(err);
+       return;
+     }
+       theCard.fullName    = req.body.fullName;
+       theCard.companyName = req.body.companyName;
+       theCard.position    = req.body.position;
+       theCard.phoneNum    = req.body.phoneNum;
+       theCard.email       = req.body.email;
+       theCard.linkedIn    = req.body.linkedIn;
+       theCard.profilePic  = req.body.profilePic;
+       theCard.save(err => {
+         if(err) {
+           res.json(err);
+           return;
+         }
+        res.json({ message: 'Changes Saved', userInfo: theCard });
    });
+});
 });
 
 //add(save) other user's card/contact
-router.post('/contacts/add/:id', (req, res, next) => {
+router.put('/contacts/add/:id', (req, res, next) => {
     const cardToSaveId = req.params.id;
     const userId       = req.user._id;
     if (!mongoose.Types.ObjectId.isValid(cardToSaveId)) {
@@ -88,15 +112,18 @@ router.post('/contacts/add/:id', (req, res, next) => {
 
 //add own card
 router.post('/profile/my-cards/add', (req, res, next) => {
-  const userId  = req.user._id;
-
+  const userId = req.user._id;
+  if (req.user.cards.length >= 3) {
+    res.json({ message: "Sorry, you have reached the limit of 3 cards. Delete other cards first" });
+    return;
+  }
   const theCard = new CardModel ({
     fullName:       req.body.fullName,
     companyName:    req.body.companyName,
     position:       req.body.position,
     phoneNum:       req.body.phoneNum,
     email:          req.body.email,
-    description:    req.body.description,
+    linkedIn:       req.body.linkedIn,
     profilePic:     req.body.profilePic,
     visibility:     req.body.visibility,
     QRcode:         req.body.qrcode//???
@@ -131,7 +158,7 @@ router.post('/profile/my-cards/add', (req, res, next) => {
   );
 });
 
-//delete user's own card
+//remove user's own card from cards collection
 router.delete('/profile/my-cards/delete/:id', (req, res, next) => {
   const cardToRemoveId = req.params.id;
   const userId = req.user._id;
@@ -146,21 +173,33 @@ router.delete('/profile/my-cards/delete/:id', (req, res, next) => {
       res.json(err);
       return;
     }
-    // if no error - update user's cards Array
+    });
+  });
+
+  //remove card from user's cards array
+  router.put('/profile/my-cards/update/:id', (req, res, next) => {
+    const cardToRemoveId = req.params.id;
+    const userId = req.user._id;
+    if (!mongoose.Types.ObjectId.isValid(cardToRemoveId)) {
+      res.status(400).json({
+        message: 'Specified id is not valid'
+      });
+      return;
+    }
     UserModel.findById(userId, (err, theUser) => {
         if(err) {
           res.json(err);
           return;
         }
-
+// console.log("BEFORE LOOP: " + theUser.cards);
         theUser.cards.forEach((oneCard, index) => {
-
-          if (oneCard._id.toString() === cardToRemoveId.toString()) {
+          if (oneCard.toString() === cardToRemoveId.toString()) {
              theUser.cards.splice(index, 1);
           }
         });
+// console.log("AFTER LOOP: " + theUser.cards);
         theUser.markModified('cards');
-        theUser.save((err) => {
+        theUser.save(err => {
           if(err) {
             res.json(err);
             return;
@@ -170,7 +209,6 @@ router.delete('/profile/my-cards/delete/:id', (req, res, next) => {
         return res.json({ message: 'Card succesfully removed!', userInfo: theUser });
       }
     );
-  });
 });
 
 //delete one of user's contacts
@@ -192,8 +230,8 @@ router.put('/contacts/delete/:id', (req, res, next) => {
 
         theUser.contacts.forEach((oneCard, index) => {
 
-          if (oneCard._id.toString() === cardToRemoveId.toString()) {
-             theUser.cards.splice(index, 1);
+          if (oneCard.toString() === cardToRemoveId.toString()) {
+             theUser.contacts.splice(index, 1);
           }
         });
         theUser.markModified('contacts');
@@ -203,7 +241,7 @@ router.put('/contacts/delete/:id', (req, res, next) => {
             return;
           }
         });
-        res.json({  message: 'Card succesfully removed!', userInfo: theUser });
+        res.json({  message: 'Contact succesfully removed!', userInfo: theUser });
       }
     );
 });

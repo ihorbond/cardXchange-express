@@ -2,6 +2,7 @@ import { Component, OnInit }     from '@angular/core';
 import { AuthorizationService }  from './authorization.service';
 import { NgForm }                from '@angular/forms';
 import { NgClass }               from '@angular/common';
+import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
@@ -24,7 +25,9 @@ export class AppComponent implements OnInit {
     loginPassword: ''
   }
 
-  constructor(private auth: AuthorizationService) {}
+  constructor(private auth: AuthorizationService,
+              private router: Router) {}
+
   ngOnInit() {
     //check if user already logged in
     this.auth.isLoggedIn()
@@ -49,18 +52,19 @@ export class AppComponent implements OnInit {
                       this.error = null;
                      },
            (err) =>   this.error = err);
-           console.log(this.user);
+  this.router.navigate(['']);
+  this.showMenu();
   }
 
    showMenu() {
      if(!this.sideMenu) {
        this.sideMenu = true;
-     $(".sidenav").css("width", 140);
+     $(".sidenav").width(140);
      $("body").css("background-color", "rgba(0,0,0,0.4)");
   }
   else {
     this.sideMenu = false;
-  $(".sidenav").css("width", 0);
+  $(".sidenav").width(0);
   $("body").css("background-color", "white");
   }
 }

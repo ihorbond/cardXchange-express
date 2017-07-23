@@ -99,21 +99,3 @@ authRoutes.get('/loggedin', (req, res, next) => {
 });
 
 module.exports = authRoutes;
-
-
-//signup
-// router.post('/signup', (req, res, next) => {
-//   const theUser = new UserModel ({
-//     fullName:          req.body.fullName,
-//     email:             req.body.email,
-//     encryptedPassword: req.body.password
-//   });
-//   theUser.save(err => {
-//     if (err) {
-//       next(err);
-//       return;
-//     }
-//   });
-//   res.json(theUser);
-//   // res.redirect('/login');
-// });

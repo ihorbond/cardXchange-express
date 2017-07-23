@@ -17,6 +17,7 @@ import { AboutComponent } from './about/about.component'
 import { AuthorizationService } from './authorization.service';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { EditCardComponent } from './edit-card/edit-card.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { SignupComponent } from './signup/signup.component';
     AddCardComponent,
     AboutComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    EditCardComponent
   ],
   imports: [
     QrScannerModule,
