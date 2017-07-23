@@ -39,7 +39,7 @@ authRoutes.post('/signup', (req, res, next) => {
         res.status(400).json({ message: 'Something went wrong' });
         return;
       }
-       //req.login is defined by password
+       //req.login is defined by passport
       req.login(theUser, (err) => {
         if (err) {
           res.status(500).json({ message: 'Something went wrong' });

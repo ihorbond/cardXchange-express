@@ -18,6 +18,7 @@ cards: any;
 message: string;
 user: string;
 showEditForm: boolean = false;
+cardVisibility: boolean = true;
 editedCard: any = {
   fullName: '',
   companyName: '',
@@ -44,7 +45,11 @@ editedCard: any = {
   }
 
   onOffSwitch(id) {
-    this.cardService.changeVisibility(id).subscribe(result =>
+    if (this.cardVisibility) this.cardVisibility = false;
+    else this.cardVisibility = true;
+    console.log("ID: " + id + " VIS: " + this.cardVisibility);
+    this.cardService.changeVisibility(id, this.cardVisibility)
+    .subscribe(result =>
               {
                 this.message = result.message;
               }
@@ -54,9 +59,12 @@ editedCard: any = {
   editCard() {
     $('#editForm').slideToggle("slow");
 }
+ cancelEdit() {
+     $('#editForm').slideToggle("fast");
+ }
 
 saveChanges(id, form: NgForm) {
-  $('#editForm').slideToggle("slow");
+  $('#editForm').slideToggle("fast");
   this.editedCard.fullName    = form.value.fullName;
   this.editedCard.companyName = form.value.companyName;
   this.editedCard.position    = form.value.position;
@@ -72,10 +80,10 @@ saveChanges(id, form: NgForm) {
 
   deleteCard(id) {
     //  console.log("CARD TO DELETE: " + id);
-    this.cardService.removeCardFromCollection(id)
-    .subscribe(res => {
-      this.message = res.message;
-    });
+    // this.cardService.removeCardFromCollection(id)
+    // .subscribe(res => {
+    //   this.message = res.message;
+    // });
     this.cardService.removeCardFromArray(id)
     .subscribe(res => {
       this.message += res.message;

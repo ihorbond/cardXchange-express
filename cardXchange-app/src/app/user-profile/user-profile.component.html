@@ -27,8 +27,8 @@
  </div>
 <div class="col-xs-8">
   <p class="contact-info">
-    <a *ngIf="oneCard.email" href="mailto:{{oneCard.email}}"><img src="../../assets/email.png"></a>
-    <a *ngIf="oneCard.phoneNum" href="tel:{{oneCared.phoneNum}}"><img src="../../assets/call.png"></a>
+    <a *ngIf="oneCard.email"    href="mailto:{{oneCard.email}}"><img src="../../assets/email.png"></a>
+    <a *ngIf="oneCard.phoneNum" href="tel:{{oneCard.phoneNum}}"><img src="../../assets/call.png"></a>
     <a *ngIf="oneCard.linkedIn" href="{{oneCard.linkedIn}}" target="_blank"><img src="../../assets/linkedin.png"></a>
     <a (click)="enlargeQr(oneCard._id)"> {{ oneCard.QRcode }} </a>
   </p>
@@ -57,12 +57,13 @@
   <br>
   <button> Save </button>
   </form>
+  <button (click)="cancelEdit(oneCard._id)"> Cancel </button>
 
 </div>
   </div>
   </div>
         <div class="col-xs-3 controls">
-          <a (click)="editCard()">Edit</a>
+          <a (click)="editCard(oneCard._id)">Edit</a>
           <br>
           <a (click)="deleteCard(oneCard._id)">Delete</a>
           <br>

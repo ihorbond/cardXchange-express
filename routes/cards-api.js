@@ -6,20 +6,22 @@ const CardModel  = require('../models/cardModel');
 // const EventModel = require('../models/eventModel');
 
 //change card visibility
-router.put('/profile/my-cards/cv/:id', (req, res, next) => {
+router.patch('/profile/my-cards/cv/:id', (req, res, next) => {
    const cardToEditId = req.params.id;
+   console.log(cardToEditId);
    if (!mongoose.Types.ObjectId.isValid(cardToEditId)) {
      res.status(400).json({ message: 'Specified id is not valid' });
      return;
    }
-   //no validation needed that's why findByIdAndUpdate
-   CardModel.findById( cardToEditId, (err, theCard) => {
+
+   CardModel.findById(cardToEditId, (err, theCard) => {
      if(err) {
        res.json(err);
        return;
      }
 
-   visibility = req.body.visibility;
+   theCard.visibility = req.body.visibility;
+
    theCard.save(err => {
      if(err) {
        res.json(err);
@@ -56,7 +58,7 @@ router.get('/contacts', (req, res, next) => {
 });
 
 //edit card info
-router.put('/profile/my-cards/edit/:id', (req, res, next) => {
+router.patch('/profile/my-cards/edit/:id', (req, res, next) => {
    const cardToEditId = req.params.id;
    if (!mongoose.Types.ObjectId.isValid(cardToEditId)) {
      res.status(400).json({ message: 'Specified id is not valid' });
@@ -88,7 +90,7 @@ router.put('/profile/my-cards/edit/:id', (req, res, next) => {
 });
 
 //add(save) other user's card/contact
-router.put('/contacts/add/:id', (req, res, next) => {
+router.patch('/contacts/add/:id', (req, res, next) => {
     const cardToSaveId = req.params.id;
     const userId       = req.user._id;
     if (!mongoose.Types.ObjectId.isValid(cardToSaveId)) {
@@ -172,7 +174,7 @@ router.delete('/profile/my-cards/delete/:id', (req, res, next) => {
     });
     return;
   }
-  CardModel.remove({ cardToRemoveId }, (err) => {
+  CardModel.findById(cardToRemoveId).remove(err => {
     if(err) {
       res.json(err);
       return;
@@ -181,16 +183,16 @@ router.delete('/profile/my-cards/delete/:id', (req, res, next) => {
   });
 
   //remove card from user's cards array
-  router.put('/profile/my-cards/update/:id', (req, res, next) => {
+  router.patch('/profile/my-cards/update/:id', (req, res, next) => {
     const cardToRemoveId = req.params.id;
     const userId = req.user._id;
     if (!mongoose.Types.ObjectId.isValid(cardToRemoveId)) {
-      res.status(400).json({
-        message: 'Specified id is not valid'
-      });
+      res.status(400).json({message: 'Specified id is not valid'});
       return;
     }
+    console.log("USER ID: " + userId);
     UserModel.findById(userId, (err, theUser) => {
+      console.log("USER: " + theUser);
         if(err) {
           res.json(err);
           return;
@@ -216,7 +218,7 @@ router.delete('/profile/my-cards/delete/:id', (req, res, next) => {
 });
 
 //delete one of user's contacts
-router.put('/contacts/delete/:id', (req, res, next) => {
+router.patch('/contacts/delete/:id', (req, res, next) => {
   const cardToRemoveId = req.params.id;
   const userId = req.user._id;
   if (!mongoose.Types.ObjectId.isValid(cardToRemoveId)) {

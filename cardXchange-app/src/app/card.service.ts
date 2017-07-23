@@ -40,26 +40,26 @@ BASE_URL: string = 'http://localhost:3000';
           .map(res => res.json());
       }
 
-  //remove own card
+  //remove own card from cards collection
   removeCardFromCollection(id) {
     return this.http.delete(`${this.BASE_URL}/api/profile/my-cards/delete/${id}`, {withCredentials: true})
         .map(res => res.json());
   }
 
-  //remove  own card
+  //remove own card from array
   removeCardFromArray(id) {
     return this.http.patch(`${this.BASE_URL}/api/profile/my-cards/update/${id}`, {withCredentials: true})
         .map(res => res.json());
   }
 
-  //change card visibility
-  changeVisibility(id) {
-    return this.http.patch(`${this.BASE_URL}/profile/my-cards/cv/${id}`, {withCredentials: true})
+  //change card visibility ON/OFF
+  changeVisibility(id, cardVisibility) {
+    return this.http.patch(`${this.BASE_URL}/api/profile/my-cards/cv/${id}`, {visibility: cardVisibility}, {withCredentials: true})
       .map(res => res.json());
   }
 
 
-  //update own card
+  //update own card in cards collection
    editCard(id, updatedCard) {
        return this.http.patch(`${this.BASE_URL}/api/profile/my-cards/edit/${id}`, updatedCard, {withCredentials: true})
          .map(res => res.json());
