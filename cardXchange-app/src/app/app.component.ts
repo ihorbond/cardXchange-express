@@ -25,10 +25,13 @@ export class AppComponent implements OnInit {
     loginPassword: ''
   }
 
-  constructor(private auth: AuthorizationService,
-              private router: Router) {}
+  constructor(
+              private auth: AuthorizationService,
+              private router: Router
+            ) {}
 
   ngOnInit() {
+    $("#pageContent").height($('body').height());
     //check if user already logged in
     this.auth.isLoggedIn()
     .subscribe(user => { this.user  = user;

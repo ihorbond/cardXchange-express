@@ -11,7 +11,7 @@
         <ul>
           <li class="col-xs-3"><a [routerLink]="['']" class="logo">{{title}}</a></li>
           <li class="col-xs-6"><a *ngIf="user" [routerLink]="['profile']" class="greeting">Hello, {{user.fullName}}</a></li>
-          <li *ngIf="!user" class="col-xs-3"><a [routerLink]="['signup']" class="menu">Sign Up</a></li>
+          <li *ngIf="!user" class="col-xs-3"><a (click)="signup()" class="menu">Sign Up</a></li>
           <li *ngIf="user" class="col-xs-3">
           <a (click)="showMenu()" class="menu"><span class="glyphicon glyphicon-th-list"></span></a>
         </li>
@@ -20,8 +20,9 @@
     </div>
 
     <div id="pageContent">
-  <p class="error"> {{ error }} </p>
-    <form *ngIf="!user" #loginInfo="ngForm" id="loginForm" (ngSubmit)="login(loginInfo)">
+
+  <!-- <p class="message">{{error}}</p>
+    <form *ngIf="!user" #loginInfo="ngForm" class="auth-form animated fadeIn" (ngSubmit)="login(loginInfo)">
       <h2> Login </h2>
       <label for id="loginEmail"> Email </label>
       <input id="loginEmail" type="email" name="loginEmail" ngModel>
@@ -30,8 +31,24 @@
       <input id="loginPassword" type="password" name="loginPassword" ngModel>
       <br>
       <button> Login </button>
-    </form>
+    </form> -->
 
+    <!-- <div class="auth"> -->
+
+  		<div class="login-wrap">
+        <div class="login-form-wrap">
+  				<div class="card-holder-wrap">
+  					<div class="hole"></div>
+  					<div class="l-stroke"></div>
+  					<div class="r-stroke"></div>
+  					<div class="ring-large-wrap"></div>
+  					<div class="ring-small-wrap"></div>
+
+
+  				</div>
+  			</div>
+  		</div>
+  <!-- </div> -->
   </div>
 
 

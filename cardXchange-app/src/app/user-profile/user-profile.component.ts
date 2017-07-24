@@ -49,7 +49,7 @@ editedCard: any = {
   onOffSwitch(id) {
     if (this.cardVisibility) this.cardVisibility = false;
     else this.cardVisibility = true;
-    console.log("ID: " + id + " VIS: " + this.cardVisibility);
+    // console.log("ID: " + id + " VIS: " + this.cardVisibility);
     this.cardService.changeVisibility(id, this.cardVisibility)
     .subscribe(result =>
               {
