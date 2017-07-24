@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgModule } from '@angular/core';
 import { CardService }       from '../card.service';
 import { NgForm }            from '@angular/forms';
 // import { AddCardComponent}   from '../add-card/add-card.component';
@@ -27,6 +27,7 @@ editedCard: any = {
   position: '',
   phoneNum: '',
   linkedIn: '',
+  email: ''
 };
 
   constructor(
@@ -58,7 +59,16 @@ editedCard: any = {
   }
 
   editCard(id) {
+    // let currentCard;
     $(`#editForm${id}`).slideToggle("slow");
+    // this.cards.forEach((oneCard, index) => {
+    //   if (id === oneCard._id) {
+    //     currentCard = this.cards[index];
+    //   }
+    // });
+    // form.value.fullName = currentCard.fullName;
+
+    // $('#oneCard').css('transform', 'rotateY(-180deg)');
 }
  cancelEdit(id) {
      $(`#editForm${id}`).slideToggle("fast");
@@ -72,17 +82,20 @@ saveChanges(id, form: NgForm) {
   this.editedCard.phoneNum    = form.value.phoneNum
   this.editedCard.linkedIn    = form.value.linkedIn;
   this.editedCard.email       = form.value.email;
+  // send changes to server
   this.cardService.editCard(id, this.editedCard)
   .subscribe(res => {
   this.message = res.message;
 });
 //update cards array here
-this.cards.forEach(oneCard => {
-  if (this.editedCard._id === oneCard._id) {
-    oneCard = this.editedCard;
-    console.log(oneCard);
+//this is desparate! there gotta be a better way! \
+//i need to reassing the cards array
+this.cards.forEach((oneCard, index) => {
+  if (id === oneCard._id) {
+    this.cards[index] = this.editedCard;
   }
 });
+// console.log(this.cards);
 }
 
 enlargeQr(id) {
@@ -93,30 +106,30 @@ enlargeQr(id) {
       });
       if (this.qrcodeIcon) {
         this.qrcodeIcon = false;
-        $(`#QR${id}`).addClass("hidden");
-        $(`#QR2${id}`).removeClass("hidden");
+        $(`#QR2${id}`).slideToggle("fast");
+        $(`#QR${id}`).slideToggle("slow");
       }
       else {
         this.qrcodeIcon = true;
-        $(`#QR2${id}`).addClass("hidden");
-        $(`#QR${id}`).removeClass("hidden");
+        $(`#QR2${id}`).slideToggle("slow");
+        $(`#QR${id}`).slideToggle("fast");
       }
 }
 
 
   deleteCard(id) {
-    //  console.log("CARD TO DELETE: " + id);
-    // this.cardService.removeCardFromCollection(id)
-    // .subscribe(res => {
-    //   this.message = res.message;
-    // });
+
+    this.cardService.removeCardFromCollection(id)
+    .subscribe(res => {
+      this.message = res.message;
+    });
     this.cardService.removeCardFromArray(id)
     .subscribe(res => {
       this.message += res.message;
       // this.cards    = res.cards;
     });
     //this is desparate! there gotta be a better way! \
-  //i need to wait for subscribe and then simply reassing the cards array
+  //i need to simply reassing the cards array to reflect the changes
     this.cards.forEach((oneCard, index) => {
       if(id.toString() === oneCard._id.toString()) {
         this.cards.splice(index, 1);

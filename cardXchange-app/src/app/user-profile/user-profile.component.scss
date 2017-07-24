@@ -57,7 +57,9 @@ img {
       width: 2em;
       height: 2em;
     }
-    #QR {}
+    .QRcode {
+      display: none;
+    }
   }
 
   .controls {
@@ -68,5 +70,7 @@ img {
     display: none;
     border-radius: 5px;
     height: 100%;
-    width: 0;
+    input {
+      color: red;
+    }
 }

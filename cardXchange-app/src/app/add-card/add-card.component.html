@@ -1,6 +1,6 @@
 <div *ngIf="user">
 
-<p *ngIf="message"> {{message}} </p>
+<p class="message" *ngIf="message"> {{message}} </p>
 <div>
   <h2> Enter Information </h2>
   <form #newCardInfo="ngForm" id="new-card-info" (ngSubmit)="addCard(newCardInfo)">
@@ -13,7 +13,7 @@
   LinkedIn link:<input type="text" name="linkedIn" ngModel><br>
   <button id="add-card" type="submit"> Save </button>
   </form>
-  <qr-code id="qr" [value]="'All QR Code data goes here!'" [size]="100" name="QR"></qr-code>
+  <qr-code  id="qr" [padding]="10" [value]="user.linkedIn" size="150"></qr-code>
 </div>
 
 </div>

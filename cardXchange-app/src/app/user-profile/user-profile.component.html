@@ -1,17 +1,14 @@
 
   <h1> Your Cards </h1>
   <a [routerLink]="['add-card']">Add Card</a> |
-  <a href="#"> Purchase template </a> |
-  <a (click)="parseQr()"> parse </a>
+  <a href="#"> Purchase template </a>
 
-<div id="q">  </div>
-
-  <p *ngIf="message"> {{message}} </p>
+  <p *ngIf="message" class="message"> {{message}} </p>
 
  <div *ngIf="cards" class="cards">
   <div *ngFor="let oneCard of cards" class="row one-card">
-    <div class="col-xs-9" id="oneCard">
-      <div class="wrapper">
+    <div class="col-xs-9" >
+      <div id="oneCard" class="wrapper">
         <div class="row">
           <div class="col-xs-4 image-wrapper">
             <img src="//cdn0.iconfinder.com/data/icons/user-pictures/100/male-256.png" alt="{{oneCard.fullName}}" />
@@ -34,20 +31,21 @@
     <a *ngIf="oneCard.phoneNum" href="tel:{{oneCard.phoneNum}}"><img src="../../assets/call.png"></a>
     <a *ngIf="oneCard.linkedIn" href="{{oneCard.linkedIn}}" target="_blank"><img src="../../assets/linkedin.png"></a>
     <a (click)="enlargeQr(oneCard._id)" id="QR{{oneCard._id}}" class="QRicon"><img src="../../assets/qrcode.png"></a>
-    <a (click)="enlargeQr(oneCard._id)" id="QR2{{oneCard._id}}" class="QRcode hidden"></a>
+      <br>
+    <a (click)="enlargeQr(oneCard._id)" id="QR2{{oneCard._id}}" class="QRcode"></a>
   </p>
 </div>
 </div>
 <div id="editForm{{oneCard._id}}" class="edit-form">
 
-  <form #editInfo="ngForm" id="editInfo" (ngSubmit)="saveChanges(oneCard._id)">
+  <form #editInfo="ngForm" id="editInfo" (ngSubmit)="saveChanges(oneCard._id, editInfo)">
   <label for id="editedFullName"> Full Name </label>
   <br>
-  <input id="editedFullName" maxlength="16" type="string" name="fullName" placeholder="{{oneCard.fullName}}" ngModel>
+  <input id="editedFullName" maxlength="16" type="text" name="fullName" placeholder="{{oneCard.fullName}}" ngModel>
   <br>
   <label for id="editedCompanyName"> Company Name </label>
     <br>
-  <input id="editedCompanyName" type="text" maxlength="12" name="companyName" placeholder="{{oneCard.companyName}}" ngModel>
+  <input id="editedCompanyName" maxlength="16" type="text"  name="companyName" placeholder="{{oneCard.companyName}}" ngModel>
   <br>
   <label for id="editedPosition"> Position </label>
     <br>
@@ -55,11 +53,11 @@
   <br>
   <label for id="editedEmail"> Email </label>
     <br>
-  <input id="editedEmail" type="text" name="email" placeholder="{{oneCard.email}}" ngModel>
+  <input id="editedEmail" type="email" name="email" placeholder="{{oneCard.email}}" ngModel>
   <br>
   <label for id="editedPhoneNum"> Phone# </label>
     <br>
-  <input id="editedPhoneNum" type="text" name="phoneNum" placeholder="{{oneCard.phoneNum}}" ngModel>
+  <input id="editedPhoneNum" type="number" name="phoneNum" placeholder="{{oneCard.phoneNum}}" ngModel>
   <br>
   <label for id="editedlinkedIn"> LinkedIn </label>
     <br>

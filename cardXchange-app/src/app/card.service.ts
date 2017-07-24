@@ -36,7 +36,7 @@ BASE_URL: string = 'http://localhost:3000';
 
    //remove card from contacts
       removeContact(id) {
-        return this.http.patch(`${this.BASE_URL}/api/contacts/delete/${id}`, {withCredentials: true})
+        return this.http.patch(`${this.BASE_URL}/api/contacts/delete/${id}`, {}, {withCredentials: true})
           .map(res => res.json());
       }
 
@@ -48,7 +48,7 @@ BASE_URL: string = 'http://localhost:3000';
 
   //remove own card from array
   removeCardFromArray(id) {
-    return this.http.patch(`${this.BASE_URL}/api/profile/my-cards/update/${id}`, {withCredentials: true})
+    return this.http.patch(`${this.BASE_URL}/api/profile/my-cards/update/${id}`,{}, {withCredentials: true})
         .map(res => res.json());
   }
 

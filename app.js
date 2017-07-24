@@ -50,6 +50,9 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+console.log('fuckkkkk right here boiii');
+const test = require('./routes/test.js');
+app.use('/api',    test);
 app.use('/',    index);
 app.use('/api', authRoutes);
 app.use('/api', userRoutes);

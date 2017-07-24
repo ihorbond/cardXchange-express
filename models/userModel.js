@@ -5,9 +5,8 @@ const userSchema = new mongoose.Schema({
   email:             {type: String, required: true, lowercase: true, trim:true},
   password:          {type: String, required: true},
   profilePic:        {type: String, default: "../public/images/new-user.png"},
-  cards:             {type: Array},
+  cards:             [ { type: Schema.Types.ObjectId, ref: 'Card' } ],
   contacts:          {type: Array},
-  //event id here
 }, {
   timestamps: {
     createdAt: 'created_at',

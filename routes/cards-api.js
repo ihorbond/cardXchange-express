@@ -5,6 +5,7 @@ const UserModel  = require('../models/userModel');
 const CardModel  = require('../models/cardModel');
 // const EventModel = require('../models/eventModel');
 
+
 //change card visibility
 router.patch('/profile/my-cards/cv/:id', (req, res, next) => {
    const cardToEditId = req.params.id;
@@ -119,10 +120,10 @@ router.patch('/contacts/add/:id', (req, res, next) => {
 //add own card
 router.post('/profile/my-cards/add', (req, res, next) => {
   const userId = req.user._id;
-  if (req.user.cards.length >= 3) {
-    res.json({ message: "Sorry, you have reached the limit of 3 cards. Delete other cards first" });
-    return;
-  }
+  // if (req.user.cards.length >= 3) {
+  //   res.json({ message: "Sorry, you have reached the limit of 3 cards. Delete other cards first" });
+  //   return;
+  // }
   const theCard = new CardModel ({
     fullName:       req.body.fullName,
     companyName:    req.body.companyName,
@@ -164,6 +165,41 @@ router.post('/profile/my-cards/add', (req, res, next) => {
   );
 });
 
+//remove card from user's cards array
+router.patch('/profile/my-cards/update/:id', (req, res, next) => {
+  const cardToRemoveId = req.params.id;
+  const userId = req.user._id;
+  if (!mongoose.Types.ObjectId.isValid(cardToRemoveId)) {
+    res.status(400).json({message: 'Specified id is not valid'});
+    return;
+  }
+  console.log("USER ID: " + userId);
+  UserModel.findById(userId, (err, theUser) => {
+    console.log("USER: " + theUser);
+      if(err) {
+        res.json(err);
+        return;
+      }
+// console.log("BEFORE LOOP: " + theUser.cards);
+      theUser.cards.forEach((oneCard, index) => {
+        if (oneCard.toString() === cardToRemoveId.toString()) {
+           theUser.cards.splice(index, 1);
+        }
+      });
+// console.log("AFTER LOOP: " + theUser.cards);
+      theUser.markModified('cards');
+      theUser.save(err => {
+        if(err) {
+          res.json(err);
+          return;
+        }
+      });
+      //card succesfully removed from the DB
+      return res.json({ message: 'Card succesfully removed!', userInfo: theUser });
+    }
+  );
+});
+
 //remove user's own card from cards collection
 router.delete('/profile/my-cards/delete/:id', (req, res, next) => {
   const cardToRemoveId = req.params.id;
@@ -181,41 +217,6 @@ router.delete('/profile/my-cards/delete/:id', (req, res, next) => {
     }
     });
   });
-
-  //remove card from user's cards array
-  router.patch('/profile/my-cards/update/:id', (req, res, next) => {
-    const cardToRemoveId = req.params.id;
-    const userId = req.user._id;
-    if (!mongoose.Types.ObjectId.isValid(cardToRemoveId)) {
-      res.status(400).json({message: 'Specified id is not valid'});
-      return;
-    }
-    console.log("USER ID: " + userId);
-    UserModel.findById(userId, (err, theUser) => {
-      console.log("USER: " + theUser);
-        if(err) {
-          res.json(err);
-          return;
-        }
-// console.log("BEFORE LOOP: " + theUser.cards);
-        theUser.cards.forEach((oneCard, index) => {
-          if (oneCard.toString() === cardToRemoveId.toString()) {
-             theUser.cards.splice(index, 1);
-          }
-        });
-// console.log("AFTER LOOP: " + theUser.cards);
-        theUser.markModified('cards');
-        theUser.save(err => {
-          if(err) {
-            res.json(err);
-            return;
-          }
-        });
-        //card succesfully removed from the DB
-        return res.json({ message: 'Card succesfully removed!', userInfo: theUser });
-      }
-    );
-});
 
 //delete one of user's contacts
 router.patch('/contacts/delete/:id', (req, res, next) => {
