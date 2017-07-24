@@ -1,14 +1,17 @@
-<div class="container-fluid">
+
   <h1> Your Cards </h1>
-  <a (click)="addCard()">Add Card</a> |
-  <a href="#"> Purchase template </a>
+  <a [routerLink]="['add-card']">Add Card</a> |
+  <a href="#"> Purchase template </a> |
+  <a (click)="parseQr()"> parse </a>
+
+<div id="q">  </div>
 
   <p *ngIf="message"> {{message}} </p>
 
  <div *ngIf="cards" class="cards">
   <div *ngFor="let oneCard of cards" class="row one-card">
     <div class="col-xs-9" id="oneCard">
-      <div class="container-fluid wrapper">
+      <div class="wrapper">
         <div class="row">
           <div class="col-xs-4 image-wrapper">
             <img src="//cdn0.iconfinder.com/data/icons/user-pictures/100/male-256.png" alt="{{oneCard.fullName}}" />
@@ -16,7 +19,7 @@
           </div>
           <div class="col-xs-8 information">
             <p class="name">{{oneCard.fullName}}</p>
-            <p class="position">{{oneCard.position}} at
+            <p class="position-company">{{oneCard.position}} at
             {{oneCard.companyName}}  </p>
 
           </div>
@@ -30,30 +33,37 @@
     <a *ngIf="oneCard.email"    href="mailto:{{oneCard.email}}"><img src="../../assets/email.png"></a>
     <a *ngIf="oneCard.phoneNum" href="tel:{{oneCard.phoneNum}}"><img src="../../assets/call.png"></a>
     <a *ngIf="oneCard.linkedIn" href="{{oneCard.linkedIn}}" target="_blank"><img src="../../assets/linkedin.png"></a>
-    <a (click)="enlargeQr(oneCard._id)"> {{ oneCard.QRcode }} </a>
+    <a (click)="enlargeQr(oneCard._id)" id="QR{{oneCard._id}}" class="QRicon"><img src="../../assets/qrcode.png"></a>
+    <a (click)="enlargeQr(oneCard._id)" id="QR2{{oneCard._id}}" class="QRcode hidden"></a>
   </p>
 </div>
 </div>
-<div id="editForm">
+<div id="editForm{{oneCard._id}}" class="edit-form">
 
-  <form #editInfo="ngForm" id="editInfo" (ngSubmit)="saveChanges(oneCard.id)">
+  <form #editInfo="ngForm" id="editInfo" (ngSubmit)="saveChanges(oneCard._id)">
   <label for id="editedFullName"> Full Name </label>
-  <input id="editedFullName" maxlength="16" type="string" name="fullName" ngModel>
+  <br>
+  <input id="editedFullName" maxlength="16" type="string" name="fullName" placeholder="{{oneCard.fullName}}" ngModel>
   <br>
   <label for id="editedCompanyName"> Company Name </label>
-  <input id="editedCompanyName" type="text" maxlength="12" name="companyName" ngModel>
+    <br>
+  <input id="editedCompanyName" type="text" maxlength="12" name="companyName" placeholder="{{oneCard.companyName}}" ngModel>
   <br>
   <label for id="editedPosition"> Position </label>
-  <input id="editedPosition" type="text" maxlength="12" name="position" ngModel>
+    <br>
+  <input id="editedPosition" type="text" maxlength="12" name="position" placeholder="{{oneCard.position}}" ngModel>
   <br>
   <label for id="editedEmail"> Email </label>
-  <input id="editedEmail" type="text" name="email" ngModel>
+    <br>
+  <input id="editedEmail" type="text" name="email" placeholder="{{oneCard.email}}" ngModel>
   <br>
   <label for id="editedPhoneNum"> Phone# </label>
-  <input id="editedPhoneNum" type="text" name="phoneNum" ngModel>
+    <br>
+  <input id="editedPhoneNum" type="text" name="phoneNum" placeholder="{{oneCard.phoneNum}}" ngModel>
   <br>
   <label for id="editedlinkedIn"> LinkedIn </label>
-  <input id="editedlLinkedIn" type="text" maxlength="25" name="linkedIn" ngModel>
+    <br>
+  <input id="editedlLinkedIn" type="text" maxlength="30" name="linkedIn" placeholder="{{oneCard.linkedIn}}" ngModel>
   <br>
   <button> Save </button>
   </form>
@@ -69,5 +79,4 @@
           <br>
         </div>
   </div>
-</div>
 </div>

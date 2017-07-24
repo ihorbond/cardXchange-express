@@ -1,60 +1,53 @@
 <div id="mySidenav" class="sidenav">
-  <a (click)="showMenu()" class="menu"><span class="glyphicon glyphicon-remove"></span></a>
-  <a href="#">About</a>
-  <a href="#">Help</a>
+  <!-- <a (click)="showMenu()" class="menu"><span class="glyphicon glyphicon-remove"></span></a> -->
+  <a (click)="about()">About</a>
+  <a (click)="help()">Help</a>
   <a (click)="logout()">Logout</a>
 </div>
 
 
-
-  <nav class="header">
-    <div class="container-fluid">
+    <div class="header navbar-fixed-top">
       <div class="row">
         <ul>
           <li class="col-xs-3"><a [routerLink]="['']" class="logo">{{title}}</a></li>
           <li class="col-xs-6"><a *ngIf="user" [routerLink]="['profile']" class="greeting">Hello, {{user.fullName}}</a></li>
           <li *ngIf="!user" class="col-xs-3"><a [routerLink]="['signup']" class="menu">Sign Up</a></li>
           <li *ngIf="user" class="col-xs-3">
-            <a (click)="showMenu()" class="menu"><span class="glyphicon glyphicon-th-list"></span></a>
-
+          <a (click)="showMenu()" class="menu"><span class="glyphicon glyphicon-th-list"></span></a>
+        </li>
         </ul>
       </div>
     </div>
-  </nav>
 
-  <div id="pageContent">
-
-  <router-outlet></router-outlet>
-
-  <form *ngIf="!user" #loginInfo="ngForm" id="loginForm" (ngSubmit)="login(loginInfo)">
-    <h2> Login </h2>
-    <label for id="loginEmail"> Email </label>
-    <input id="loginEmail" type="email" name="loginEmail" ngModel>
-    <br>
-    <label for id="loginPassword"> Password </label>
-    <input id="loginPassword" type="password" name="loginPassword" ngModel>
-    <br>
-    <button> Login </button>
-  </form>
-
+    <div id="pageContent">
   <p class="error"> {{ error }} </p>
+    <form *ngIf="!user" #loginInfo="ngForm" id="loginForm" (ngSubmit)="login(loginInfo)">
+      <h2> Login </h2>
+      <label for id="loginEmail"> Email </label>
+      <input id="loginEmail" type="email" name="loginEmail" ngModel>
+      <br>
+      <label for id="loginPassword"> Password </label>
+      <input id="loginPassword" type="password" name="loginPassword" ngModel>
+      <br>
+      <button> Login </button>
+    </form>
 
-</div>
+  </div>
 
-  <nav class="footer">
-    <div class="container-fluid">
+
+    <div *ngIf="user" class="footer navbar-fixed-bottom">
       <div class="row">
         <ul>
-          <li class="col-xs-4">
+          <li class="col-xs-3">
             <a id="contacts" [routerLink]="['contacts']">Contacts</a>
           </li>
-          <li class="col-xs-4">
-            <a id="Profile"[routerLink]="['profile']">Profile</a>
+          <li class="col-xs-6">
+            <a id="profile"[routerLink]="['profile']">Profile</a>
           </li>
-          <li class="col-xs-4">
+          <li class="col-xs-3">
             <a id="events">Events</a>
           </li>
         </ul>
       </div>
     </div>
-  </nav>
+<router-outlet></router-outlet>

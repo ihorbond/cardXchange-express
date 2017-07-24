@@ -2,13 +2,7 @@
 $font: 'PT Sans', sans-serif;
 $bg: linear-gradient(to right, #E75A7C, #141B41);
 $bg_wrapper: linear-gradient(to left, #306BAC, #141B41);
-$white: #fff;
 $black: #212129;
-$selection: #272838;
-
-::selection {
-  background: $selection;
-}
 
 * {
   margin: 0;
@@ -27,26 +21,24 @@ img {
   .wrapper {
     width: 100%;
     background: $bg_wrapper;
-    color: $white;
+    color: white;
     margin-left: 10px;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 50px 1px $black;
+    // box-shadow: 0 0 50px 1px $black;
 
     .image-wrapper img {
       width: 5em;
       border-radius: 50%;
     }
 
-    .information {
-      text-align: left;
-
       .name {
         font-size: 1.5em;
         text-transform: capitalize;
       }
 
-      .position {
+      .position-company {
+        text-transform: capitalize;
         font-size: 1em;
         font-style: italic;
       }
@@ -61,19 +53,18 @@ img {
 
   .contact-info {
     img {
-      margin: 15px 10px 0;
+      margin: 15px 5px 0 0;
       width: 2em;
       height: 2em;
     }
+    #QR {}
   }
 
   .controls {
     text-align: center;
   }
 
-}
-
-#editForm {
+.edit-form {
     display: none;
     border-radius: 5px;
     height: 100%;

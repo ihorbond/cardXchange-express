@@ -3,33 +3,37 @@ import { CardService }                   from '../card.service';
 import { NgForm }                        from '@angular/forms';
 import { UserProfileComponent }          from '../user-profile/user-profile.component';
 import { NgClass }                       from '@angular/common';
+import { Router }                        from '@angular/router';
+import { EditCardComponent }             from '../edit-card/edit-card.component';
+import { AuthorizationService }          from '../authorization.service';
 // import { QRcode } from '../../assets/QR/qrcode.js';
 // declare var QRious: any;
 declare var $:any;
+
 @Component({
   selector:    'app-add-card',
   templateUrl: './add-card.component.html',
   styleUrls:   ['./add-card.component.min.css'],
-  providers:   [CardService, UserProfileComponent]
+  providers:   [
+    CardService,
+    UserProfileComponent,
+    EditCardComponent,
+    AuthorizationService
+  ]
 })
 export class AddCardComponent implements OnInit {
-
-isHidden: boolean = true;
+user: any;
 message: string;
-numberOfCards: number;
 
   constructor(
+              private router: Router,
               private card: CardService,
               private el: ElementRef,
-              private userProfile: UserProfileComponent
+              private userProfile: UserProfileComponent,
+              private auth: AuthorizationService
             ) { }
 
   addCard(form: NgForm) {
-    if (this.numberOfCards >= 3) {
-        this.message = "You've reached the limit of 3 cards :( Please remove other card first";
-        return;
-    }
-    this.isHidden = true;
     let newCard = {
       fullName:    form.value.fullName,
       companyName: form.value.companyName,
@@ -38,33 +42,24 @@ numberOfCards: number;
       email:       form.value.email,
       description: form.value.description,
       linkedIn:    form.value.linkedIn,
-      QRcode:      this.generateQR()
+      qrcode:      $('#qr').html()
     }
-    console.log(newCard);
-    this.card.addCard(newCard).subscribe(
-    result => { this.message = result.message;
-                this.userProfile.ngOnInit();
+    console.log(newCard.qrcode);
+
+    this.card.addCard(newCard)
+    .subscribe(result =>
+              {
+                this.message = result.message;
               }
     )
+    // this.router.navigate(['profile']);
   }
 
-    generateQR() {
-    let qrcode = this.el.nativeElement.querySelector('#qr');
-    return qrcode;
- }
-
- //hide show new card add form
-   addNewCard() {
-    if (!this.isHidden) this.isHidden = true;
-    else this.isHidden = false;
-   }
-//check how many saved cards user already has
- checkCardsCount(id){
-   $("qr").show();
- }
-
   ngOnInit() {
-
+     this.auth.isLoggedIn()
+     .subscribe(res => {
+       this.user = res;
+     })
   }
 
 }

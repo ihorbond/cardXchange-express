@@ -2,7 +2,7 @@ import { Component, OnInit }     from '@angular/core';
 import { AuthorizationService }  from './authorization.service';
 import { NgForm }                from '@angular/forms';
 import { NgClass }               from '@angular/common';
-import { Router } from '@angular/router';
+import { Router }                from '@angular/router';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
@@ -54,6 +54,16 @@ export class AppComponent implements OnInit {
            (err) =>   this.error = err);
   this.router.navigate(['']);
   this.showMenu();
+  }
+
+  about() {
+    this.router.navigate(['about']);
+    this.showMenu();
+  }
+
+  help() {
+    this.router.navigate(['help']);
+    this.showMenu();
   }
 
    showMenu() {

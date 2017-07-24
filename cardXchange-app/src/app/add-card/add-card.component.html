@@ -1,27 +1,25 @@
+<div *ngIf="user">
 
-<button (click)="addNewCard()">Add Card</button>
 <p *ngIf="message"> {{message}} </p>
-
-<div [ngClass]="{'hidden':isHidden}">
-
+<div>
+  <h2> Enter Information </h2>
   <form #newCardInfo="ngForm" id="new-card-info" (ngSubmit)="addCard(newCardInfo)">
-  Name: <input type="text" name="fullName" ngModel><br>
+  Name:         <input type="text" name="fullName" ngModel><br>
   Company Name: <input type="text" name="companyName" ngModel><br>
-  Position: <input type="text" name="position" ngModel><br>
-  Email: <input type="email" name="email" ngModel><br>
-  Phone#: <input type="text" name="phoneNum" ngModel><br>
-  Desc: <input type="text" name="description" ngModel><br>
-  Photo:<input type="file" accept="image/*" name="picture" ngModel><br>
-  LinkedIn uername:<input type="text" name="linkedIn" ngModel><br>
+  Position:     <input type="text" name="position" ngModel><br>
+  Email:        <input type="email" name="email" ngModel><br>
+  Phone#:       <input type="text" name="phoneNum" ngModel><br>
+  Photo:        <input type="file" accept="image/*" name="picture" ngModel><br>
+  LinkedIn link:<input type="text" name="linkedIn" ngModel><br>
   <button id="add-card" type="submit"> Save </button>
   </form>
-  <qr-code id="qr" [value]="'All QR Code data goes here!'" [size]="150"></qr-code>
-
+  <qr-code id="qr" [value]="'All QR Code data goes here!'" [size]="100" name="QR"></qr-code>
 </div>
 
-<textarea id="note" (blur)="hideNote(oneCard.id)" value="{{oneCard.description}}">Text Area</textarea>
+</div>
+<!-- <textarea id="note" (blur)="hideNote(oneCard.id)" value="{{oneCard.description}}">Text Area</textarea>
 <a (click)="addNote(oneCard.id)">Add Note</a>
-<br>
+<br> -->
   <!-- <qr-scanner
      [debug]="true"
      [canvasWidth]="300"
@@ -30,14 +28,3 @@
      [stopAfterScan]="true"
      [updateTime]="500"
      (onRead)="decodedOutput()"></qr-scanner> -->
-
-
-<!-- fullName:       req.body.fullName,
-companyName:    req.body.companyName,
-position:       req.body.position,
-phoneNum:       req.body.image,
-email:          req.body.email,
-description:    req.body.description,
-profilePic:     req.body.profilePic,
-
-QRcode:         req.body.qrcode//??? -->

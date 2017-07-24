@@ -19,6 +19,8 @@ message: string;
 user: string;
 showEditForm: boolean = false;
 cardVisibility: boolean = true;
+qrcodeIcon: boolean = true;
+icon: any;
 editedCard: any = {
   fullName: '',
   companyName: '',
@@ -29,7 +31,6 @@ editedCard: any = {
 
   constructor(
     private cardService: CardService,
-    // private newCard: AddCardComponent,
     private editCardComp: EditCardComponent
   ) { }
 
@@ -56,15 +57,15 @@ editedCard: any = {
     );
   }
 
-  editCard() {
-    $('#editForm').slideToggle("slow");
+  editCard(id) {
+    $(`#editForm${id}`).slideToggle("slow");
 }
- cancelEdit() {
-     $('#editForm').slideToggle("fast");
+ cancelEdit(id) {
+     $(`#editForm${id}`).slideToggle("fast");
  }
 
 saveChanges(id, form: NgForm) {
-  $('#editForm').slideToggle("fast");
+  $(`#editForm${id}`).slideToggle("fast");
   this.editedCard.fullName    = form.value.fullName;
   this.editedCard.companyName = form.value.companyName;
   this.editedCard.position    = form.value.position;
@@ -74,9 +75,34 @@ saveChanges(id, form: NgForm) {
   this.cardService.editCard(id, this.editedCard)
   .subscribe(res => {
   this.message = res.message;
-  //update cards array here
-  })
+});
+//update cards array here
+this.cards.forEach(oneCard => {
+  if (this.editedCard._id === oneCard._id) {
+    oneCard = this.editedCard;
+    console.log(oneCard);
+  }
+});
 }
+
+enlargeQr(id) {
+  this.cards.forEach(oneCard => {
+    if(id === oneCard._id.toString()) {
+    $(`#QR2${id}`).html(oneCard.QRcode);
+    }
+      });
+      if (this.qrcodeIcon) {
+        this.qrcodeIcon = false;
+        $(`#QR${id}`).addClass("hidden");
+        $(`#QR2${id}`).removeClass("hidden");
+      }
+      else {
+        this.qrcodeIcon = true;
+        $(`#QR2${id}`).addClass("hidden");
+        $(`#QR${id}`).removeClass("hidden");
+      }
+}
+
 
   deleteCard(id) {
     //  console.log("CARD TO DELETE: " + id);
@@ -96,10 +122,6 @@ saveChanges(id, form: NgForm) {
         this.cards.splice(index, 1);
       }
     });
-  }
-
-  enlargeQr(id) {
-
   }
 
 }
