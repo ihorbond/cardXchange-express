@@ -21,21 +21,7 @@
 
     <div id="pageContent">
 
-  <!-- <p class="message">{{error}}</p>
-    <form *ngIf="!user" #loginInfo="ngForm" class="auth-form animated fadeIn" (ngSubmit)="login(loginInfo)">
-      <h2> Login </h2>
-      <label for id="loginEmail"> Email </label>
-      <input id="loginEmail" type="email" name="loginEmail" ngModel>
-      <br>
-      <label for id="loginPassword"> Password </label>
-      <input id="loginPassword" type="password" name="loginPassword" ngModel>
-      <br>
-      <button> Login </button>
-    </form> -->
-
-    <!-- <div class="auth"> -->
-
-  		<div class="login-wrap">
+  		<div *ngIf="!user" class="login-wrap animated fadeInDownBig">
         <div class="login-form-wrap">
   				<div class="card-holder-wrap">
   					<div class="hole"></div>
@@ -44,11 +30,38 @@
   					<div class="ring-large-wrap"></div>
   					<div class="ring-small-wrap"></div>
 
+          <div id="logo"> cXc </div> 
+
+            <p class="message">{{message}}</p>
+
+            <form #loginInfo="ngForm" class="auth-form" (ngSubmit)="login(loginInfo)">
+<div class="row">
+           <div class="col-xs-3">
+             <span class="glyphicon glyphicon-envelope"></span>
+          </div>
+            <div class="col-xs-9">
+              <input id="loginEmail" class="email" type="email" name="loginEmail" placeholder="Email" ngModel>
+            </div>
+            </div>
+            <div class="row">
+             <div class="col-xs-3">
+
+               <!-- <span class="glyphicons glyphicons-keys"></span> -->
+                 <span class="glyphicon glyphicon-lock"></span>
+            </div>
+              <div class="col-xs-9">
+              <input id="loginPassword" class="password" type="password" placeholder="Password" name="loginPassword" ngModel>
+            </div>
+            <button type="button" class="btn btn-danger">Login</button>
+            <div id="or">OR</div>
+            <a ><img src="assets/linkedinSignin.png"> </a>
+                </div>
+            </form>
 
   				</div>
   			</div>
   		</div>
-  <!-- </div> -->
+
   </div>
 
 

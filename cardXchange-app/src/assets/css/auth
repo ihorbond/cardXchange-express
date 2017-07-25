@@ -121,37 +121,3 @@
   height: 108px;
   background: url(https://i.imgur.com/d8qMj72.png);
 }
-
-
-.user-id {
-  background: url(https://i.imgur.com/OSo6WLs.png) no-repeat right;
-  width: 385px;
-  display: block;
-}
-.user-id input {
-  display: block;
-  width: 350px;
-  border-radius: 15px 15px 0 0;
-  margin: 7px 5px 0 7px;
-  padding: 18px 25px 8px 15px;
-  color: #666;
-  outline: none;
-  border: none;
-}
-
-.password {
-  background: url(https://i.imgur.com/PhJdR34.png) no-repeat right;
-  width: 385px;
-  display: block;
-}
-
-.password input {
-  display: block;
-  width: 350px;
-  border-radius: 15px 15px 0 0;
-  margin: 7px 5px 0 7px;
-  padding: 12px 25px 9px 15px;
-  color: #666;
-  outline: none;
-  border: none;
-}
