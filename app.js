@@ -10,7 +10,6 @@ const cors         = require('cors');
 const session      = require('express-session');
 const passport     = require('passport');
 const passportSetup= require('./configs/passport');
-passportSetup(passport);
 const index        = require('./routes/index');
 const userRoutes   = require('./routes/users-api');
 const cardRoutes   = require('./routes/cards-api');
@@ -19,6 +18,8 @@ const authRoutes   = require('./routes/auth-api');
 // const eventRoutes  = require('./routes/events-api');
 
 require('./configs/database');
+require('dotenv').config();
+require('./configs/passport.js');
 
 const app = express();
 app.use(cors({
@@ -50,9 +51,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-console.log('fuckkkkk right here boiii');
-const test = require('./routes/test.js');
-app.use('/api',    test);
+
 app.use('/',    index);
 app.use('/api', authRoutes);
 app.use('/api', userRoutes);

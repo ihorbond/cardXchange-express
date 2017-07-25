@@ -1,9 +1,10 @@
-const LocalStrategy = require('passport-local').Strategy;
-const UserModel     = require('../models/userModel');
-const bcrypt        = require('bcrypt');
-const passport      = require('passport');
+const LocalStrategy    = require('passport-local').Strategy;
+const LinkedInStrategy = require('passport-linkedin').Strategy;
+const UserModel        = require('../models/userModel');
+const bcrypt           = require('bcrypt');
+const passport         = require('passport');
 
-module.exports = passport => {
+
   passport.use(new LocalStrategy({
     usernameField: "loginEmail",
     passwordField: "loginPassword"
@@ -45,4 +46,18 @@ module.exports = passport => {
       cb(null, userDocument);
     });
   });
-};
+
+
+//linked strategy
+//
+// passport.use(new LinkedInStrategy({
+//     consumerKey: LINKEDIN_API_KEY,
+//     consumerSecret: LINKEDIN_SECRET_KEY,
+//     callbackURL: "http://127.0.0.1:3000/auth/linkedin/callback"
+//   },
+//   function(token, tokenSecret, profile, done) {
+//     User.findOrCreate({ linkedinId: profile.id }, function (err, user) {
+//       return done(err, user);
+//     });
+//   }
+// ));

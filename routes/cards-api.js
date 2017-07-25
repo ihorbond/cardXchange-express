@@ -173,9 +173,9 @@ router.patch('/profile/my-cards/update/:id', (req, res, next) => {
     res.status(400).json({message: 'Specified id is not valid'});
     return;
   }
-  console.log("USER ID: " + userId);
+
   UserModel.findById(userId, (err, theUser) => {
-    console.log("USER: " + theUser);
+
       if(err) {
         res.json(err);
         return;

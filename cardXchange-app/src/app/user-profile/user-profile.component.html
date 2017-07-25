@@ -1,9 +1,19 @@
+<!-- <router-outlet></router-outlet> -->
+<div class="profile">
 
-  <h1> Your Cards </h1>
-  <a [routerLink]="['add-card']">Add Card</a> |
-  <a href="#"> Purchase template </a>
-
-  <p *ngIf="message" class="message"> {{message}} </p>
+<ul class="links">
+  <!-- <p *ngIf="message" class="message animated fadeOut"> {{message}} </p> -->
+  <li class="add-card">
+  <img src="../assets/images/add.png">
+  <a [routerLink]="['add-card']">Add Card </a>
+</li>
+  <!-- <span class="glyphicon glyphicon-plus-sign"></span> -->
+  <li class="purchase-template">
+    <img src="../assets/images/shop.png">
+  <a href="https://store.cxc.com"> Purchase template </a>
+</li>
+  <!-- <span class="glyphicon glyphicon-shopping-cart"></span> -->
+</ul>
 
  <div *ngIf="cards" class="cards">
   <div *ngFor="let oneCard of cards" class="row one-card">
@@ -27,10 +37,10 @@
  </div>
 <div class="col-xs-8">
   <p class="contact-info">
-    <a *ngIf="oneCard.email"    href="mailto:{{oneCard.email}}"><img src="../../assets/email.png"></a>
-    <a *ngIf="oneCard.phoneNum" href="tel:{{oneCard.phoneNum}}"><img src="../../assets/call.png"></a>
-    <a *ngIf="oneCard.linkedIn" href="{{oneCard.linkedIn}}" target="_blank"><img src="../../assets/linkedin.png"></a>
-    <a (click)="enlargeQr(oneCard._id)" id="QR{{oneCard._id}}" class="QRicon"><img src="../../assets/qrcode.png"></a>
+    <a *ngIf="oneCard.email"    href="mailto:{{oneCard.email}}"><img src="../../assets/images/email.png"></a>
+    <a *ngIf="oneCard.phoneNum" href="tel:{{oneCard.phoneNum}}"><img src="../../assets/images/call.png"></a>
+    <a *ngIf="oneCard.linkedIn" href="{{oneCard.linkedIn}}" target="_blank"><img src="../../assets/images/linkedin.png"></a>
+    <a (click)="enlargeQr(oneCard._id)" id="QR{{oneCard._id}}" class="QRicon"><img src="../../assets/images/qrcode.png"></a>
       <br>
     <a (click)="enlargeQr(oneCard._id)" id="QR2{{oneCard._id}}" class="QRcode"></a>
   </p>
@@ -63,18 +73,28 @@
     <br>
   <input id="editedlLinkedIn" type="text" maxlength="30" name="linkedIn" placeholder="{{oneCard.linkedIn}}" ngModel>
   <br>
-  <button> Save </button>
+  <button class="btn btn-success"> Save </button>
+  <button class="btn btn-warning" (click)="cancelEdit(oneCard._id)"> Cancel </button>
   </form>
-  <button (click)="cancelEdit(oneCard._id)"> Cancel </button>
+
 
 </div>
   </div>
   </div>
         <div class="col-xs-3 controls">
-          <a (click)="editCard(oneCard._id)">Edit</a>
+          <a (click)="editCard(oneCard._id)">
+            <span><i class="glyphicon glyphicon-pencil"></i></span>
+          </a>
           <br>
-          <a (click)="deleteCard(oneCard._id)">Delete</a>
+          <br>
+          <br>
+          <a (click)="deleteCard(oneCard._id)">
+            <img src="../assets/images/trash.png">
+          </a>
+
           <br>
         </div>
   </div>
+</div>
+
 </div>

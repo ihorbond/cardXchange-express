@@ -13,10 +13,7 @@
 
 #pageContent {
   width: 100%;
-  background-image: url("../assets/background.jpg");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  background-position: center;
+
   box-sizing: border-box;
 
   .login-wrap {
@@ -58,17 +55,11 @@
       font-weight: bolder;
     }
   }
-}
-
-#logo {
-  color: white;
-  margin: 2.5em;
-}
-
-.glyphicon {
-  vertical-align: -webkit-baseline-middle;
-  color: grey;
-  font-size: 1.5em;
+  .glyphicon {
+    vertical-align: -webkit-baseline-middle;
+    color: grey;
+    font-size: 1.5em;
+  }
 }
 
 ,

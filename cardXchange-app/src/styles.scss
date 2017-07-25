@@ -6,6 +6,10 @@ html {
   height: 100%;
 }
 body {
+  background-image: url("/assets/images/background.jpg");
+  // background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
   margin: 50px 0 50px 0;
 }
 .container-fluid {
@@ -14,5 +18,7 @@ body {
 }
 
 .message {
+  font-size: 2em;
   color: green;
+  animation-duration: 10s;
 }

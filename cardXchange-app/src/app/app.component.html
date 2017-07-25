@@ -5,6 +5,7 @@
   <a (click)="logout()">Logout</a>
 </div>
 
+<router-outlet></router-outlet>
 
     <div class="header navbar-fixed-top">
       <div class="row">
@@ -22,7 +23,7 @@
     <div id="pageContent">
 
 
-      <div class="strokes animated fadeInDownBig">
+      <div *ngIf="!user" class="strokes animated fadeInDownBig">
       <div class="l-stroke"></div>
       <div class="r-stroke"></div>
 </div>
@@ -40,7 +41,7 @@
             <p class="message">{{message}}</p>
 
             <form #loginInfo="ngForm" class="auth-form" (ngSubmit)="login(loginInfo)">
-<div class="row">
+          <div class="row">
            <div class="col-xs-2">
              <span class="glyphicon glyphicon-envelope"></span>
           </div>
@@ -57,9 +58,9 @@
               <div class="col-xs-10">
               <input id="loginPassword" class="password" type="password" placeholder="Password" name="loginPassword" ngModel>
             </div>
-            <button type="button" class="btn btn-danger">Login</button>
+            <button class="btn btn-danger"> Login </button>
             <div id="or">OR</div>
-            <a ><img src="assets/linkedinSignin.png"> </a>
+            <a href="#"><img src="assets/images/linkedinSignin.png"> </a>
                 </div>
             </form>
 
@@ -85,4 +86,3 @@
         </ul>
       </div>
     </div>
-<router-outlet></router-outlet>
