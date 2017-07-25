@@ -6,7 +6,7 @@
 }
 
 .login-form-wrap {
-
+  width: 100%;
   background: rgba(54, 54, 54, 0.7);
   border: 1px solid #767676;
   border-radius: 15px;
@@ -14,9 +14,8 @@
 }
 
 .card-holder-wrap {
+  width: 70%;
   margin: 25px auto 40px auto;
-  width: 145px;
-  position: relative;
 }
 
 .hole {
@@ -103,21 +102,17 @@
 }
 
 .l-stroke {
-  position: absolute;
-  top: -223px;
-  left: 40px;
+display: inline-block;
   width: 34px;
   z-index: 1;
-  height: 108px;
+  height: 70px;
   background: url(https://i.imgur.com/HECNjze.png);
 }
 
 .r-stroke {
-  position: absolute;
-  top: -223px;
-  left: 66px;
+display: inline-block;
   width: 34px;
   z-index: 3;
-  height: 108px;
+  height: 70px;
   background: url(https://i.imgur.com/d8qMj72.png);
 }

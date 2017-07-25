@@ -17,6 +17,7 @@ declare var $:any;
 })
 export class AppComponent implements OnInit {
   title = 'cXc';
+  loginSignup: boolean = false;
   sideMenu: boolean = false;
   user: any;
   error: string;
@@ -38,6 +39,16 @@ export class AppComponent implements OnInit {
                          this.error = null });
 
   }
+
+  // signup() {
+  //   if (!this.loginSignup) {
+  //     this.loginSignup = true;
+  //     this.router.navigate(['signup'])
+  //
+  //   }
+
+  // }
+
 
   login(form: NgForm) {
     this.loginInfo.loginEmail    = form.value.loginEmail.toLowerCase();

@@ -21,35 +21,40 @@
 
     <div id="pageContent">
 
+
+      <div class="strokes animated fadeInDownBig">
+      <div class="l-stroke"></div>
+      <div class="r-stroke"></div>
+</div>
   		<div *ngIf="!user" class="login-wrap animated fadeInDownBig">
         <div class="login-form-wrap">
   				<div class="card-holder-wrap">
   					<div class="hole"></div>
-  					<div class="l-stroke"></div>
-  					<div class="r-stroke"></div>
   					<div class="ring-large-wrap"></div>
   					<div class="ring-small-wrap"></div>
 
-          <div id="logo"> cXc </div> 
+    <div id="qr">
+       <qr-code [backgroundAlpha]="0.5" [background]="'rgb(52, 154, 237)'" [foreground]="'white'" [value]="cardxchange" size="100"></qr-code>
+      </div>
 
             <p class="message">{{message}}</p>
 
             <form #loginInfo="ngForm" class="auth-form" (ngSubmit)="login(loginInfo)">
 <div class="row">
-           <div class="col-xs-3">
+           <div class="col-xs-2">
              <span class="glyphicon glyphicon-envelope"></span>
           </div>
-            <div class="col-xs-9">
+            <div class="col-xs-10">
               <input id="loginEmail" class="email" type="email" name="loginEmail" placeholder="Email" ngModel>
             </div>
             </div>
             <div class="row">
-             <div class="col-xs-3">
+             <div class="col-xs-2">
 
                <!-- <span class="glyphicons glyphicons-keys"></span> -->
                  <span class="glyphicon glyphicon-lock"></span>
             </div>
-              <div class="col-xs-9">
+              <div class="col-xs-10">
               <input id="loginPassword" class="password" type="password" placeholder="Password" name="loginPassword" ngModel>
             </div>
             <button type="button" class="btn btn-danger">Login</button>

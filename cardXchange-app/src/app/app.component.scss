@@ -1,9 +1,14 @@
-
 * {
   margin: 0;
   padding: 0;
 }
 
+#qr {
+  text-align: center;
+  margin: 1em auto;
+  background: none;
+}
+//
 @import "../assets/css/auth";
 
 #pageContent {
@@ -13,48 +18,50 @@
   background-size: 100% 100%;
   background-position: center;
   box-sizing: border-box;
-  .card-holder-wrap {
-    // width: 100%;
-  }
+
   .login-wrap {
     animation-duration: 1s;
-    padding-top: 10em;
+    padding-top: 5em;
     margin: 0 auto;
     width: 20em;
   }
-  .login-form-wrap {
-    margin: 0 auto;
-    height: 25em;
+
+  .strokes {
+    // z-index: 10;
+    text-align: center;
+    width: 100%;
   }
+
   .auth-form {
+    text-align: center;
     height: 100%;
     width: 100%;
     margin: 0 auto;
     color: white;
-    // padding-top: 3em;
+
     button {
       margin-top: 0.5em;
       font-weight: bold;
       text-transform: uppercase;
     }
-   img,
-   button {
-     border-bottom: 2px solid white;
-     width: 13em;
-     height: 2em;
-   }
-   #or {
-    //  display: inline;
-     text-align: center;
-     margin: 0.5em 0;
-     font-weight: bolder;
-   }
+
+    button,
+    img {
+      border-bottom: 2px solid white;
+      width: 13em;
+      height: 2em;
+    }
+
+    #or {
+      text-align: center;
+      margin: 0.5em 0;
+      font-weight: bolder;
+    }
   }
 }
 
 #logo {
   color: white;
-  // text-align: center;
   margin: 2.5em;
 }
 
@@ -64,20 +71,19 @@
   font-size: 1.5em;
 }
 
+,
 .email,
-.password, {
+.password {
   height: 2em;
   border: none;
-display: inline-block;
-border-bottom: 1px solid white;
-background: none;
-
+  display: inline-block;
+  border-bottom: 1px solid white;
+  background: none;
 }
 
-
+,
 .footer,
-.header,
- {
+.header {
   width: 100%;
   background-color: #111;
 }
@@ -86,19 +92,18 @@ background: none;
   margin-bottom: -4px;
 }
 
-  a,
-  a:hover {
-    text-transform: uppercase;
-    text-decoration: none;
-    color: white;
-  }
+a,
+a:hover {
+  text-transform: uppercase;
+  text-decoration: none;
+  color: white;
+}
 
-  li {
-    padding: 15px 15px;
-    margin: 0;
-    text-align: center;
-  }
-
+li {
+  padding: 15px;
+  margin: 0;
+  text-align: center;
+}
 
 #loginForm {
   input {
@@ -108,9 +113,8 @@ background: none;
 }
 /* The side navigation menu */
 .sidenav {
-  // display: none;
   padding-top: 50px;
-  width: 0px;
+  width: 0;
   height: 100%;
   position: fixed;
   z-index: 1;
@@ -132,7 +136,6 @@ background: none;
     display: block;
   }
 }
-
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
   .sidenav {
