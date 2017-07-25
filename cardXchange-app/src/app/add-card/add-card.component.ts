@@ -7,7 +7,7 @@ import { Router }                        from '@angular/router';
 import { EditCardComponent }             from '../edit-card/edit-card.component';
 import { AuthorizationService }          from '../authorization.service';
 // import { QRcode } from '../../assets/QR/qrcode.js';
-// declare var QRious: any;
+
 declare var $:any;
 
 @Component({
@@ -42,9 +42,9 @@ message: string;
       email:       form.value.email,
       description: form.value.description,
       linkedIn:    form.value.linkedIn,
+      // photo:
       qrcode:      $('#qr').html()
     }
-    console.log(newCard.qrcode);
 
     this.card.addCard(newCard)
     .subscribe(result =>
@@ -52,7 +52,11 @@ message: string;
                 this.message = result.message;
               }
     )
-    // this.router.navigate(['profile']);
+    this.router.navigate(['profile']);
+  }
+
+  cancel() {
+    this.router.navigate(['profile']);
   }
 
   ngOnInit() {
@@ -61,5 +65,4 @@ message: string;
        this.user = res;
      })
   }
-
 }

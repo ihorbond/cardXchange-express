@@ -36,7 +36,7 @@ editedCard: any = {
   ) { }
 
   ngOnInit() {
-    $('#pageContent').addClass('hidden');
+    // $('#pageContent').addClass('hidden');
     $('#editForm').width($('#oneCard').width());
     this.cardService.getCards().subscribe(result =>
               {
@@ -45,7 +45,6 @@ editedCard: any = {
                 this.user    = result.userInfo.fullName;
               }
     )
-
   }
 
   onOffSwitch(id) {
