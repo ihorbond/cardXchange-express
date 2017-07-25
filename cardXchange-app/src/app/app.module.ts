@@ -19,6 +19,8 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { EditCardComponent } from './edit-card/edit-card.component';
 import { HelpComponent } from './help/help.component';
+import { HomeComponent } from './home/home.component';
+import { EventsComponent } from './events/events.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { HelpComponent } from './help/help.component';
     LoginComponent,
     SignupComponent,
     EditCardComponent,
-    HelpComponent
+    HelpComponent,
+    HomeComponent,
+    EventsComponent
   ],
   imports: [
     QrScannerModule,

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit }    from '@angular/core';
 import { AuthorizationService } from '../authorization.service';
-import { NgForm } from '@angular/forms';
+import { NgForm }               from '@angular/forms';
+import { Router }               from '@angular/router';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
@@ -9,7 +10,7 @@ import 'rxjs/add/operator/toPromise';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.min.css'],
-  providers: [AuthorizationService]
+  providers: [AuthorizationService, ]
 
 })
 export class LoginComponent implements OnInit {
@@ -19,13 +20,18 @@ export class LoginComponent implements OnInit {
     loginEmail: '',
     loginPassword: ''
   }
-  constructor(private auth: AuthorizationService) { }
+  constructor(
+    private router: Router,
+    private auth: AuthorizationService) { }
 
   ngOnInit() {
     //check if user already logged in
     this.auth.isLoggedIn()
     .subscribe(user => { this.user  = user;
-                         this.error = null });
+                         this.error = null;
+                         //if logged in => go home
+                         if (this.user) this.router.navigate[('')];
+                         });
   }
 
   login(form: NgForm) {
@@ -34,16 +40,10 @@ export class LoginComponent implements OnInit {
     console.log(this.loginInfo);
     this.auth.login(this.loginInfo)
     .subscribe((user => { this.user  = user;
-                          this.error = null; }),
-               (err) =>   this.error = err   );
+                          this.error = null;
+                          if (this.user) this.router.navigate[('')];
+                        }),
+                          (err) =>   this.error = err
+                        );
   }
-
-  logout() {
-   this.auth.logout()
-   .subscribe(() => { this.user  = null;
-                      this.error = null; },
-           (err) =>   this.error = err)
-  }
-
-
 }

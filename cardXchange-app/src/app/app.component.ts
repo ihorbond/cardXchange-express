@@ -20,11 +20,7 @@ export class AppComponent implements OnInit {
   loginSignup: boolean = false;
   sideMenu: boolean = false;
   user: any;
-  error: string;
-  loginInfo: any = {
-    loginEmail: '',
-    loginPassword: ''
-  }
+  message: string;
 
   constructor(
               private auth: AuthorizationService,
@@ -32,41 +28,36 @@ export class AppComponent implements OnInit {
             ) {}
 
   ngOnInit() {
-    $("#pageContent").height($('body').height());
     //check if user already logged in
     this.auth.isLoggedIn()
     .subscribe(user => { this.user  = user;
-                         this.error = null });
+                         this.message = null });
 
   }
 
   // signup() {
   //   if (!this.loginSignup) {
   //     this.loginSignup = true;
-  //     this.router.navigate(['signup'])
-  //
+  //     this.router.navigate(['signup']);
   //   }
-
+  //   else {
+  //     this.loginSignup = true;
+  //     this.router.navigate(['signup']);
+  //   }
   // }
 
-
-  login(form: NgForm) {
-    this.loginInfo.loginEmail    = form.value.loginEmail.toLowerCase();
-    this.loginInfo.loginPassword = form.value.loginPassword;
-    console.log(this.loginInfo);
-    this.auth.login(this.loginInfo)
-    .subscribe((user => { this.user  = user;
-                          this.error = null; }),
-               (err) =>   this.error = err   );
-  }
+ logoClicked() {
+   if (this.user) this.router.navigate(['']);
+     else this.router.navigate(['login']);
+ }
 
   logout() {
    this.auth.logout()
    .subscribe(() => { this.user  = null;
-                      this.error = null;
+                      this.message = null;
                      },
-           (err) =>   this.error = err);
-  this.router.navigate(['']);
+           (err) =>   this.message = err);
+  this.router.navigate(['login']);
   this.showMenu();
   }
 
@@ -84,12 +75,12 @@ export class AppComponent implements OnInit {
      if(!this.sideMenu) {
        this.sideMenu = true;
      $(".sidenav").width(140);
-     $("body").css("background-color", "rgba(0,0,0,0.4)");
+     $(".page-content").css("opacity", "0.5");
   }
   else {
     this.sideMenu = false;
   $(".sidenav").width(0);
-  $("body").css("background-color", "white");
+  $(".page-content").css("opacity", "1");
   }
 }
 }

@@ -11,7 +11,7 @@ const cardSchema = new mongoose.Schema({
   visibility:        {type: Boolean, default: true},
   default:           {type: Boolean, default: false},
   eventId:           {type: mongoose.Schema.Types.ObjectId},
-  //unique qr code for each card for scanning
+  //unique qr code for each card
   QRcode:            {type: String}
 });
 
