@@ -25,6 +25,7 @@ declare var $:any;
 export class AddCardComponent implements OnInit {
 user: any;
 message: string;
+cardUrl: string;
 imgUpload = new FileUploader({
   url: 'http://localhost:3000/api/profile/my-cards/add'
 });
@@ -41,6 +42,7 @@ imgUpload = new FileUploader({
                this.auth.isLoggedIn()
                .subscribe(res => {
                  this.user = res;
+                 this.cardUrl = `http://localhost:3000/api/contacts/add/${this.user._id}`;
                });
             }
 

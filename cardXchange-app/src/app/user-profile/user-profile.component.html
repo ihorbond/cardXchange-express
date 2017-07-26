@@ -1,6 +1,10 @@
 <!-- <router-outlet></router-outlet> -->
 <div *ngIf="user" class="page-content">
 
+
+
+<p *ngIf="message" class="message animated fadeInLeft"></p>
+
 <ul class="links">
   <!-- <p *ngIf="message" class="message animated fadeOut"> {{message}} </p> -->
   <li class="add-card">
@@ -21,7 +25,7 @@
       <div id="oneCard" class="wrapper">
         <div class="row">
           <div class="col-xs-4 image-wrapper">
-            <img src="../../assets/images/ihor.jpg" alt="{{oneCard.fullName}}" >
+            <img src="../../assets/images/default-pic.png" alt="{{oneCard.fullName}}" >
 
           </div>
           <div class="col-xs-8 information">
@@ -33,7 +37,13 @@
             </div>
 <div class="row">
 <div class="col-xs-4">
-  <a (click)="makeDefault(defaultCard._id)" class="default"> Default? </a>
+
+  <div class="outer-switch" (click)="toggleDefault(oneCard._id)">
+  <div id="switch{{oneCard._id}}" class="inner-switch" (click)="toggleDefault(oneCard._id)">
+   <span id="switchLabel{{oneCard._id}}" class="switch-label">OFF</span>
+  </div>
+  </div>
+  <!-- <a (click)="makeDefault(oneCard._id)" class="default"> Make <br> Default? </a> -->
  </div>
 <div class="col-xs-8">
   <p class="contact-info">

@@ -28,7 +28,6 @@ router.patch('/profile/my-cards/md/:id', (req, res, next) => {
        return;
    }
 
-
 //there's gotta be a better way to do this....
 let errors = [];
 //make all cards defaultSetting false
@@ -49,7 +48,7 @@ let errors = [];
    });
    console.log(errors);
 
-res.json({message: "This card is now default", userInfo: theUser});
+res.json({message: "Card is now default", userInfo: theUser});
 });
 });
 

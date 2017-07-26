@@ -3,6 +3,42 @@ $font: 'PT Sans', sans-serif;
 $bg: linear-gradient(to right, #E75A7C, #141B41);
 $bg_wrapper: linear-gradient(to left, #306BAC, #141B41);
 $black: #212129;
+// on/off switch
+
+// .toggleOn{
+//
+// }
+
+.outer-switch {
+  margin-top: 20px;
+  border-radius: 20px;
+  width: 60px;
+  height: 20px;
+  background: rgb(135, 132, 128);
+  .inner-switch {
+    padding: 5px;
+    float:left;
+    width: 25px;
+    height: 20px;
+    border-radius: 50%;
+    background: red;
+    transition: float 0.9s ;
+  }
+  .switch-label {
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bolder;
+    font-size: 0.7em;
+    vertical-align: top;
+  }
+}
+
+
+.default {
+  color: white;
+  text-align: center;
+  font-weight: bolder;
+}
 
 * {
   margin: 0;

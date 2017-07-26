@@ -4,6 +4,25 @@ $bg: linear-gradient(to right, #E75A7C, #141B41);
 $bg_wrapper: linear-gradient(to left, #306BAC, #141B41);
 $black: #212129;
 
+.share {
+color: white;
+font-size: 1.5em;
+text-align: center;
+margin-top: 0.5em;
+
+i {
+  border: 1px solid white;
+  vertical-align: middle;
+  border-radius: 3px;
+}
+}
+
+.feed {
+
+  h1 {
+    text-align: center;
+  }
+}
 
 .one-card {
   padding: 2em;

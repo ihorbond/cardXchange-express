@@ -64,6 +64,11 @@ export class AppComponent implements OnInit {
     this.showMenu();
   }
 
+  home(){
+    this.router.navigate(['home']);
+    this.showMenu();
+  }
+
    showMenu() {
      if(!this.sideMenu) {
        this.sideMenu = true;

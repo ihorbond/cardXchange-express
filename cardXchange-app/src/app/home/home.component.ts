@@ -20,6 +20,10 @@ qrcodeIcon: boolean = true;
     private cardService: CardService
   ) { }
 
+  shareCard(id) {
+    
+  }
+
   enlargeQr() {
         $(".QRcode").html(this.defaultCard.QRcode);
       $(".QRcode").slideToggle("fast");

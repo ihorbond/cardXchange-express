@@ -18,8 +18,8 @@ cards: any;
 message: string;
 user: string;
 showEditForm: boolean = false;
-cardVisibility: boolean = true;
-defaultCard: boolean = true;
+// cardVisibility: boolean = true;
+// defaultCard: boolean = false;
 qrcodeIcon: boolean = true;
 icon: any;
 editedCard: any = {
@@ -47,18 +47,6 @@ editedCard: any = {
     )
   }
 
-  onOffSwitch(id) {
-    if (this.cardVisibility) this.cardVisibility = false;
-    else this.cardVisibility = true;
-    // console.log("ID: " + id + " VIS: " + this.cardVisibility);
-    this.cardService.changeVisibility(id, this.cardVisibility)
-    .subscribe(result =>
-              {
-                this.message = result.message;
-              }
-    );
-  }
-
   editCard(id) {
     $(`#editForm${id}`).slideToggle("slow");
 
@@ -66,6 +54,40 @@ editedCard: any = {
  cancelEdit(id) {
      $(`#editForm${id}`).slideToggle("fast");
  }
+
+
+//defaultCard = true switch is on
+//defaultCard = false swith is off
+ toggleDefault(id) {
+   this.cards.forEach(oneCard => {
+     if (oneCard._id.toString() === id && oneCard.defaultSetting === true) {
+       oneCard.defaultSetting = false;
+       $(`#switch${id}`).css("float", "left");
+       $(`#switch${id}`).css("background", "red");
+       $(`#switchLabel${id}`).text("OFF");
+
+     } else {
+       oneCard.defaultSetting = true;
+       $(`#switch${id}`).css("float", "right");
+       $(`#switch${id}`).css("background", "rgb(45, 176, 109)");
+       $(`#switchLabel${id}`).text("ON");
+     }
+   });
+
+
+ }
+
+ // onOffSwitch(id) {
+ //   if (this.cardVisibility) this.cardVisibility = false;
+ //   else this.cardVisibility = true;
+ //   // console.log("ID: " + id + " VIS: " + this.cardVisibility);
+ //   this.cardService.changeVisibility(id, this.cardVisibility)
+ //   .subscribe(result =>
+ //             {
+ //               this.message = result.message;
+ //             }
+ //   );
+ // }
 
 saveChanges(id, form: NgForm) {
   $(`#editForm${id}`).slideToggle("fast");
@@ -90,11 +112,10 @@ this.cards.forEach((oneCard, index) => {
     this.cards[index].companyName  = this.editedCard.companyName;
     this.cards[index].position     = this.editedCard.position;
     this.cards[index].phoneNum     = this.editedCard.phoneNum;
-    this.cards[index].linkedIn     = this.editedCard.inkedIn;
+    this.cards[index].linkedIn     = this.editedCard.linkedIn;
     this.cards[index].email        = this.editedCard.email;
   }
 });
-// console.log(this.cards);
 }
 
 enlargeQr(id) {
@@ -115,13 +136,13 @@ enlargeQr(id) {
       }
 }
 
-  makeDefault(id) {
-    this.cardService.makeDefault(id, this.defaultCard)
-    .subscribe(res => {
-      this.message = res.message;
-    });
+  // makeDefault(id) {
+  //   this.cardService.makeDefault(id, this.defaultCard)
+  //   .subscribe(res => {
+  //     this.message = res.message;
+  //   });
 
-  }
+  // }
 
   deleteCard(id) {
      //update cards collection
