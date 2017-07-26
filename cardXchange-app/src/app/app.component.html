@@ -1,5 +1,6 @@
 <div id="mySidenav" class="sidenav">
   <!-- <a (click)="showMenu()" class="menu"><span class="glyphicon glyphicon-remove"></span></a> -->
+  <a [routerLink]="['home']">Home</a>
   <a (click)="about()">About</a>
   <a (click)="help()">Help</a>
   <a (click)="logout()">Logout</a>
@@ -10,11 +11,12 @@
 <div class="header navbar-fixed-top">
   <div class="row">
     <ul>
-      <li class="col-xs-3"><a (click)="logoClicked()" class="logo">{{title}}</a></li>
-      <li class="col-xs-6"><a *ngIf="user" [routerLink]="['profile']" class="greeting">Hello, {{user.fullName}}</a></li>
+      <li class="col-xs-3"></li>
+      <li class="col-xs-6">
+        <a *ngIf="user" [routerLink]="['profile']" class="greeting">Hello, {{user.fullName}}</a>
+        <a *ngIf="!user"(click)="logoClicked()" class="logo">{{title}}</a>
+      </li>
       <li *ngIf="!user" class="col-xs-3">
-        <a *ngIf="loginSignup" (click)="signup()" class="menu">Sign Up</a>
-        <a *ngIf="!loginSignup" (click)="login()" class="menu">Login</a>
       </li>
       <li *ngIf="user" class="col-xs-3">
         <a (click)="showMenu()" class="menu"><span class="glyphicon glyphicon-th-list"></span></a>

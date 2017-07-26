@@ -9,7 +9,8 @@
   Position:  <br>    <input type="text" name="position" ngModel><br>
   Email:    <br>     <input type="email" name="email" ngModel><br>
   Phone#:   <br>     <input type="text" name="phoneNum" ngModel><br>
-  Photo:    <br>     <input type="file" accept="image/*" name="picture" ngModel><br>
+  Photo:    <br>
+  <input type="file" accept="image/*" name="profilePic" ng2FileSelect [uploader]="imgUpload"><br>
   LinkedIn link:<br> <input type="text" name="linkedIn" ngModel><br>
   <button type="submit" class="btn btn-success"> Save </button>
   <button class="btn btn-warning" (click)="cancel()"> Cancel </button>

@@ -3,76 +3,6 @@
   padding: 0;
 }
 
-#qr {
-  text-align: center;
-  margin: 1em auto;
-  background: none;
-}
-//
-@import "../assets/css/auth";
-
-.pageContent {
-  width: 100%;
-
-  box-sizing: border-box;
-
-  .login-wrap {
-    animation-duration: 1s;
-    padding-top: 5em;
-    margin: 0 auto;
-    width: 20em;
-  }
-
-  .strokes {
-    // z-index: 10;
-    text-align: center;
-    width: 100%;
-  }
-
-  .auth-form {
-    text-align: center;
-    height: 100%;
-    width: 100%;
-    margin: 0 auto;
-    color: white;
-
-    button {
-      margin-top: 0.5em;
-      font-weight: bold;
-      text-transform: uppercase;
-    }
-
-    button,
-    img {
-      border-bottom: 2px solid white;
-      width: 13em;
-      height: 2em;
-    }
-
-    #or {
-      text-align: center;
-      margin: 0.5em 0;
-      font-weight: bolder;
-    }
-  }
-  .glyphicon {
-    vertical-align: -webkit-baseline-middle;
-    color: grey;
-    font-size: 1.5em;
-  }
-}
-
-,
-.email,
-.password {
-  height: 2em;
-  border: none;
-  display: inline-block;
-  border-bottom: 1px solid white;
-  background: none;
-}
-
-,
 .footer,
 .header {
   width: 100%;
@@ -85,23 +15,20 @@
 
 a,
 a:hover {
-  text-transform: uppercase;
-  text-decoration: none;
   color: white;
+  text-decoration: none;
 }
 
+
 li {
+  list-style-type: none;
   padding: 15px;
   margin: 0;
   text-align: center;
 }
 
-#loginForm {
-  input {
-    border: 1px solid red;
-    border-radius: 3px;
-  }
-}
+
+
 /* The side navigation menu */
 .sidenav {
   padding-top: 50px;
@@ -122,10 +49,16 @@ li {
     text-decoration: none;
     font-size: 20px;
     color: white;
-    font-weight: bold;
+    font-weight: bolder;
     text-transform: uppercase;
     display: block;
   }
+}
+
+.logo {
+  font-size: 1.5em;
+  text-transform: none;
+  font-weight: bolder;
 }
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {

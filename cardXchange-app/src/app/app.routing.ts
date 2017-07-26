@@ -7,10 +7,13 @@ import { SignupComponent }       from './signup/signup.component';
 import { AppComponent }          from './app.component';
 import { AddCardComponent }      from './add-card/add-card.component';
 import { HelpComponent }         from './help/help.component';
-import { HomeComponent }        from './home/home.component';
+import { HomeComponent }         from './home/home.component';
+import { EventsComponent }       from './events/events.component';
 
 export const routes: Routes = [
+  
     { path: '',         component: HomeComponent },
+    { path: 'events',   component: EventsComponent },
     { path: 'contacts', component: ContactsComponent },
     { path: 'profile',  component: UserProfileComponent },
     { path: 'about',    component: AboutComponent },

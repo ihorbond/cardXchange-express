@@ -16,7 +16,7 @@ declare var $:any;
 
 })
 export class AppComponent implements OnInit {
-  title = 'cXc';
+  title = 'cardXchange';
   loginSignup: boolean = false;
   sideMenu: boolean = false;
   user: any;
@@ -31,20 +31,12 @@ export class AppComponent implements OnInit {
     //check if user already logged in
     this.auth.isLoggedIn()
     .subscribe(user => { this.user  = user;
-                         this.message = null });
-
+                         this.message = null;
+                         console.log(user);
+                         if(!user) this.router.navigate[('login')];
+                        });
   }
 
-  // signup() {
-  //   if (!this.loginSignup) {
-  //     this.loginSignup = true;
-  //     this.router.navigate(['signup']);
-  //   }
-  //   else {
-  //     this.loginSignup = true;
-  //     this.router.navigate(['signup']);
-  //   }
-  // }
 
  logoClicked() {
    if (this.user) this.router.navigate(['']);

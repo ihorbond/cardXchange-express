@@ -21,6 +21,7 @@ import { EditCardComponent } from './edit-card/edit-card.component';
 import { HelpComponent } from './help/help.component';
 import { HomeComponent } from './home/home.component';
 import { EventsComponent } from './events/events.component';
+import { FileSelectDirective } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { EventsComponent } from './events/events.component';
     EditCardComponent,
     HelpComponent,
     HomeComponent,
-    EventsComponent
+    EventsComponent,
+    FileSelectDirective
   ],
   imports: [
     QrScannerModule,

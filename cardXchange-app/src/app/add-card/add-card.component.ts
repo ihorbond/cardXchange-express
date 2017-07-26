@@ -6,6 +6,7 @@ import { NgClass }                       from '@angular/common';
 import { Router }                        from '@angular/router';
 import { EditCardComponent }             from '../edit-card/edit-card.component';
 import { AuthorizationService }          from '../authorization.service';
+import { FileUploader }                  from 'ng2-file-upload';
 // import { QRcode } from '../../assets/QR/qrcode.js';
 
 declare var $:any;
@@ -24,6 +25,9 @@ declare var $:any;
 export class AddCardComponent implements OnInit {
 user: any;
 message: string;
+imgUpload = new FileUploader({
+  url: 'http://localhost:3000/api/profile/my-cards/add'
+});
 
   constructor(
               private router: Router,
@@ -33,36 +37,62 @@ message: string;
               private auth: AuthorizationService
             ) { }
 
+  ngOnInit() {
+               this.auth.isLoggedIn()
+               .subscribe(res => {
+                 this.user = res;
+               });
+            }
+
   addCard(form: NgForm) {
+
     let newCard = {
       fullName:    form.value.fullName,
       companyName: form.value.companyName,
       position:    form.value.position,
       phoneNum:    form.value.phoneNum,
       email:       form.value.email,
-      description: form.value.description,
       linkedIn:    form.value.linkedIn,
-      // photo:
       qrcode:      $('#qr').html()
     }
+console.log("NEW CARD: " + newCard.fullName);
+if (this.imgUpload.queue.length === 0) {
 
-    this.card.addCard(newCard)
-    .subscribe(result =>
-              {
-                this.message = result.message;
+  this.card.addCard(newCard)
+  .subscribe(result =>
+            {
+              if (result.status === "OK") {
+                this.router.navigate(['profile']);
               }
-    )
-    this.router.navigate(['profile']);
+              else {
+              this.message = result.message;
+            }
+            }
+  )
+}
+
+else {
+  this.imgUpload.onBuildItemForm = (item, form) => {
+    //'newCard' has to match the req.body.... in DB
+    console.log("NEW CARD: " + newCard);
+    form.append('newCard', newCard);
   }
+
+  this.imgUpload.onSuccessItem = (item, response) => {
+      this.router.navigate(['profile']);
+  }
+  this.imgUpload.onErrorItem = (item, response) => {
+    console.log(response);
+    this.message = "Oops something went wrong :(";
+  }
+
+  this.imgUpload.uploadAll();
+
+  }
+}
 
   cancel() {
     this.router.navigate(['profile']);
   }
 
-  ngOnInit() {
-     this.auth.isLoggedIn()
-     .subscribe(res => {
-       this.user = res;
-     })
-  }
 }

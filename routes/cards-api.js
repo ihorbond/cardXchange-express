@@ -3,7 +3,11 @@ const router     = express.Router();
 const mongoose   = require('mongoose');
 const UserModel  = require('../models/userModel');
 const CardModel  = require('../models/cardModel');
+const multer     = require('multer');
 // const EventModel = require('../models/eventModel');
+const imgUpload  = multer ({
+  dest: __dirname + '/../public/uploads/'
+});
 
 
 //change card visibility
@@ -118,27 +122,30 @@ router.patch('/contacts/add/:id', (req, res, next) => {
 });
 
 //add own card
-router.post('/profile/my-cards/add', (req, res, next) => {
+router.post('/profile/my-cards/add', imgUpload.single('file'), (req, res, next) => {
   const userId = req.user._id;
   // if (req.user.cards.length >= 3) {
   //   res.json({ message: "Sorry, you have reached the limit of 3 cards. Delete other cards first" });
   //   return;
   // }
   const theCard = new CardModel ({
-    fullName:       req.body.fullName,
-    companyName:    req.body.companyName,
-    position:       req.body.position,
-    phoneNum:       req.body.phoneNum,
-    email:          req.body.email,
-    linkedIn:       req.body.linkedIn,
-    profilePic:     req.body.profilePic,
-    visibility:     req.body.visibility,
-    QRcode:         req.body.qrcode//???
+    fullName:       req.body.newCard.fullName,
+    companyName:    req.body.newCard.companyName,
+    position:       req.body.newCard.position,
+    phoneNum:       req.body.newCard.phoneNum,
+    email:          req.body.newCard.email,
+    linkedIn:       req.body.newCard.linkedIn,
+    visibility:     req.body.newCard.visibility,
+    QRcode:         req.body.newCard.qrcode//???
   });
   if(!theCard.fullName || !theCard.email) {
     res.json({message: "Both Name and Email fields must be filled out"});
     return;
   }
+  if (req.file) {
+    theCard.profilePic = `/uploads/${req.file.filename}`;
+  }
+
   theCard.save(err => {
     if (err) {
       res.json(err);
@@ -159,7 +166,7 @@ router.post('/profile/my-cards/add', (req, res, next) => {
           res.json(err);
           return;
         }
-        res.json({  message: 'Card Added', userInfo: theUser });
+        res.json({status: 'OK', message: 'Card Added', userInfo: theUser });
       });
     }
   );

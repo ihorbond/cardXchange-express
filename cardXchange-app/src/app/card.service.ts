@@ -24,7 +24,7 @@ BASE_URL: string = 'http://localhost:3000';
 
    //add new own card
    addCard(newCard) {
-     return this.http.post(`${this.BASE_URL}/api/profile/my-cards/add`, newCard, {withCredentials: true})
+     return this.http.post(`${this.BASE_URL}/api/profile/my-cards/add`, {newCard: newCard}, {withCredentials: true})
        .map(res => res.json());
    }
 

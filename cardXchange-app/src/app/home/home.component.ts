@@ -12,6 +12,7 @@ cards: any;
 message: string;
 user: any;
 defaultCard: any;
+
   constructor(
     private cardService: CardService
   ) { }
@@ -22,9 +23,9 @@ defaultCard: any;
                 this.message = result.message;
                 this.cards   = result.userInfo.cards;
                 this.user    = result.userInfo;
+                this.getDefaultCard();
               }
     )
-    this.getDefaultCard();
   }
 
   getDefaultCard() {

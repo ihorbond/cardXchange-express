@@ -31,3 +31,6 @@ npm-debug.log
 
 #jshint config
 .jshintrc
+
+#dont upload pictures to github
+public/uploads

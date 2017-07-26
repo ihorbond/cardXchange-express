@@ -13,35 +13,98 @@
         <div class="ring-large-wrap"></div>
         <div class="ring-small-wrap"></div>
 
-<div id="qr">
+<!-- <div id="qr">
    <qr-code [backgroundAlpha]="0.5" [background]="'rgb(52, 154, 237)'" [foreground]="'white'" [value]="cardxchange" size="100"></qr-code>
-  </div>
+  </div> -->
 
-        <p class="message">{{message}}</p>
 
-        <form #loginInfo="ngForm" class="auth-form" (ngSubmit)="login(loginInfo)">
-      <div class="row">
-       <div class="col-xs-2">
-         <span class="glyphicon glyphicon-envelope"></span>
-      </div>
-        <div class="col-xs-10">
-          <input id="loginEmail" class="email" type="email" name="loginEmail" placeholder="Email" ngModel>
-        </div>
-        </div>
-        <div class="row">
-         <div class="col-xs-2">
+<br>
+<img id="badgePhoto" src="//cdn0.iconfinder.com/data/icons/user-pictures/100/male-256.png">
+<div id="greeting">
+<h4> Lets get started! </h4>
+<i>This will be an amazing experience</i>
+</div>
+  <p class="message animated fadeInUpBig">{{message}}</p>
 
-           <!-- <span class="glyphicons glyphicons-keys"></span> -->
-             <span class="glyphicon glyphicon-lock"></span>
-        </div>
-          <div class="col-xs-10">
-          <input id="loginPassword" class="password" type="password" placeholder="Password" name="loginPassword" ngModel>
-        </div>
-        <button class="btn btn-danger"> Login </button>
-        <div id="or">OR</div>
-        <a href="#"><img src="assets/images/linkedinSignin.png"> </a>
-            </div>
-        </form>
+        <nav class="navbar navbar-inverse">
+
+<div class="row">
+  <ul class="nav nav-tabs">
+          <li id="emailLi" role="presentation" class="col-xs-3">
+          <a id="emailA" (click)="toggleLogin($event)"><i class="material-icons">email</i></a>
+          </li>
+          <li id="linkedInLi" class="col-xs-3">
+            <a id="linkedInA" (click)="toggleLogin($event)"><i class="material-icons">contact_mail</i></a>
+          </li>
+          <li id="patternLi" class="col-xs-3">
+            <a id="patternA" (click)="toggleLogin($event)"><i class="glyphicon glyphicon-th"></i></a>
+          </li>
+          <li id="signupLi" class="col-xs-3">
+            <a id="signupA" (click)="toggleLogin($event)"><i class="material-icons">assignment_ind</i></a>
+          </li>
+          <!-- <i class="material-icons">fingerprint</i> -->
+    </ul>
+</div>
+
+
+
+
+<!-- login with email  -->
+<div class="email-login">
+<form #loginInfo="ngForm" class="auth-form" (ngSubmit)="login(loginInfo)">
+<div class="row">
+<div class="col-xs-2">
+ <span class="glyphicon glyphicon-envelope"></span>
+</div>
+<div class="col-xs-10">
+  <input id="loginEmail" class="email" type="email" name="loginEmail" placeholder="Email" ngModel>
+</div>
+</div>
+<div class="row">
+ <div class="col-xs-2">
+
+   <!-- <span class="glyphicons glyphicons-keys"></span> -->
+     <span class="glyphicon glyphicon-lock"></span>
+</div>
+  <div class="col-xs-10">
+  <input id="loginPassword" class="password" type="password" placeholder="Password" name="loginPassword" ngModel>
+</div>
+<button class="btn btn-danger"> Login </button>
+</div>
+<!-- <div id="or">OR</div> -->
+</form>
+    </div>
+
+<!-- login with linkedIn -->
+<div class="linkedin-login">
+<a href="#"><img src="assets/images/linkedinSignin.png"> </a>
+</div>
+
+<!-- pattern login  -->
+<div class="pattern-login">
+ pattern
+</div>
+
+<!-- signup  -->
+
+<div class="signup-login">
+<h4> What is your...</h4>
+  <form #signupInfo="ngForm" id="signupForm" (ngSubmit)="signup(signupInfo)">
+  <label for id="signup-fullName"> Full Name </label>
+  <input id="signup-fullName" maxlength="16" type="string" name="fullName" ngModel>
+  <br>
+  <label for id="signup-email"> Email </label>
+  <input id="login-email" type="email" name="email" ngModel>
+  <br>
+  <label for id="login-password"> Password </label>
+  <input id="login-password" type="password" name="password" ngModel>
+  <br>
+  <button class="btn btn-success"> Sign Up </button>
+  </form>
+</div>
+
+</nav>
+
 
       </div>
     </div>
