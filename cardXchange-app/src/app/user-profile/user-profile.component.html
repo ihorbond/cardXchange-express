@@ -21,7 +21,7 @@
       <div id="oneCard" class="wrapper">
         <div class="row">
           <div class="col-xs-4 image-wrapper">
-            <img src={{oneCard.profilePic}}" alt="{{oneCard.fullName}}" />
+            <img src="../../assets/images/ihor.jpg" alt="{{oneCard.fullName}}" >
 
           </div>
           <div class="col-xs-8 information">
@@ -33,7 +33,7 @@
             </div>
 <div class="row">
 <div class="col-xs-4">
-    <a (click)="onOffSwitch(oneCard._id)" class="on-off"> ON/OFF </a>
+  <a (click)="makeDefault(defaultCard._id)" class="default"> Default? </a>
  </div>
 <div class="col-xs-8">
   <p class="contact-info">
@@ -41,10 +41,9 @@
     <a *ngIf="oneCard.phoneNum" href="tel:{{oneCard.phoneNum}}"><img src="../../assets/images/call.png"></a>
     <a *ngIf="oneCard.linkedIn" href="{{oneCard.linkedIn}}" target="_blank"><img src="../../assets/images/linkedin.png"></a>
     <a (click)="enlargeQr(oneCard._id)" id="QR{{oneCard._id}}" class="QRicon"><img src="../../assets/images/qrcode.png"></a>
-      <br>
-    <a (click)="enlargeQr(oneCard._id)" id="QR2{{oneCard._id}}" class="QRcode"></a>
   </p>
-</div>
+    <div (click)="enlargeQr(oneCard._id)" id="QR2{{oneCard._id}}" class="QRcode"></div>
+  </div>
 </div>
 <div id="editForm{{oneCard._id}}" class="edit-form">
 

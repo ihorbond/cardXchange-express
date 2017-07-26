@@ -11,8 +11,8 @@ import { HomeComponent }         from './home/home.component';
 import { EventsComponent }       from './events/events.component';
 
 export const routes: Routes = [
-  
-    { path: '',         component: HomeComponent },
+
+    { path: 'home',         component: HomeComponent },
     { path: 'events',   component: EventsComponent },
     { path: 'contacts', component: ContactsComponent },
     { path: 'profile',  component: UserProfileComponent },
@@ -21,5 +21,5 @@ export const routes: Routes = [
     { path: 'login',    component: LoginComponent },
     { path: 'signup',   component: SignupComponent },
     { path: 'profile/add-card', component: AddCardComponent },
-    // { path: 'login',    redirectTo: '', pathMatch: 'full' }
+    { path: '',    redirectTo: 'home', pathMatch: 'full' }
 ];

@@ -1,8 +1,37 @@
 <div class="page-content">
 
-<div *ngIf="defaultCard">
 
-{{defaultCard | json}};
+
+  <div *ngIf="defaultCard" class="one-card">
+      <div class="wrapper">
+        <div class="row">
+          <div class="col-xs-4 image-wrapper">
+            <img src="../../assets/images/default-pic.png" alt="{{defaultCard.fullName}}" >
+
+          </div>
+          <div class="col-xs-8 information">
+            <p class="name">{{defaultCard.fullName}}</p>
+            <p class="position-company">{{defaultCard.position}} at
+            {{defaultCard.companyName}}  </p>
+
+          </div>
+            </div>
+  <div class="row">
+  <div class="col-xs-4">
+
+  </div>
+  <div class="col-xs-8">
+  <p class="contact-info">
+    <a *ngIf="defaultCard.email"    href="mailto:{{defaultCard.email}}"><img src="../../assets/images/email.png"></a>
+    <a *ngIf="defaultCard.phoneNum" href="tel:{{defaultCard.phoneNum}}"><img src="../../assets/images/call.png"></a>
+    <a *ngIf="defaultCard.linkedIn" href="{{defaultCard.linkedIn}}" target="_blank"><img src="../../assets/images/linkedin.png"></a>
+    <a (click)="enlargeQr()" class="QRicon"><img src="../../assets/images/qrcode.png"></a>
+      <br>
+  </p>
+  <div (click)="enlargeQr()" class="QRcode"></div>
+  </div>
+  </div>
+</div>
 
 </div>
 

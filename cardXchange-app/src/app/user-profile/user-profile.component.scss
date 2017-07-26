@@ -68,7 +68,7 @@ li {
     }
   }
 
-  .on-off {
+  .default {
     display: inline-block;
     text-align: center;
     margin: 20px 0 0 10px;
@@ -79,9 +79,6 @@ li {
       margin: 15px 5px 0 0;
       width: 2em;
       height: 2em;
-    }
-    .QRcode {
-      display: none;
     }
   }
 
@@ -117,4 +114,11 @@ li {
       font-weight: bolder;
       margin-top: 0.5em;
     }
+}
+
+.QRcode {
+  margin: 1em 0 1em 0;
+  display: none;
+  width: 8em;
+  height: 8em;
 }

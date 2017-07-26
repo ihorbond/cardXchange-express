@@ -58,6 +58,12 @@ BASE_URL: string = 'http://localhost:3000';
       .map(res => res.json());
   }
 
+  //make default
+  makeDefault(id, defaultSetting) {
+    return this.http.patch(`${this.BASE_URL}/api/profile/my-cards/md/${id}`, {defaultSetting: defaultSetting}, {withCredentials: true})
+    .map(res => res.json());
+  }
+
 
   //update own card in cards collection
    editCard(id, updatedCard) {

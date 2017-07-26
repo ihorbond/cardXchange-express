@@ -1,6 +1,6 @@
 <div *ngIf="user" class="page-content">
 
-<p class="message" *ngIf="message"> {{message}} </p>
+<p class="message animated fadeInLeft" *ngIf="message"> {{message}} </p>
 <div class="new-card-info animated fadeInLeftBig">
   <h2> Enter Information </h2>
   <form #newCardInfo="ngForm" id="newCardInfo" (ngSubmit)="addCard(newCardInfo)">

@@ -9,8 +9,82 @@ const imgUpload  = multer ({
   dest: __dirname + '/../public/uploads/'
 });
 
+//make default
+router.patch('/profile/my-cards/md/:id', (req, res, next) => {
+   const cardToEditId   = req.params.id;
+   const userId         = req.user._id;
+   const defaultSetting = req.body.defaultSetting;
+   if (!mongoose.Types.ObjectId.isValid(cardToEditId)) {
+     res.status(400).json({ message: 'Specified id is not valid' });
+     return;
+   }
 
-//change card visibility
+   UserModel.findById({ _id: userId})
+   .populate('cards')
+   //exec returns the user with cards array populated by actual objects
+   .exec((err, theUser) => {
+     if(err) {
+       res.json(err);
+       return;
+   }
+
+
+//there's gotta be a better way to do this....
+let errors = [];
+//make all cards defaultSetting false
+   theUser.cards.forEach(oneCard => {
+     if (oneCard.defaultSetting) {
+       oneCard.defaultSetting = false;
+       oneCard.save(err => {
+        errors.push(err);
+       });
+     }
+        //assing true to the picked card
+     if (oneCard._id.toString() === cardToEditId) {
+      oneCard.defaultSetting = true;
+      oneCard.save(err => {
+       errors.push(err);
+      });
+     }
+   });
+   console.log(errors);
+
+res.json({message: "This card is now default", userInfo: theUser});
+});
+});
+
+
+// add/edit contact note
+router.patch('/profile/contacts/add-note/:id', (req, res, next) => {
+   const cardToEditId = req.params.id;
+   const userId       = req.user._id;
+   const editedNote   = req.body.note;
+   if (!mongoose.Types.ObjectId.isValid(cardToEditId)) {
+     res.status(400).json({ message: 'Specified id is not valid' });
+     return;
+   }
+   UserModel.findById(userId, (err, theUser) => {
+     if(err) {
+       res.json(err);
+       return;
+     }
+       theUser.contacts.forEach((oneContact, index) => {
+         if (oneContact._id === cardToEditId) {
+           oneContact.notes = editedNote;
+         }
+       });
+       theUser.markModified('contacts');
+       theUser.save(err => {
+         if(err) {
+           res.json(err);
+           return;
+         }
+        res.json({ message: 'Changes Saved', userInfo: theCard });
+   });
+});
+});
+
+//change visibility
 router.patch('/profile/my-cards/cv/:id', (req, res, next) => {
    const cardToEditId = req.params.id;
    console.log(cardToEditId);
@@ -83,7 +157,7 @@ router.patch('/profile/my-cards/edit/:id', (req, res, next) => {
        theCard.phoneNum    = req.body.phoneNum;
        theCard.email       = req.body.email;
        theCard.linkedIn    = req.body.linkedIn;
-       theCard.profilePic  = req.body.profilePic;
+      //  theCard.profilePic  = req.body.profilePic;
        theCard.save(err => {
          if(err) {
            res.json(err);
@@ -244,7 +318,7 @@ router.patch('/contacts/delete/:id', (req, res, next) => {
 
         theUser.contacts.forEach((oneCard, index) => {
 
-          if (oneCard.toString() === cardToRemoveId.toString()) {
+          if (oneCard._id.toString() === cardToRemoveId.toString()) {
              theUser.contacts.splice(index, 1);
           }
         });

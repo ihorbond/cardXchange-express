@@ -30,10 +30,11 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     //check if user already logged in
     this.auth.isLoggedIn()
-    .subscribe(user => { this.user  = user;
+    .subscribe(user => {
+                         this.user    = user;
                          this.message = null;
                          console.log(user);
-                         if(!user) this.router.navigate[('login')];
+                         if(!user) this.router.navigate(['login']);
                         });
   }
 

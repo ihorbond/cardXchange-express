@@ -30,7 +30,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private auth: AuthorizationService) { }
+    private auth: AuthorizationService
+  ) { }
 
   ngOnInit() {
     // check if user already logged in
@@ -40,7 +41,7 @@ export class LoginComponent implements OnInit {
                          this.message = null;
                          console.log(user);
                          //if logged in => go home
-                         if (user) this.router.navigate[('')];
+                        //  if (user) this.router.navigate(['']);
                          });
   }
 
@@ -67,7 +68,7 @@ export class LoginComponent implements OnInit {
                           this.user  = user;
                           this.message = null;
                           console.log(user);
-                          if (user !== null) {
+                          if (user) {
                             this.router.navigate(['']);
                           }
                         }),

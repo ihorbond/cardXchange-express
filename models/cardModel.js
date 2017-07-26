@@ -9,7 +9,7 @@ const cardSchema = new mongoose.Schema({
   linkedIn:          {type: String, lowercase: true, trim:true},
   profilePic:        {type: String, default: "../images/new-user.png"},
   visibility:        {type: Boolean, default: true},
-  default:           {type: Boolean, default: false},
+  defaultSetting:    {type: Boolean, default: false},
   eventId:           {type: mongoose.Schema.Types.ObjectId},
   //unique qr code for each card
   QRcode:            {type: String}

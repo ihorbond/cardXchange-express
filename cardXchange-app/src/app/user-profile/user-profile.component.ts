@@ -19,6 +19,7 @@ message: string;
 user: string;
 showEditForm: boolean = false;
 cardVisibility: boolean = true;
+defaultCard: boolean = true;
 qrcodeIcon: boolean = true;
 icon: any;
 editedCard: any = {
@@ -36,7 +37,6 @@ editedCard: any = {
   ) { }
 
   ngOnInit() {
-    // $('#pageContent').addClass('hidden');
     $('#editForm').width($('#oneCard').width());
     this.cardService.getCards().subscribe(result =>
               {
@@ -60,16 +60,8 @@ editedCard: any = {
   }
 
   editCard(id) {
-    // let currentCard;
     $(`#editForm${id}`).slideToggle("slow");
-    // this.cards.forEach((oneCard, index) => {
-    //   if (id === oneCard._id) {
-    //     currentCard = this.cards[index];
-    //   }
-    // });
-    // form.value.fullName = currentCard.fullName;
 
-    // $('#oneCard').css('transform', 'rotateY(-180deg)');
 }
  cancelEdit(id) {
      $(`#editForm${id}`).slideToggle("fast");
@@ -77,6 +69,7 @@ editedCard: any = {
 
 saveChanges(id, form: NgForm) {
   $(`#editForm${id}`).slideToggle("fast");
+  // this.editedCard._id         = id;
   this.editedCard.fullName    = form.value.fullName;
   this.editedCard.companyName = form.value.companyName;
   this.editedCard.position    = form.value.position;
@@ -88,12 +81,17 @@ saveChanges(id, form: NgForm) {
   .subscribe(res => {
   this.message = res.message;
 });
-//update cards array here
-//this is desparate! there gotta be a better way! \
-//i need to reassing the cards array
+// update cards array here
+// this is desparate! there gotta be a better way! \
+// i need to reassing the cards array
 this.cards.forEach((oneCard, index) => {
-  if (id === oneCard._id) {
-    this.cards[index] = this.editedCard;
+  if (id === oneCard._id.toString()) {
+    this.cards[index].fullName     = this.editedCard.fullName;
+    this.cards[index].companyName  = this.editedCard.companyName;
+    this.cards[index].position     = this.editedCard.position;
+    this.cards[index].phoneNum     = this.editedCard.phoneNum;
+    this.cards[index].linkedIn     = this.editedCard.inkedIn;
+    this.cards[index].email        = this.editedCard.email;
   }
 });
 // console.log(this.cards);
@@ -117,13 +115,21 @@ enlargeQr(id) {
       }
 }
 
+  makeDefault(id) {
+    this.cardService.makeDefault(id, this.defaultCard)
+    .subscribe(res => {
+      this.message = res.message;
+    });
+
+  }
 
   deleteCard(id) {
-
+     //update cards collection
     this.cardService.removeCardFromCollection(id)
     .subscribe(res => {
       this.message = res.message;
     });
+    //update user's cards array
     this.cardService.removeCardFromArray(id)
     .subscribe(res => {
       this.message += res.message;
