@@ -53,6 +53,15 @@ textarea {
 }
 
 .card {
+
+  #editContactIcon {
+    color: rgb(233, 201, 89);
+    float: left;
+  }
+  #deleteContactIcon {
+    color: rgb(191, 14, 14);
+    float: right;
+  }
   transform-style: preserve-3d;
   transition: transform 0.5s;
 }

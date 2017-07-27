@@ -34,3 +34,5 @@ npm-debug.log
 
 #dont upload pictures to github
 public/uploads
+
+.env

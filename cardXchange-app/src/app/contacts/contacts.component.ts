@@ -34,6 +34,13 @@ export class ContactsComponent implements OnInit {
     this.flip(id);
   }
 
+  removeContact(id) {
+    this.card.removeContact(id)
+    .subscribe(res => {
+      this.message = res.message;
+    });
+  }
+
   flip(id) {
     $(`#card${id}`).toggleClass("flipped");
   }

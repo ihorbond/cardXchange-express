@@ -9,15 +9,15 @@ const passport         = require('passport');
     usernameField: "loginEmail",
     passwordField: "loginPassword"
   }, (email, password, next) => {
-    // console.log("EMAIL: " + email);
-    // console.log("PASSWORD: " + password);
+    console.log("EMAIL: " + email);
+    console.log("PASSWORD: " + password);
     UserModel.findOne( { email: email }, (err, foundUser) => {
       if (err) {
         next(err);
         return;
       }
-    //   console.log("EMAIL: " + email);
-    // console.log("FOUND USER: " + foundUser);
+      console.log("EMAIL: " + email);
+    console.log("FOUND USER: " + foundUser);
       if (!foundUser) {
         next(null, false, { message: 'Incorrect email address' });
         return;

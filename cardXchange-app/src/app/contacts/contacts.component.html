@@ -18,13 +18,15 @@
 
   <ul>
 
-<div *ngFor="let oneContact of contacts | search:'fullName':keyword; let i = index">
+<div *ngFor="let oneContact of contacts | search:'fullName':keyword">
    <div class="card-container">
       <div class="col-xs-6 card" id="card{{oneContact._id}}">
-     <li class="front">
+     <li class="front" id="front{{oneContact._id}}">
+        <i class="material-icons" id="deleteContactIcon" (click)="removeContact(oneContact._id)">delete_forever</i>
+          <i class="material-icons" id="editContactIcon" (click)="flip(oneContact._id)">mode_edit</i>
 
-       <div class="contact-image" (click)="flip(oneContact._id)">
-        <img src="../../assets/images/default-pic.png" alt="{{oneContact.fullName}}">
+       <div class="contact-image">
+        <img src="../../assets/images/default-pic.png" alt="{{oneContact.fullName}}" (click)="expandContact(oneContact._id)">
         </div>
         <div class="full-name" (click)="expandContact(oneContact._id)"> {{oneContact.fullName}} </div>
         <!-- <button class="expand-contact" id="expandContact{{oneContact._id}}" (click)="expandContact(oneContact._id)">

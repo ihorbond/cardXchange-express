@@ -18,7 +18,7 @@ authRoutes.post('/signup', (req, res, next) => {
 
   UserModel.findOne({ email }, (err, foundUser) => {
     if (err) {
-      res.status(500).json({message: "Email check failed"});
+      res.status(500).json({message: "Email check failed due to server problem."});
     }
     if (foundUser) {
       res.status(400).json({message: 'The user with this email address is already registered' });

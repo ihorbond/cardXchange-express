@@ -14,7 +14,7 @@
   <!-- <span class="glyphicon glyphicon-plus-sign"></span> -->
   <li class="purchase-template">
     <img src="../assets/images/shop.png">
-  <a href="https://store.cxc.com"> Purchase template </a>
+  <a href="https://store.cardxchange.co"> Purchase template </a>
 </li>
   <!-- <span class="glyphicon glyphicon-shopping-cart"></span> -->
 </ul>
@@ -46,12 +46,12 @@
   <!-- <a (click)="makeDefault(oneCard._id)" class="default"> Make <br> Default? </a> -->
  </div>
 <div class="col-xs-8">
-  <p class="contact-info">
+  <div class="contact-info">
     <a *ngIf="oneCard.email"    href="mailto:{{oneCard.email}}"><img src="../../assets/images/email.png"></a>
     <a *ngIf="oneCard.phoneNum" href="tel:{{oneCard.phoneNum}}"><img src="../../assets/images/call.png"></a>
     <a *ngIf="oneCard.linkedIn" href="{{oneCard.linkedIn}}" target="_blank"><img src="../../assets/images/linkedin.png"></a>
     <a (click)="enlargeQr(oneCard._id)" id="QR{{oneCard._id}}" class="QRicon"><img src="../../assets/images/qrcode.png"></a>
-  </p>
+  </div>
     <div (click)="enlargeQr(oneCard._id)" id="QR2{{oneCard._id}}" class="QRcode"></div>
   </div>
 </div>
