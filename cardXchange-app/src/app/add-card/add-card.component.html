@@ -3,13 +3,14 @@
 <p class="message animated fadeInLeft" *ngIf="message"> {{message}} </p>
 <div class="new-card-info animated fadeInLeftBig">
   <h2> Enter Information </h2>
-  <form #newCardInfo="ngForm" id="newCardInfo" (ngSubmit)="addCard(newCardInfo)">
+  <form #newCardInfo="ngForm" id="newCardInfo" enctype="multipart/form-data" (ngSubmit)="addCard(newCardInfo)">
   Name: <br>        <input type="text" name="fullName" ngModel><br>
   Company Name:<br>  <input type="text" name="companyName" ngModel><br>
   Position:  <br>    <input type="text" name="position" ngModel><br>
   Email:    <br>     <input type="email" name="email" ngModel><br>
   Phone#:   <br>     <input type="text" name="phoneNum" ngModel><br>
   Photo:    <br>
+  <!-- <input type="file" name="file" ng2FileSelect [uploader]="uploader" /> -->
   <input type="file" accept="image/*" name="profilePic" ng2FileSelect [uploader]="imgUpload"><br>
   LinkedIn link:<br> <input type="text" name="linkedIn" ngModel><br>
   <button type="submit" class="btn btn-success"> Save </button>

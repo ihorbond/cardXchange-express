@@ -1,28 +1,26 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes} from '@angular/router';
-import { routes } from './app.routing';
-import { AppComponent } from './app.component';
+import { BrowserModule }        from '@angular/platform-browser';
+import { NgModule }             from '@angular/core';
+import { RouterModule, Routes}  from '@angular/router';
+import { routes }               from './app.routing';
+import { AppComponent }         from './app.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
-import { ContactsComponent } from './contacts/contacts.component';
-import { CardService } from './card.service';
-import { AddCardComponent } from './add-card/add-card.component';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { ContactsComponent }    from './contacts/contacts.component';
+import { CardService }          from './card.service';
+import { AddCardComponent }     from './add-card/add-card.component';
+import { FormsModule }          from '@angular/forms';
+import { HttpModule }           from '@angular/http';
 //qr code generator
-import { QRCodeModule } from 'angular2-qrcode'
-//qr code scanner
-import { QrScannerModule } from 'angular2-qrscanner';
-import { AboutComponent } from './about/about.component'
+import { QRCodeModule }         from 'angular2-qrcode'
+import { AboutComponent }       from './about/about.component'
 import { AuthorizationService } from './authorization.service';
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
-import { EditCardComponent } from './edit-card/edit-card.component';
-import { HelpComponent } from './help/help.component';
-import { HomeComponent } from './home/home.component';
-import { EventsComponent } from './events/events.component';
-import { FileSelectDirective } from 'ng2-file-upload';
-import { SearchPipe } from './pipes/search.pipe';
+import { LoginComponent }       from './login/login.component';
+import { SignupComponent }      from './signup/signup.component';
+import { EditCardComponent }    from './edit-card/edit-card.component';
+import { HelpComponent }        from './help/help.component';
+import { HomeComponent }        from './home/home.component';
+import { EventsComponent }      from './events/events.component';
+import { FileSelectDirective }  from 'ng2-file-upload';
+import { SearchPipe }           from './pipes/search.pipe';
 
 @NgModule({
   declarations: [
@@ -37,11 +35,11 @@ import { SearchPipe } from './pipes/search.pipe';
     HelpComponent,
     HomeComponent,
     EventsComponent,
+    SearchPipe,
     FileSelectDirective,
-    SearchPipe
   ],
   imports: [
-    QrScannerModule,
+    FileSelectDirective,
     QRCodeModule,
     HttpModule,
     FormsModule,

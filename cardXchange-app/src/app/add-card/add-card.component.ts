@@ -7,7 +7,6 @@ import { Router }                        from '@angular/router';
 import { EditCardComponent }             from '../edit-card/edit-card.component';
 import { AuthorizationService }          from '../authorization.service';
 import { FileUploader }                  from 'ng2-file-upload';
-// import { QRcode } from '../../assets/QR/qrcode.js';
 
 declare var $:any;
 
@@ -23,7 +22,7 @@ declare var $:any;
   ]
 })
 export class AddCardComponent implements OnInit {
-user: any;
+user:    any;
 message: string;
 cardUrl: string;
 imgUpload = new FileUploader({
@@ -57,7 +56,7 @@ imgUpload = new FileUploader({
       linkedIn:    form.value.linkedIn,
       qrcode:      $('#qr').html()
     }
-console.log("NEW CARD: " + newCard.fullName);
+
 if (this.imgUpload.queue.length === 0) {
 
   this.card.addCard(newCard)
@@ -74,18 +73,20 @@ if (this.imgUpload.queue.length === 0) {
 }
 
 else {
-  this.imgUpload.onBuildItemForm = (item, form) => {
-    //'newCard' has to match the req.body.... in DB
-    console.log("NEW CARD: " + newCard);
-    form.append('newCard', newCard);
-  }
 
   this.imgUpload.onSuccessItem = (item, response) => {
       this.router.navigate(['profile']);
+      return;
   }
   this.imgUpload.onErrorItem = (item, response) => {
-    console.log(response);
     this.message = "Oops something went wrong :(";
+    return;
+  }
+  this.imgUpload.onBuildItemForm = (item, formToBeSent) => {
+    for (let fieldName in form.value) {
+      formToBeSent.append(fieldName, form.value[fieldName]);
+    }
+
   }
 
   this.imgUpload.uploadAll();

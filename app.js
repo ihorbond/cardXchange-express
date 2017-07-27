@@ -33,7 +33,6 @@ app.set('view engine', 'ejs');
 
 // default value for title local
 app.locals.title = 'cardXchange';
-app.locals.user  =
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -43,7 +42,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(layouts);
 app.use(session({
-  secret: 'angular auth passport secret shh',
+  secret: 'string to compare hashes from hijacking session',
   resave: true,
   saveUninitialized: true,
   cookie : { httpOnly: true, maxAge: 2419200000 }
