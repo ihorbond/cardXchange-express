@@ -171,8 +171,6 @@ router.post('/profile/my-cards/add', imgUpload.single('file'), (req, res, next) 
   //   res.json({ message: "Sorry, you have reached the limit of 3 cards. Delete other cards first or upgrade storage limit" });
   //   return;
   // }
-  console.log("BODY" , req.body);
-  console.log(req.file);
   let picture;
   if (!req.file) {
     picture = null;

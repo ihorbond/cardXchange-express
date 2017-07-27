@@ -2,7 +2,7 @@ import { Component, OnInit }    from '@angular/core';
 import { AuthorizationService } from '../authorization.service';
 import { NgForm }               from '@angular/forms';
 import { Router }               from '@angular/router';
-import { SignupComponent }      from '../signup/signup.component';
+// import { SignupComponent }      from '../signup/signup.component';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
@@ -12,7 +12,7 @@ declare var $:any;
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.min.css'],
-  providers: [AuthorizationService, SignupComponent]
+  providers: [AuthorizationService]
 })
 
 export class LoginComponent implements OnInit {

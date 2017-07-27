@@ -14,13 +14,13 @@ import { QRCodeModule }         from 'angular2-qrcode'
 import { AboutComponent }       from './about/about.component'
 import { AuthorizationService } from './authorization.service';
 import { LoginComponent }       from './login/login.component';
-import { SignupComponent }      from './signup/signup.component';
+// import { SignupComponent }      from './signup/signup.component';
 import { EditCardComponent }    from './edit-card/edit-card.component';
 import { HelpComponent }        from './help/help.component';
 import { HomeComponent }        from './home/home.component';
 import { EventsComponent }      from './events/events.component';
-import { FileSelectDirective }  from 'ng2-file-upload';
 import { SearchPipe }           from './pipes/search.pipe';
+import { FileSelectDirective, FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [
@@ -30,16 +30,15 @@ import { SearchPipe }           from './pipes/search.pipe';
     AddCardComponent,
     AboutComponent,
     LoginComponent,
-    SignupComponent,
+    // SignupComponent,
     EditCardComponent,
     HelpComponent,
     HomeComponent,
     EventsComponent,
     SearchPipe,
-    FileSelectDirective,
   ],
   imports: [
-    FileSelectDirective,
+    FileUploadModule,
     QRCodeModule,
     HttpModule,
     FormsModule,

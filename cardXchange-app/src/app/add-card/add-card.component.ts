@@ -73,6 +73,10 @@ if (this.imgUpload.queue.length === 0) {
 }
 
 else {
+  this.imgUpload.onBuildItemForm = (item, formToBeSent) => {
+    for (let fieldName in form.value) {
+      formToBeSent.append(fieldName, form.value[fieldName]);
+    }
 
   this.imgUpload.onSuccessItem = (item, response) => {
       this.router.navigate(['profile']);
@@ -82,11 +86,6 @@ else {
     this.message = "Oops something went wrong :(";
     return;
   }
-  this.imgUpload.onBuildItemForm = (item, formToBeSent) => {
-    for (let fieldName in form.value) {
-      formToBeSent.append(fieldName, form.value[fieldName]);
-    }
-
   }
 
   this.imgUpload.uploadAll();
