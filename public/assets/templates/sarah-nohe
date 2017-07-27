@@ -1,0 +1,39 @@
+$black: rgb(2, 14, 2);
+
+
+.sarah-nohe {
+  // margin: 1em;
+
+  color: $black;
+  width: 100%;
+  height: 14em;
+  // padding: 4em 2em 2em;
+  border: 5px solid $black;
+  background: white;
+  border-radius: 5px;
+  .name {
+    padding:4em 2em 0em;
+    text-align: center;
+    color: inherit;
+    h2, h4, hr {
+      padding: 0;
+      margin: 0;
+      // margin: 0.5em;
+    }
+    hr {
+      margin:0.2em;
+    }
+  }
+  .contact-info {
+    margin-top: 2em;
+    text-align: center;
+    color: $black;
+   .email {
+     color: inherit;
+   }
+   .telephone {
+      text-decoration: none;
+      color: inherit;
+   }
+  }
+}
