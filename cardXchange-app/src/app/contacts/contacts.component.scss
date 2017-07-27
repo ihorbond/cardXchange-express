@@ -1,6 +1,6 @@
 @import "../../assets/templates/sarah-nohe";
 
-$bg_wrapper: linear-gradient(to left, #306BAC, #141B41);
+$bg: linear-gradient(to bottom right, rgb(69, 6, 98) , rgb(101, 5, 51));
 
 .sarah-nohe {
   display:none;
@@ -9,6 +9,12 @@ $bg_wrapper: linear-gradient(to left, #306BAC, #141B41);
 * {
   margin: 0;
   padding: 0;
+}
+
+i {
+  font-size: 2em;
+  float: right;
+  color: white;
 }
 
 // .expand-contact {
@@ -72,6 +78,9 @@ textarea {
 .search {
   margin: 1em 0 1em 0;
   #searchInput {
+    font-size: 1.3em;
+    font-style: italic;
+    color:white;
     background: none;
     border:none;
     border-bottom: 1px solid white;
@@ -84,7 +93,7 @@ ul {
     margin: 1em auto;
     width: 80%;
     height: 80%;
-  background: $bg_wrapper;
+  background: $bg;
   padding: 0.5em;
   box-shadow: 0 0 10px 5px white;
 }

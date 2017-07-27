@@ -14,6 +14,7 @@ export class ContactsComponent implements OnInit {
   showNote: boolean = false;
   flipped:  boolean = false;
   message:  string;
+  keyword:  string;
 
   constructor(private card: CardService) { }
 

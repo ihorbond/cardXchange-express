@@ -22,6 +22,7 @@ import { HelpComponent } from './help/help.component';
 import { HomeComponent } from './home/home.component';
 import { EventsComponent } from './events/events.component';
 import { FileSelectDirective } from 'ng2-file-upload';
+import { SearchPipe } from './pipes/search.pipe';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { FileSelectDirective } from 'ng2-file-upload';
     HelpComponent,
     HomeComponent,
     EventsComponent,
-    FileSelectDirective
+    FileSelectDirective,
+    SearchPipe
   ],
   imports: [
     QrScannerModule,
