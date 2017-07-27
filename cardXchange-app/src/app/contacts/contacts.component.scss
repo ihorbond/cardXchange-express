@@ -1,11 +1,57 @@
 @import "../../assets/templates/sarah-nohe";
 
-$bg: linear-gradient(to right, #E75A7C, #141B41);
 $bg_wrapper: linear-gradient(to left, #306BAC, #141B41);
+
+.sarah-nohe {
+  display:none;
+}
 
 * {
   margin: 0;
   padding: 0;
+}
+
+button {
+  // padding: 0.2em;
+  display:inline-block;
+  width: 47%;
+  text-transform: uppercase;
+  font-weight: bolder;
+  margin-top: 0.2em;
+}
+
+textarea {
+  width: 100%;
+  height: 70%;
+  background: rgb(233, 201, 89);
+  color: rgb(58, 121, 15);
+}
+
+.card-container {
+  perspective: 800px;
+}
+
+.card {
+  transform-style: preserve-3d;
+  transition: transform 0.5s;
+}
+
+.card li {
+  backface-visibility: hidden;
+}
+
+.back {
+    position: absolute;
+    top: 0;
+    left: 1em;
+}
+
+.card .back {
+  transform: rotateY( 180deg );
+}
+
+.flipped {
+  transform: rotateY( 180deg );
 }
 
 .search {
@@ -17,14 +63,7 @@ $bg_wrapper: linear-gradient(to left, #306BAC, #141B41);
     width: 100%;
   }
 }
-//
-// i {
-//   color: white;
-//   vertical-align: text-bottom;
-// }
-//
-//
-//
+
 ul {
   li {
     margin: 1em auto;

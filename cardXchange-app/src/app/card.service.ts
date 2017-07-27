@@ -71,6 +71,10 @@ BASE_URL: string = 'http://localhost:3000';
          .map(res => res.json());
      }
 
-
+//update contact note
+   updateNote(id, note) {
+     return this.http.patch(`${this.BASE_URL}/api/profile/contacts/add-note/${id}`, {note: note}, {withCredentials: true})
+       .map(res => res.json());
+   }
 
 }

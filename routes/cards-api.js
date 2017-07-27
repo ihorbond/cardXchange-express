@@ -68,7 +68,7 @@ router.patch('/profile/contacts/add-note/:id', (req, res, next) => {
        return;
      }
        theUser.contacts.forEach((oneContact, index) => {
-         if (oneContact._id === cardToEditId) {
+         if (oneContact._id.toString() === cardToEditId) {
            oneContact.notes = editedNote;
          }
        });
@@ -78,7 +78,7 @@ router.patch('/profile/contacts/add-note/:id', (req, res, next) => {
            res.json(err);
            return;
          }
-        res.json({ message: 'Changes Saved', userInfo: theCard });
+        res.json({ message: 'Changes Saved', userInfo: theUser });
    });
 });
 });

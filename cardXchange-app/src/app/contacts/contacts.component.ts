@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CardService } from '../card.service';
+import { CardService }       from '../card.service';
 
 declare var $:any;
 
@@ -12,6 +12,9 @@ declare var $:any;
 export class ContactsComponent implements OnInit {
  contacts: any;
  showNote: boolean = false;
+ flipped:  boolean = false;
+ message:  string;
+
   constructor(private card: CardService) { }
 
   ngOnInit() {
@@ -20,23 +23,27 @@ export class ContactsComponent implements OnInit {
   });
 }
 
-//click button event
-  addNote(id) {
-    if(!this.showNote) {
-      this.showNote = true;
-    $('#note').width($('#oneCard').width());
-    $('#note').height(50);
-  }
-  else {
-    this.showNote = false;
-    this.hideNote(id);
-  }
+saveNote(id) {
+  let note = $(`#notes${id}`).val();
+  console.log(note);
+   this.card.updateNote(id, note)
+   .subscribe(res => {
+     this.message = res.message;
+   });
+   this.flip(id);
 }
 
-//onblur event
-  hideNote(id) {
-    $('#note').width(0);
-    $('#note').height(0);
-  }
+flip(id) {
+  $(`#card${id}`).toggleClass("flipped");
+}
+
+cancelNote(id) {
+  this.flip(id);
+}
+
+expandContact(id) {
+
+}
+
 
 }

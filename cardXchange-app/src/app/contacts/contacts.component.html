@@ -1,59 +1,71 @@
 <div class="page-content">
 
-
-
 <div class="row search">
 
 <div class="col-xs-3">
 <!-- <i class="material-icons">search</i> -->
 </div>
 <div class="col-xs-6">
-<input type="text" id="searchInput" name="search" placeholder="Search...">
+<input type="text" id="searchInput" class="material-icons" name="search" placeholder="search">
 </div>
 <div class="col-xs-3"></div>
 
-
 </div>
+
 
 <p *ngIf="message" class="message animated fadeInLeft"><p>
 
 <div *ngIf="contacts" class="row">
+
   <ul>
-    <div *ngFor="let oneContact of contacts" class="col-xs-6">
-     <li>
+    <div *ngFor="let oneContact of contacts">
+
+   <div class="card-container">
+      <div class="col-xs-6 card" id="card{{oneContact._id}}">
+     <li class="front" (click)="flip(oneContact._id)">
+
        <div class="contact-image">
         <img src="../../assets/images/default-pic.png" alt="{{oneContact.fullName}}">
         </div>
-        <div class="full-name" (click)="expandContact()"> {{oneContact.fullName}} </div>
+        <div class="full-name"> {{oneContact.fullName}} </div>
       </li>
+
+      <li class="back" id="back{{oneContact._id}}" >
+
+       <textarea id="notes{{oneContact._id}}" placeholder="How did you meet {{oneContact.fullName}}"></textarea>
+       <button class="btn btn-success" (click)="saveNote(oneContact._id)"> Save </button>
+       <button class="btn btn-warning" (click)="cancelNote(oneContact._id)"> Cancel </button>
+
+      </li>
+
+
+</div>
+      </div>
+
+
+      <div class="sarah-nohe col-xs-12" id="contact{{oneContact._id}}">
+
+      <div class="name">
+
+      <h2> Sarah Nohe </h2>
+      <hr>
+      <h4> UX Research and Design </h4>
+
+      </div>
+
+      <div class="contact-info">
+
+      <a class="email" href="mailto:sarahnohe@gmail.com">sarahnohe@gmail.com</a>
+      <br>
+      <a class="telephone" href="tel:7817107123">781.710.7123</a>
+      </div>
+
+
+</div>
+
     </div>
   </ul>
 
-<div>
-<!-- <div class="sarah-nohe">
 
-<div class="name">
-
-<h2> Sarah Nohe </h2>
-<hr>
-<h4> UX Research and Design </h4>
-
-</div>
-
-<div class="contact-info">
-
-<a class="email" href="mailto:sarahnohe@gmail.com">sarahnohe@gmail.com</a>
-<br>
-<a class="telephone" href="tel:7817107123">781.710.7123</a>
-</div>
-
-</div>
-
-</div> -->
-  <!-- <div *ngFor="let oneCard of contacts">
-
-  </div> -->
-
-</div>
 </div>
 </div>

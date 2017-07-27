@@ -3,11 +3,7 @@ $font: 'PT Sans', sans-serif;
 $bg: linear-gradient(to right, #E75A7C, #141B41);
 $bg_wrapper: linear-gradient(to left, #306BAC, #141B41);
 $black: #212129;
-// on/off switch
 
-// .toggleOn{
-//
-// }
 
 //my improvised switch
 .outer-switch {
@@ -33,7 +29,6 @@ $black: #212129;
     vertical-align: top;
   }
 }
-
 
 .default {
   color: white;
