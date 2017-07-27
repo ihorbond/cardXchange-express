@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CardService }       from '../card.service';
 
-declare var $:any;
+declare var $: any;
 
 @Component({
   selector: 'app-contacts',
@@ -10,40 +10,41 @@ declare var $:any;
   providers: [CardService]
 })
 export class ContactsComponent implements OnInit {
- contacts: any;
- showNote: boolean = false;
- flipped:  boolean = false;
- message:  string;
+  contacts: any;
+  showNote: boolean = false;
+  flipped:  boolean = false;
+  message:  string;
 
   constructor(private card: CardService) { }
 
   ngOnInit() {
     this.card.getContacts().subscribe(result => {
       this.contacts = result.userInfo;
-  });
-}
+    });
+  }
 
-saveNote(id) {
-  let note = $(`#notes${id}`).val();
-  console.log(note);
-   this.card.updateNote(id, note)
-   .subscribe(res => {
-     this.message = res.message;
-   });
-   this.flip(id);
-}
+  saveNote(id) {
+    let note = $(`#notes${id}`).val();
+    console.log(note);
+    this.card.updateNote(id, note)
+      .subscribe(res => {
+        this.message = res.message;
+      });
+    this.flip(id);
+  }
 
-flip(id) {
-  $(`#card${id}`).toggleClass("flipped");
-}
+  flip(id) {
+    $(`#card${id}`).toggleClass("flipped");
+  }
 
-cancelNote(id) {
-  this.flip(id);
-}
+  cancelNote(id) {
+    // console.log(this.contacts);
+    this.flip(id);
+  }
 
-expandContact(id) {
-
-}
+  expandContact(id) {
+    $(`#contact${id}`).slideToggle("fast");
+  }
 
 
 }

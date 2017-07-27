@@ -22,24 +22,31 @@
 
    <div class="card-container">
       <div class="col-xs-6 card" id="card{{oneContact._id}}">
-     <li class="front" (click)="flip(oneContact._id)">
+     <li class="front">
 
-       <div class="contact-image">
+       <div class="contact-image" (click)="flip(oneContact._id)">
         <img src="../../assets/images/default-pic.png" alt="{{oneContact.fullName}}">
         </div>
-        <div class="full-name"> {{oneContact.fullName}} </div>
+        <div class="full-name" (click)="expandContact(oneContact._id)"> {{oneContact.fullName}} </div>
+        <!-- <button class="expand-contact" id="expandContact{{oneContact._id}}" (click)="expandContact(oneContact._id)">
+          <i class="material-icons">eject</i>
+        </button> -->
       </li>
 
       <li class="back" id="back{{oneContact._id}}" >
 
+       <!-- <textarea id="notes{{oneContact._id}}" placeholder="{{oneContact.notes}}"></textarea> -->
        <textarea id="notes{{oneContact._id}}" placeholder="How did you meet {{oneContact.fullName}}"></textarea>
        <button class="btn btn-success" (click)="saveNote(oneContact._id)"> Save </button>
        <button class="btn btn-warning" (click)="cancelNote(oneContact._id)"> Cancel </button>
-
       </li>
 
+      <!-- <button class="expand-contact" id="expandContact{{oneContact._id}}" (click)="expandContact(oneContact._id)">
+        <i class="material-icons">eject</i>
+      </button> -->
 
 </div>
+
       </div>
 
 
