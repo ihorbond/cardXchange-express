@@ -114,25 +114,25 @@ router.patch('/profile/my-cards/cv/:id', (req, res, next) => {
 router.get('/contacts', (req, res, next) => {
   const userId = req.user._id;
   UserModel.findById(userId, (err, theUser) => {
-    if (err) {
+    if(err) {
       res.json(err);
       return;
     }
+
     if(!theUser.contacts.length) {
-      res.json({message: "No contacts to display", userInfo: theUser });
+      res.json({message: "You don't have any contacts yet"});
       return;
     }
-       //fetch matching cards from cards collection
-      CardModel.find({ _id:theUser.contacts }, (err, contactsArray) => {
-        if (err) {
-          res.json(err);
-          return;
-        }
-        console.log("CONTACTS: " + contactsArray);
-        theUser.contacts = contactsArray;
-        res.json({message: "Here's your saved cards", userInfo: theUser });
+       //if no error => get matching cards from cards collection
+       CardModel.find({_id: theUser.cards}, (err, contacts) => {
+         if(err) {
+           res.json(err);
+           return;
+         }
+
+        res.json({message: "Here are your contacts", userInfo: contacts });
       });
-  });
+        });
 });
 
 //edit card info
@@ -165,33 +165,6 @@ router.patch('/profile/my-cards/edit/:id', (req, res, next) => {
         res.json({ message: 'Changes Saved', userInfo: theCard });
    });
 });
-});
-
-//add(save) other user's card/contact
-router.patch('/contacts/add/:id', (req, res, next) => {
-    const cardToSaveId = req.params.id;
-    const userId       = req.user._id;
-    if (!mongoose.Types.ObjectId.isValid(cardToSaveId)) {
-      res.status(400).json({
-        message: 'Specified id is not valid'
-      });
-      return;
-    }
-    UserModel.findById(userId, (err, theUser) => {
-      if (err) {
-        res.json(err);
-        return;
-      }
-      theUser.contacts.push(cardToSaveId);
-      theUser.markModified('contacts');
-      theUser.save((err) => {
-        if(err) {
-          res.json(err);
-          return;
-        }
-        res.json({ message: 'Contact Added', userInfo: theUser });
-      });
-    });
 });
 
 //add own card

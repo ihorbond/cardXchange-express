@@ -1,16 +1,36 @@
 <div class="page-content">
 
-<div class="search">
 
-<h4><i class="material-icons">search</i> Search </h4>
+
+<div class="row search">
+
+<div class="col-xs-3">
+<!-- <i class="material-icons">search</i> -->
+</div>
+<div class="col-xs-6">
+<input type="text" id="searchInput" name="search" placeholder="Search...">
+</div>
+<div class="col-xs-3"></div>
+
 
 </div>
 
 <p *ngIf="message" class="message animated fadeInLeft"><p>
 
-<div class="container">
+<div *ngIf="contacts" class="row">
+  <ul>
+    <div *ngFor="let oneContact of contacts" class="col-xs-6">
+     <li>
+       <div class="contact-image">
+        <img src="../../assets/images/default-pic.png" alt="{{oneContact.fullName}}">
+        </div>
+        <div class="full-name" (click)="expandContact()"> {{oneContact.fullName}} </div>
+      </li>
+    </div>
+  </ul>
 
-<div class="sarah-nohe">
+<div>
+<!-- <div class="sarah-nohe">
 
 <div class="name">
 
@@ -29,9 +49,11 @@
 
 </div>
 
-</div>
+</div> -->
   <!-- <div *ngFor="let oneCard of contacts">
 
   </div> -->
 
+</div>
+</div>
 </div>

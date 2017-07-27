@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
   profilePic:        {type: String, default: "../public/images/default-pic.png"},
   cards:             [ { type: mongoose.Schema.Types.ObjectId, ref: 'Card' } ],
   contacts:          [ {
-                     _id: { type: mongoose.Schema.Types.ObjectId, ref: 'Card' },
+                     _id: { type: mongoose.Schema.Types.ObjectId},
                      notes: {type: String, default: ''}
                      }],
 }, {

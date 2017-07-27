@@ -1,1 +1,56 @@
-@import "../../assets/templates/sarah-nohe"
+@import "../../assets/templates/sarah-nohe";
+
+$bg: linear-gradient(to right, #E75A7C, #141B41);
+$bg_wrapper: linear-gradient(to left, #306BAC, #141B41);
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.search {
+  margin: 1em 0 1em 0;
+  #searchInput {
+    background: none;
+    border:none;
+    border-bottom: 1px solid white;
+    width: 100%;
+  }
+}
+//
+// i {
+//   color: white;
+//   vertical-align: text-bottom;
+// }
+//
+//
+//
+ul {
+  li {
+    margin: 1em auto;
+    width: 80%;
+    height: 80%;
+  background: $bg_wrapper;
+  padding: 0.5em;
+  box-shadow: 0 0 10px 5px white;
+}
+}
+
+.contact-image {
+  border-radius: 50%;
+  img {
+    margin: 0 auto;
+    display: block;
+    border-radius: 50%;
+    width: 4em;
+    height: 4em;
+  }
+}
+
+.full-name {
+    text-decoration: underline;
+    margin-top: 0.5em;
+    color: white;
+    font-weight: bolder;
+    text-align: center;
+}

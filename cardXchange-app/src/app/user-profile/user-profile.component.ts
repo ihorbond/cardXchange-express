@@ -63,18 +63,25 @@ editedCard: any = {
      if (oneCard._id.toString() === id && oneCard.defaultSetting === true) {
        oneCard.defaultSetting = false;
        $(`#switch${id}`).css("float", "left");
-       $(`#switch${id}`).css("background", "red");
+       $(`#switch${id}`).css("background", "rgb(129, 35, 15)");
        $(`#switchLabel${id}`).text("OFF");
 
-     } else {
+     } else if (oneCard._id.toString() === id && oneCard.defaultSetting === false) {
        oneCard.defaultSetting = true;
        $(`#switch${id}`).css("float", "right");
        $(`#switch${id}`).css("background", "rgb(45, 176, 109)");
        $(`#switchLabel${id}`).text("ON");
      }
+
    });
 
+   // makeDefault(id) {
+   //   this.cardService.makeDefault(id, this.defaultCard)
+   //   .subscribe(res => {
+   //     this.message = res.message;
+   //   });
 
+   // }
  }
 
  // onOffSwitch(id) {
@@ -135,14 +142,6 @@ enlargeQr(id) {
         $(`#QR${id}`).slideToggle("fast");
       }
 }
-
-  // makeDefault(id) {
-  //   this.cardService.makeDefault(id, this.defaultCard)
-  //   .subscribe(res => {
-  //     this.message = res.message;
-  //   });
-
-  // }
 
   deleteCard(id) {
      //update cards collection

@@ -42,7 +42,7 @@ imgUpload = new FileUploader({
                this.auth.isLoggedIn()
                .subscribe(res => {
                  this.user = res;
-                 this.cardUrl = `http://localhost:3000/api/contacts/add/${this.user._id}`;
+                 this.cardUrl = `http://localhost:3000/add/${this.user._id}`;
                });
             }
 

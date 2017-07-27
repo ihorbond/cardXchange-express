@@ -30,7 +30,7 @@ BASE_URL: string = 'http://localhost:3000';
 
    //save other user's card
    saveCard(id) {
-     return this.http.patch(`${this.BASE_URL}/api/contacts/add/${id}`, {id:id}, {withCredentials: true})
+     return this.http.patch(`${this.BASE_URL}/add/${id}`, {id:id}, {withCredentials: true})
        .map(res => res.json());
    }
 

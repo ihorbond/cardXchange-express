@@ -15,9 +15,10 @@ export class ContactsComponent implements OnInit {
   constructor(private card: CardService) { }
 
   ngOnInit() {
-    this.card.getContacts().subscribe(
-      result => this.contacts = result
-  )}
+    this.card.getContacts().subscribe(result => {
+      this.contacts = result.userInfo;
+  });
+}
 
 //click button event
   addNote(id) {
