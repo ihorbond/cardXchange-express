@@ -28,17 +28,22 @@ li {
 
 /* The side navigation menu */
 .sidenav {
+  i {
+    margin: 0.5em 0 1em 0;
+    font-size: 3em;
+    text-align: center;
+    display: block;
+    color: white;
+  }
   padding-top: 50px;
   width: 0;
   height: 100%;
   position: fixed;
   z-index: 100;
-  /* Stay on top */
   top: 0;
   right: 0;
   background-color: #111;
-  overflow-x: hidden;
-  /* Disable horizontal scroll */
+  overflow-x: hidden;   //Disable horizontal scroll
   transition: 0.6s;
 
   a {

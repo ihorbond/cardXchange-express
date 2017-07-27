@@ -1,9 +1,9 @@
 <div id="mySidenav" class="sidenav">
   <!-- <a (click)="showMenu()" class="menu"><span class="glyphicon glyphicon-remove"></span></a> -->
-  <a [routerLink]="['home']">Home</a>
-  <a (click)="about()">About</a>
-  <a (click)="help()">Help</a>
-  <a (click)="logout()">Logout</a>
+  <i class="material-icons" (click)="home()">home</i>
+  <i class="material-icons" (click)="about()">info_outline</i>
+  <i class="material-icons" (click)="help()">help_outline</i>
+  <i class="material-icons" (click)="logout()">exit_to_app</i>
 </div>
 
 <router-outlet></router-outlet>
