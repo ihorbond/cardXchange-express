@@ -22,10 +22,10 @@ require('dotenv').config();
 require('./configs/passport.js');
 
 const app = express();
-// app.use(cors({
-//   credentials: true,
-//   origin: [ 'http://localhost:4200' ]
-// }));
+app.use(cors({
+  credentials: true,
+  origin: [ 'http://localhost:4200' ]
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
