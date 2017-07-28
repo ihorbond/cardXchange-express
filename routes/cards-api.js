@@ -176,7 +176,7 @@ router.post('/profile/my-cards/add', imgUpload.single('file'), (req, res, next) 
     picture = undefined;
   }
   else {
-    picture = `public/uploads/${req.file.filename}`;
+    picture = `/uploads/${req.file.filename}`;
   }
 
   const theCard = new CardModel ({
