@@ -15,8 +15,6 @@ const userRoutes   = require('./routes/users-api');
 const cardRoutes   = require('./routes/cards-api');
 const authRoutes   = require('./routes/auth-api');
 
-// const eventRoutes  = require('./routes/events-api');
-
 require('./configs/database');
 require('dotenv').config();
 require('./configs/passport.js');
@@ -24,7 +22,7 @@ require('./configs/passport.js');
 const app = express();
 app.use(cors({
   credentials: true,
-  origin: [ 'http://localhost:4200' ]
+  origin: [ 'http://www.cardxchange.co' ]
 }));
 
 // view engine setup

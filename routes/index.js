@@ -14,30 +14,31 @@ module.exports = router;
 //add(save) other user's card/contact
 router.patch('/add/:id', (req, res, next) => {
     const cardToSaveId = req.params.id;
-    if(!req.user._id) {
-      res.json({message: "Please login first", url: `http://localhost:3000/add/${cardToSaveId}`});
-      return;
-    }
     const userId       = req.user._id;
-    if (!mongoose.Types.ObjectId.isValid(cardToSaveId)) {
-      res.status(400).json({
-        message: 'Specified id is not valid'
+    if(!userId) {
+      res.render('scanned-card-view.ejs', {
+        message: "Please login to your account and try scanning agaon",
+        url: `https://cardxchange.herokuapp.com/${cardToSaveId}`,
+        action: "scanner"
       });
       return;
     }
-    UserModel.findById(userId, (err, theUser) => {
-      if (err) {
-        res.json(err);
-        return;
-      }
-      theUser.contacts.push(cardToSaveId);
-      theUser.markModified('contacts');
-      theUser.save((err) => {
-        if(err) {
-          res.json(err);
-          return;
-        }
-        res.json({ message: 'Contact Added', userInfo: theUser });
-      });
-    });
+
+      res.sendFile(__dirname + '../public/index.html');
+
+    // UserModel.findById(userId, (err, theUser) => {
+    //   if (err) {
+    //     res.json(err);
+    //     return;
+    //   }
+    //   theUser.contacts.push(cardToSaveId);
+    //   theUser.markModified('contacts');
+    //   theUser.save((err) => {
+    //     if(err) {
+    //       res.json(err);
+    //       return;
+    //     }
+    //     res.sendFile(__dirname + '../public/index.html');
+    //   });
+    // });
 });

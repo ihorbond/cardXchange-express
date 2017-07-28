@@ -4,11 +4,10 @@ const userSchema = new mongoose.Schema({
   fullName:          {type: String, required: true, trim:true},
   email:             {type: String, required: true, lowercase: true, trim:true},
   password:          {type: String, required: true},
-  profilePic:        {type: String, default: "../public/images/default-pic.png"},
   cards:             [ { type: mongoose.Schema.Types.ObjectId, ref: 'Card' } ],
   contacts:          [ {
                      _id: { type: mongoose.Schema.Types.ObjectId},
-                     notes: {type: String, default: ''}
+                     notes: {type: String}
                      }],
 }, {
   timestamps: {

@@ -31,7 +31,6 @@ router.get('/profile', (req, res, next) => {
           res.json(err);
           return;
         }
-          console.log(cardsArray);
           theUser.cards = cardsArray;
         res.json({message: "Here is your cards", userInfo: theUser });
       });

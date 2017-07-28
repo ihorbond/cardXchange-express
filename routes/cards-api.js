@@ -45,7 +45,7 @@ let errors = [];
    });
    console.log(errors);
 
-res.json({message: "Card is now default", userInfo: theUser});
+res.json({errors: errors, message: "Card is now default", userInfo: theUser});
 });
 });
 
@@ -80,7 +80,7 @@ router.patch('/profile/contacts/add-note/:id', (req, res, next) => {
 });
 });
 
-//change visibility
+//change visibility of the particular card (for events)
 router.patch('/profile/my-cards/cv/:id', (req, res, next) => {
    const cardToEditId = req.params.id;
    console.log(cardToEditId);
@@ -167,13 +167,13 @@ router.patch('/profile/my-cards/edit/:id', (req, res, next) => {
 //add own card
 router.post('/profile/my-cards/add', imgUpload.single('file'), (req, res, next) => {
   const userId = req.user._id;
-  // if (req.user.cards.length >= 3) {
-  //   res.json({ message: "Sorry, you have reached the limit of 3 cards. Delete other cards first or upgrade storage limit" });
-  //   return;
-  // }
+  if (req.user.cards.length >= 3) {
+    res.json({ message: "Sorry, you have reached the limit of 3 cards. Delete other cards first or upgrade storage limit" });
+    return;
+  }
   let picture;
   if (!req.file) {
-    picture = null;
+    picture = "";
   }
   else {
     picture = `/uploads/${req.file.filename}`;
@@ -284,13 +284,13 @@ router.patch('/contacts/delete/:id', (req, res, next) => {
     });
     return;
   }
-    //update user's contacts Array
+
     UserModel.findById(userId, (err, theUser) => {
         if(err) {
           res.json(err);
           return;
         }
-
+         //update user's contacts Array
         theUser.contacts.forEach((oneCard, index) => {
 
           if (oneCard._id.toString() === cardToRemoveId.toString()) {
