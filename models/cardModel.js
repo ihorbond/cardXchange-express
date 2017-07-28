@@ -7,7 +7,7 @@ const cardSchema = new mongoose.Schema({
   phoneNum:          {type: String, trim:true},
   email:             {type: String, required: true, lowercase: true, trim:true},
   linkedIn:          {type: String, lowercase: true, trim:true},
-  profilePic:        {type: String,  default: "./images/default-pic.png"},
+  profilePic:        {type: String,  default: "/images/default-pic.png"},
   visibility:        {type: Boolean, default: true},
   defaultSetting:    {type: Boolean, default: false},
   eventId:           {type: mongoose.Schema.Types.ObjectId},
