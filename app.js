@@ -23,6 +23,7 @@ const app = express();
 app.use(cors({
   credentials: true,
   origin: [ 'http://www.cardxchange.co' ]
+  // origin: [ 'http://localhost:4200' ]
 }));
 
 // view engine setup

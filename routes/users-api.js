@@ -37,4 +37,36 @@ router.get('/profile', (req, res, next) => {
   });
 });
 
+  //add contact manually (testing purposes)
+  router.post('/add-contact/manual', (req, res, next) => {
+    const userId = req.user._id;
+
+
+    const theCard = new CardModel ({
+      fullName:       req.body.fullName,
+      companyName:    req.body.companyName,
+      position:       req.body.position,
+      phoneNum:       req.body.phoneNum,
+      email:          req.body.email,
+      linkedIn:       req.body.linkedIn,
+      visibility:     req.body.visibility,
+      profilePic:     req.body.pic
+    });
+
+    if(!theCard.fullName || !theCard.email) {
+      res.json({message: "Both Name and Email fields must be filled out"});
+      return;
+    }
+
+    theCard.save(err => {
+      if (err) {
+        res.json(err);
+        return;
+      }
+    });
+
+  res.json({status: 'OK', message: 'Card Added', card: theCard._id});
+
+  });
+
 module.exports = router;

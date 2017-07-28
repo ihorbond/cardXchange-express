@@ -108,7 +108,7 @@ router.patch('/profile/my-cards/cv/:id', (req, res, next) => {
 });
 
 //show contacts
-router.get('/contacts', (req, res, next) => {
+router.get('/contacts/:id', (req, res, next) => {
   const userId = req.user._id;
   UserModel.findById(userId, (err, theUser) => {
     if(err) {
@@ -121,7 +121,7 @@ router.get('/contacts', (req, res, next) => {
       return;
     }
        //if no error => get matching cards from cards collection
-       CardModel.find({_id: theUser.cards}, (err, contacts) => {
+       CardModel.find({ _id: theUser.contacts}, (err, contacts) => {
          if(err) {
            res.json(err);
            return;
@@ -173,10 +173,10 @@ router.post('/profile/my-cards/add', imgUpload.single('file'), (req, res, next) 
   }
   let picture;
   if (!req.file) {
-    picture = "";
+    picture = undefined;
   }
   else {
-    picture = `/uploads/${req.file.filename}`;
+    picture = `public/uploads/${req.file.filename}`;
   }
 
   const theCard = new CardModel ({
@@ -291,9 +291,9 @@ router.patch('/contacts/delete/:id', (req, res, next) => {
           return;
         }
          //update user's contacts Array
-        theUser.contacts.forEach((oneCard, index) => {
-
-          if (oneCard._id.toString() === cardToRemoveId.toString()) {
+        theUser.contacts.forEach((oneContact, index) => {
+         console.log(oneContact);
+          if (oneContact._id.toString() === cardToRemoveId.toString()) {
              theUser.contacts.splice(index, 1);
           }
         });
