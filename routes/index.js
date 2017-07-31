@@ -3,14 +3,6 @@ const router    = express.Router();
 const mongoose  = require('mongoose');
 const UserModel = require('../models/userModel');
 
-/* GET home page. */
-router.get('/', (req, res, next) => {
-  res.render('index');
-});
-
-module.exports = router;
-
-
 //add(save) other user's card/contact
 router.patch('/add/:id', (req, res, next) => {
     const cardToSaveId = req.params.id;
