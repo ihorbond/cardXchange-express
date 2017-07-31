@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser   = require('body-parser');
 const layouts      = require('express-ejs-layouts');
 const mongoose     = require('mongoose');
-const cors         = require('cors');
+// const cors         = require('cors');
 const session      = require('express-session');
 const passport     = require('passport');
 const passportSetup= require('./configs/passport');
@@ -38,7 +38,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-// app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(layouts);
 app.use(session({
   secret: 'string to compare hashes from hijacking session',
@@ -58,7 +58,7 @@ app.use('/api', cardRoutes);
 
 //send to index.html if no route matched
 app.use((req, res, next) => {
-  res.sendfile(__dirname + '/public/index.html');
+  res.sendfile(__dirname + 'index.html');
 });
 
 // catch 404 and forward to error handler
