@@ -58,7 +58,7 @@ app.use('/api', cardRoutes);
 
 //send to index.html if no route matched
 app.use((req, res, next) => {
-  res.sendfile(__dirname + 'public/index.html');
+  res.sendfile(__dirname + '/public/index.html');
 });
 
 // catch 404 and forward to error handler
