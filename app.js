@@ -20,11 +20,11 @@ require('dotenv').config();
 require('./configs/passport.js');
 
 const app = express();
-app.use(cors({
-  credentials: true,
-  origin: [ 'http://www.cardxchange.co' ]
-  // origin: [ 'http://localhost:4200' ]
-}));
+// app.use(cors({
+//   credentials: true,
+//   origin: [ 'http://www.cardxchange.co' ]
+//   origin: [ 'http://localhost:4200' ]
+// }));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -32,13 +32,13 @@ app.set('view engine', 'ejs');
 
 // default value for title local
 app.locals.title = 'cardXchange';
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
 app.use(layouts);
 app.use(session({
   secret: 'string to compare hashes from hijacking session',
@@ -55,6 +55,11 @@ app.use('/api', authRoutes);
 app.use('/api', userRoutes);
 app.use('/api', cardRoutes);
 // app.use('/api', eventRoutes);
+
+//send to index.html if no route matched
+app.use((req, res, next) => {
+  res.sendfile(__dirname + 'public/index.html');
+});
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

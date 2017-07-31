@@ -96,7 +96,7 @@ authRoutes.get('/loggedin', (req, res, next) => {
     return;
   }
 
-  res.status(403).json({ message: 'Unauthorized' });
+  res.status(403).json({ message: 'Please login' });
 });
 
 module.exports = authRoutes;
