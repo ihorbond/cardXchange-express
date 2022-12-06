@@ -14,7 +14,7 @@
     "debug": "~2.6.0",
     "dotenv": "^4.0.0",
     "ejs": "~2.5.5",
-    "express": "^4.14.1",
+    "express": "^4.17.3",
     "express-ejs-layouts": "~2.2.0",
     "express-session": "^1.15.4",
     "mongoose": "~4.8.5",
